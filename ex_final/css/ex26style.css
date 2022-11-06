@@ -1,0 +1,32 @@
+@charset "UTF-8";
+table{
+    margin:auto;
+    width: 800px;
+}
+.title{
+    background-color: blanchedalmond;
+    /* 표 왼쪽색상 */
+}
+.headtext{
+    background-color: skyblue;
+    color: blue;
+    font-size: 1.1em;
+    font-weight: bold;
+    /* id정보와 개인정보나누는 셀 */
+}
+tr>td>label{
+    display: block;
+    text-align: right;
+    /* 인라인요소를 블락으로바꿔서 오른쪽에붙임 */
+}
+td{
+    padding : 5px;
+}
+
+span{
+    font-size: 0.8em;
+    color: blue;
+}
+span.tel{
+    color: brown;
+}

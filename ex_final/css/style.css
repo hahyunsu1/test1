@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/* style.css */
+body{
+    color:blueviolet;
+    font-size: 2em;
+    /* em: 상대적 크기
+        1em : 16px
+        2em : 32px
+    */
+}
+/* div선택해서
+서체
+글자색
+바깥여백: 1em 
+*/
+div{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color:brown;
+    margin: 1em;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex66window.html</title>
+    <style>
+        #circle{
+            background-color: blueviolet;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>window객체의 setTimeout()/clearTimeout()활용</h2>
+    <h2>window객체의 setInterval()/clearInterval()활용</h2>
+    <button onclick="show()">Click Me</button>
+    <button onclick="go()">Go Go</button>
+    <button onclick="stop()">Stop</button>
+    <button onclick="goGoogle()">3초 뒤에 구글로 이동</button>
+    <button onclick="move()">Move</button>
+    <hr>
+    <div id="circle"></div>
+
+    <script>
+        let wid=null;//전역변수
+        const show=function(){
+            //let obj=document.getElementById('circle');
+            let obj=document.querySelector("#circle");
+            obj.style.display='block';
+            obj.style.backgroundColor='orange'; //[x]
+            //자바스크립트에서는 하이픈('-')이 빼기(-)연산자로 사용되므로
+            //하이픈을 빼고 대신 하이픈 뒤에오는 첫글자를 대문자로 기술한다 (camel표기법)
+
+           // alert(obj);
+        }
+        //go  함수 구성하기 #circle객체 참조변수 선언후 할당하기
+        const go=function(){
+            let obj=document.querySelector("#circle");
+            //window.setTimeout(함수,밀리초) : 밀리초(1/1000초) 이후에 함수를 한번만 호출한다
+            wid=window.setTimeout(move,3000); //3초 뒤에 show()함수를 호출함
+            
+        }
+        const stop=function(){
+            //setTimeout()<=> clearTimeout(wid)
+            window.clearTimeout(wid); //setTimeout()걸어 놓은 것을 중지시킨다
+        }
+        const move=function(){
+            let obj=document.querySelector("#circle");
+            //#circle의 x좌표를 500px 위치로 이동시키는 코드 작성하세요
+            //go()함수 내에서 setTimeout()에 move전달해보기
+            obj.style.display='block';
+            obj.style.position='absolute';
+            obj.style.left='500px';
+        }
+        // [1] goGoogle()함수에서 location 이용해서 3초 뒤에 구글로 이동하기
+        const goGoogle = function(){
+            //window.setTimeout(google, 3000);
+
+            // setTimeout(function(){
+            //     location.href='http://www.naver.com';
+            // },3000)
+
+            //ES6 화살표 함수: ()=>{}
+            setTimeout(()=>{
+                location.href='http://www.google.com';
+            }, 3000);    
+        }
+
+        const google = function() {
+            window.location.href = "http://www.google.com";
+        }
+
+    </script>
+</body>
+</html>
+
+<!-- ex66window.html -->

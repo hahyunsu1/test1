@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex50operator</title>
+</head>
+<body>
+    <h1>연산자</h1>
+    <script>
+        //5. 논리 연산자: &, |, ^
+        /*
+        ! : 논리부정 연산자 true를 false로, false는 true로 변경
+        */
+       let a=true;
+       let b=!true;
+
+       let print=function(str){
+            document.write("<h2>"+str+"</h2>");
+       }
+       print("a="+a);
+       print("b="+b);
+       print("a&b="+(a&b));//false(0)
+       print("a|b="+(a|b));//true(1)
+       print("a^b="+(a^b));//true(1)
+       document.write("<hr>");
+       print("a&&b="+(a&&b));//false(0)
+       print("a||b="+(a||b));//true(1)
+       /*
+       &, && : 결과는 동일하게 나오지만 &&의 경우는 앞의 피연산자가 false일 경우
+                뒤에 오는 피 연산자는 수행하지 않는다.
+       |, || : 결과는 동일함. ||의 경우 앞의 피연산자가 true일경우         
+                뒤에 오는 피 연산자는 수행하지 않는다.
+       */
+      //6. 비트연산자 (비트로 바꾸어 연산을 수행함): |, &,^
+      print(3|5);//0111 ==>7
+      print(3&5); //=> 1, 두 비트가 1일 때만 1, 나머지는 0
+      print(3^5); //=>6,  두 비트가 서로 다르면 1, 같으면 0
+      /*
+       0011
+       0101
+      */
+       //7. Shift연산자 (비트를 주어진 숫자만큼 이동시킨다)
+    /*  [1] << : 왼쪽으로 비트 이동. 뒤의 빈칸은 무조건 0으로 채운다
+        [2] >> : 오른쪽으로 비트 이동. 앞에 빈칸은 부호비트로 채운다.
+        [3] >>> : 오른쪽으로 비트 이동. 앞에 빈칸은 무조건 0으로 채운다.       
+
+        5    : 00000101
+        5<<2 : 00010100  ==> 20   
+        5>>2 : 00000001   
+       */
+       print(5<<2);//20
+       print(5>>2);//1
+       print(5>>>2);//1
+       document.write("<hr>");
+       print(-5>>2);
+       print(-5>>>2);
+       
+
+    </script>
+</body>
+</html>
+<!-- ex50operator.html -->

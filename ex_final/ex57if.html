@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex57if.html</title>
+</head>
+<body>
+    <h1>다중 if 문 - 성적 프로그램</h1>
+    <script>
+        let kor=parseFloat(prompt('국어 점수 입력','99.5'));
+        let math=parseFloat(prompt('수학 점수 입력','88'));
+        let eng=parseFloat(prompt('영어 점수 입력','77.5'));
+
+        console.log(kor, math, eng);
+
+        let total=kor+math+eng;
+        let avg=total/3;
+        let avg2=Math.round(avg*100)/100;        //Math.round() : 반올림
+        console.log(total, avg, avg2);
+        let grade='', cr='black';
+        if(avg>=80 && avg<90){
+            grade='B';
+        }else if(avg>=90 && avg<=100){
+            grade='A';
+            cr='blue';
+        }else if(avg>=70 && avg <80){
+            grade='C';
+        }else if(avg>=60 && avg <70){
+            grade='D'
+        }else if(avg<60){
+            grade='F';
+            cr='red';
+        }else{
+            alert("점수는 0~100점사이로 입력해야 해요");
+            window.location.reload();//새로고침            
+        }
+
+        let str=`<table border='1' style='width:400px'>
+            <tr>
+                <th>국어</th><td>${kor}</td>
+            </tr>
+            <tr>    
+                <th>수학</th><td>${math}</td>
+            </tr>
+            <tr>    
+                <th>영어</th><td>${eng}</td>
+            </tr>    
+            <tr>
+                <th>총점</th><td>${total}</td>
+            </tr>
+            <tr>
+                <th>평균점수</th><td>${avg2}</td>
+            </tr>
+            <tr>
+                <th>학점</th><td style="color:${cr}">${grade}</td>
+            </tr>
+        </table>
+        `
+        document.write(str);
+    </script>
+    
+</body>
+</html>
+<!-- ex57if.html -->

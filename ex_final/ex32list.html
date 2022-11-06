@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul>li{
+            border: 1px dotted orange;
+            list-style-position: inside; /*기본값은 outside*/
+        }
+        /* 클래스 menu 아래 li를 선택해서 
+       - 폭:120px  높이:25px
+	   - 배경색: lightblue;
+	   - 마진: 3px
+	   - 패딩: 10px
+	   - 글자색: 알아서
+	   - 서체: Helvetica, sans-serif
+	   - 글자크기 : 13px;
+	   - 글자정렬: 중앙에 오도록
+       - 목록 표시 없도록
+        */
+        ul.menu li{
+            width:120px;
+            height:25px;
+            background: lightblue;
+            margin: 3px;
+            padding:10px;
+            color:rebeccapurple;
+            font-family: Helvetical, sans-serif;
+            font-size:13px;
+            text-align: center;
+            list-style: none;
+            border: none;
+            float:left;
+        }
+        a:link{
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>목록 스타일</h1>
+    <ul style="list-style-type:none;list-style-image: url(../images/icon3.JPG);border:1px solid blue">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Java</li>
+    </ul>
+    <hr>
+    <ol style="list-style-type:upper-roman;border:1px solid red">
+        <li>Oracle</li>
+        <li>MySQL</li>
+        <li>SQL Server</li>
+    </ol>
+    <hr color="blue">
+    <ul class="menu">
+        <li><a href="ex01.html">HTML</a></li>
+        <li><a href="ex01.html">CSS</a></li>
+        <li><a href="ex01.html">JavaScript</a></li>
+        <li><a href="ex01.html">jQuery</a></li>
+    </ul>
+    <hr color="red" style="clear:both">
+    <!-- float속성을 해제할 때는 clear로 준다.
+    left를 해제할 때는  clear:left
+    right   => clear:right
+    둘다 해제할 때는=> clear:both
+    -->
+
+
+
+</body>
+</html>
+<!-- ex32list.html -->
+
+
+

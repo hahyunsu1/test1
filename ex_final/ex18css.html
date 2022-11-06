@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex18css</title>
+    <!-- html주석 -->
+    <style type="text/css">
+        /* css주석 */
+        /* 선택자{속성명:값; 속성명2:값2;...} */
+
+        *{
+            color:blue;
+        }
+        body{
+            padding:50px;
+            font-family: 궁서체, Verdana;
+            font-size: 30px;
+        }
+        /* b 태그를 선택해서
+         - 글자색: tomato
+         - 글자크기: 33px
+         - 배경색 : beige
+        */
+        b {
+            color: tomato;
+            font-size: 33px;
+            background-color: beige;
+         }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        [1] style태그로 html파일 내부에 정의하는 방법
+        [2] 외부파일에 정의한 뒤 참조하는 방법 => link태그
+        [3] 외부파일에 정의한 뒤 참조하는 방법 => @import
+        [4] 태그 안에 인라인 스타일로 정의하는 방법
+     -->
+    <div>
+        안녕하세요<br>
+        <b>CSS3.0</b>을 배워봅시다
+        <p>
+            HTML의 보완적 요소가 CSS입니다
+            <b>Hello CSS 3.0</b>
+        </p>
+    </div>
+</body>
+</html>
+<!-- ex18css.html -->

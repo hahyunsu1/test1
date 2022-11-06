@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열의 주요 함수(메서드)</h1>
+    <h3>push(): 배열에 새로운 요소를 마지막에 추가한다.</h3>
+    <h3>concat(): 배열의 요소를 모두 합쳐 배열을 만들어 리턴한다.</h3>
+    <h3>join(): 배열 안의 모든 요소를 문자열로 만들어 반환한다.</h3>
+    <h3>pop(): 배열의 마지막 요소를 제거하고 반환한다.</h3>
+    <h3>shift(): 배열의 첫번째 요소를 제거하고 반환한다.</h3>
+    <h3>sort() : 오름차순으로 정렬하여 반환한다.</h3>
+    <hr color="red">
+
+    <script>
+        const a=10;//상수
+        const fruits=["Banana","Apple","Orange","Mango"];
+
+        fruits.push("Kiwi");//마지막에 요소를 추가
+        //for루프 이용해서 fruits에 저장된 요소값들을 출력
+        for(let i=0;i<fruits.length;i++){
+            document.write(fruits[i]+", ");
+        }
+        //앞에 요소를 추가 unshift()
+        //맨 앞에 Lemon을 추가하세요
+        fruits.unshift("Lemon");
+        document.write("<br>", fruits,"<br>");
+
+        let b=fruits.pop();//맨 마지막 요소를 제거하고, 제거된 요소를 반환한다.
+        document.write(b,"<br>");
+        document.write(`<h3>${fruits}</h3>`);
+
+        fruits.shift();//맨 앞의 요소를 제거
+        document.write(`<h3>${fruits}</h3>`);
+
+        //splice(시작인덱스, [삭제할 개수]) : 시작인덱스에서 개수만큼 삭제
+        //splice(시작인덱스, 삭제할개수, 추가할요소): 삭제한 후 새로운 요소를 중간에 추가
+        fruits.splice(2,1);
+        document.write(`<h3>${fruits}</h3>`);
+
+        fruits.splice(1,1,"Melon");
+        document.write(`<h3>${fruits}</h3>`);
+
+        //arr1.concat(arr2): arr1과 arr2를 하나로 합쳐서 새로운 배열을 반환한다.                    
+        let drinks=["Juice","Coke","Coffee"];
+        //fruits, drinks를 합쳐서 하나의 배열을 만든 뒤 출력
+        let arr=fruits.concat(drinks);
+
+        document.write(`<h3>arr=${arr}</h3>`);
+        document.write(`<h3>fruits=${fruits}</h3>`);//원본배열은 그대로
+
+        let str=fruits.join('#');
+        document.write(`<h3>${str}</h3>`);
+        fruits.push("Apple");
+        fruits.push("Peach");
+        document.write(`<h3>fruits=${fruits}</h3>`);
+        fruits.sort();//오름차순 정렬
+        document.write(`<h3>sort한 뒤 fruits=${fruits}</h3>`);
+
+        //slice(start,  end): start에서부터 end-1 까지의 요소를 조각내어 반환한다
+        let arr2=fruits.slice(1, 3);
+        document.write(`<h3>${arr2}</h3>`);
+        document.write("<hr>");
+        /*
+           배열.forEach(함수(element, index){}) 
+           for(let i=0;i<arr.length;i++){...} 
+           (for i in arr) {...}
+        */
+        fruits.forEach(function(value, i){
+            //value에 배열에 저장된 요소값들이 전달된다. i에는 배열 인덱스번호가 전달된다
+            document.write(`<h2>${i} : ${value}</h2>`)
+        })
+
+        for(let i in fruits){//i 는 배열의 속성
+            document.write(`<h2>${fruits[i]}</h2>`)
+        }
+
+    </script>
+</body>
+</html>
+<!-- ex70array.html -->

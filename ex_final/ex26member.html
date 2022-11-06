@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/ex26style.css">
+</head>
+<body>
+    <br>
+    <hr>
+    <title>회원가입</title>
+    <form name="frm" action="member.jsp" method="post" enctype="multipart/form-data">
+        <table>
+            <tr class="headtext">
+                <td colspan="2">&gt;아이디(ID)정보</td>
+            </tr>
+            <tr>
+                <td class="title" rowspan="2">
+                    <label for="id">* 아이디</label>
+                </td>
+                <td>
+                    <input type="text" name="id" id="id" minlength="4" maxlength="12" required >
+                    <button type="button" onclick="alert('중복검사완료')">중복검사</button>
+                </td>
+            </tr>
+            <tr>
+                <!-- <td></td> -->
+                <td><span>(4~12자 영자/숫자 가능,한글,특수문자 ID는 사용할 수 없습니다.)</span></td>
+            </tr>
+            <!-- 아이디 -->
+            <tr>
+                <td class="title" >
+                    <label for="pw">* 비밀번호</label>
+                </td>
+                <td>
+                    <input type="password" name="pw" id="pw" minlength="4" maxlength="8" required>
+                    <span>(4~8자 이내로 만들어주세요)</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="title">
+                    <label for="pwcheck">* 비밀번호 확인</label>
+                </td>
+                <td>
+                    <input type="password" name="pwcheck" id="pwcheck" minlength="4" maxlength="8" required>
+                    <span>(위 번호와 같이 입력해 주세요)</span>
+                </td>
+            </tr>
+            <!-- 비밀번호 -->
+            <tr>
+                <td class="title">
+                    <label for="QA">* 본인확인 질문</label>
+                </td>
+                <td>
+                    <select name="QA" id="QA" required>
+                        <option value="" selected >질문을 선택하세요</option>
+                        <option value="school">초등학교 졸업학교?</option>
+                        <option value="born">태어난 곳?</option>
+                        <option value="favfood">좋아하는 음식?</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="title">
+                    <label for="QACheck">* 본인확인 답</label>
+                </td>
+                <td>
+                    <input type="text" name="QACheck" id="QACheck" required>
+                    <span>(비밀번호 분실, 변경시 본인확인을 위한 정보)</span>
+                </td>
+            </tr>
+            <!-- 본인확인 -->
+            <tr class="headtext">
+                <td colspan="2">&gt;개인정보</td>
+            </tr>
+            <tr>
+                <td class="title">
+                    <label for="name">* 이름(한글)</label>
+                </td>
+                <td>
+                    <input type="text" name="name" id="name" required>
+                    <span>(예:박정현) </span>
+                </td>
+            </tr>
+            <!-- 이름 -->
+            <tr>
+                <td class="title">
+                    <label for="gender">성별</label>
+                </td>
+                <td>
+                    <input type="radio" name="gender" id="gender" value="M" checked>남
+                    <input type="radio" name="gender" id="gender" value="F">여
+                </td>
+            </tr>
+            <!-- 성별 -->
+            <tr>
+                <td class="title">
+                    <label for="birth">생년월일</label>
+                </td>
+                <td>
+                    <input type="number" id="birth" maxlength="4">년
+                    <select name="month" id="born">
+                        <option value="" selected >선택</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>월
+                    <select name="date" id="birth">
+                        <option value="" selected >선택</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>일
+                    <input type="radio" id="birth" name="cal" value="lunar">음력
+                    <input type="radio" id="birth" name="cal" value="solar">양력
+                </td>
+            </tr>
+            <!-- 생년월일 -->
+            <tr>
+                <td class="title" rowspan="2">
+                    <label for="address">* 주소</label>
+                </td>
+                <td>
+                    <input type="text" name="addressnumber" id="address" required>
+                    <button type="button" onclick="alert('주소팝업창 띄우기')">우편번호 찾기</button>
+                </td>
+            </tr>
+            <tr>
+                <!-- <td></td> -->
+                <td>
+                    <input type="text" name="address" id="address" size="50" required>
+                </td>
+            </tr>
+            <!-- 주소 -->
+            <tr>
+                <td class="title" rowspan="2">
+                    <label for="tel" required>* 전화번호</label>
+                </td>
+                <td>
+                    <span class="tel">핸드폰</span>
+                    <input type="tel" name="tel1" id="tel" size="4" maxlength="3"> -
+                    <input type="tel" name="tel2" id="tel" size="4" maxlength="4"> -
+                    <input type="tel" name="tel3" id="tel" size="4" maxlength="4">
+                    <input type="radio" name="telcompany" value="SKT">SKT
+                    <input type="radio" name="telcompany" value="KT">KT
+                    <input type="radio" name="telcompany" value="LGT">LGT
+                </td>
+            </tr>
+            <tr>
+                <!-- <td></td> -->
+                <td>
+                    <span class="tel">집/회사</span>
+                    <input type="tel" name="cel1" id="tel" size="4" maxlength="3"> -
+                    <input type="tel" name="cel2" id="tel" size="4" maxlength="3"> -
+                    <input type="tel" name="cel3" id="tel" size="4" maxlength="4">
+                    <span>최소 한개는 입력하세요.</span>
+                </td>
+            </tr>
+            <!-- 전화번호 -->
+            <tr>
+                <td class="title">
+                    <label for="job">* 직업</label>
+                </td>
+                <td>
+                    <select name="job" id="job" required>
+                        <option value="" selected>직업을 선택하세요</option>
+                        <option value="Developer">개발자</option>
+                        <option value="Designer">디자이너</option>
+                        <option value="Manager">매니저</option>
+                    </select>
+                </td>
+            </tr>
+            <!-- 직업 -->
+            <tr>
+                <td class="title">
+                    <label for="myemail">이메일</label>
+                </td>
+                <td>
+                    <input type="email" name="email" id="myemail">
+                </td>
+            </tr>
+            <!-- 이메일 -->
+            <tr>
+                <td class="title">
+                    <label for="mailsend">메일수신</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="mailsend" id="mailsend" value="0" checked>받습니다.
+                    <input type="checkbox" name="mailsend" id="mailsend" value="1">받지 않습니다.
+                    <span>다양하고 유힉한 정보, 메일로 받아보세요.</span>
+                </td>
+            </tr>
+            <!-- 메일수신 -->
+            <tr>
+                <td class="title">
+                    <label for="smssend">SMS수신</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="smssend" id="smssend" value="0">받습니다.
+                    <input type="checkbox" name="smssend" id="smssend" value="1">받지 않습니다.
+                </td>
+            </tr>
+            <!-- SMS수신 -->
+            <tr>
+                <td class="title" rowspan="2">
+                    <label for="intro">가입인사</label>
+                </td>
+                <td rowspan="2">
+                    <textarea name="intro" id="intro" cols="70" rows="5"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <!-- <td></td> -->
+                <!-- <td></td> -->
+            </tr>
+            <!-- 가입인사 -->
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit">확인</button>
+                    <button type="reset">다시입력</button>   
+                </td>
+                <!-- <td></td> -->
+            </tr>
+            <!-- 버튼 -->
+        </table>
+    </form>
+</body>
+</html>

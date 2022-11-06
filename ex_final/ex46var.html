@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex46var</title>
+</head>
+<body>
+    <h1>자바스크립트 자료유형(data type)</h1>
+    <h2>기본자료형: number, string, boolean, undefined</h2>
+    <h2>참조형: object, function </h2>
+    <script>
+        var a; //변수 선언(var, let, const  변수명)
+        a=10; //number
+        var b="안녕"; //string
+        document.write("a=",a,"<br>");
+        document.write("a의 자료형: ", typeof a,"<br>");
+        document.write("b=",b,"<br>");
+        document.write("b의 자료형: ", typeof b,"<br>");
+        a='Hi';
+        document.write("a=",a,"<br>");
+        document.write("a의 자료형: ", typeof a,"<br>");
+
+        let intNum=100;//정수형 number
+        let doubleNum=3.141592;//실수형 number
+        var bool=true;//boolean
+
+        document.write(intNum, typeof(intNum),"<br>");
+        document.write(doubleNum, typeof(doubleNum),"<br>");
+        document.write(bool, typeof(bool),"<br>");
+
+        var obj=null; //null : 아무것도 아닌값  참조형
+        document.write(obj, typeof obj, "<br>"); //object
+
+        var obj2; //undefined 값이 아직 정해지지 않은 경우
+        document.write(obj2, typeof obj2, "<br>");
+
+        //참조형 : object, function
+        //객체1
+        //객체 (속성+행동양식): 속성 => 변수(property), 행동양식=> 함수(메서드)
+        var car=new Object();
+        car.color="black"; //속성 객체명.속성명
+        car.capacity=2000;
+        car.run= function(){//행동양식=>함수
+            document.write("<h2>"+this.color+"색상의 자동차가 달려요</h2>")
+        }
+
+        document.write(car.color+" "+car.capacity+" ", typeof car);
+        car.run();//함수 호출
+        //객체2 : {속성명1:값1, 속성명2:값,  }  
+
+        var car2={
+            color:'red',
+            capacity:3000,
+            run:function(){
+                document.write("<h2>"+this.color+"색상의 자동차가 달려요</h2>");
+            }
+        };
+        document.write(car2.color+" "+car2.capacity+" ", typeof car2,"<br>");
+        car2.run();
+
+
+    </script>
+    
+</body>
+</html>
+<!-- ex46var.html -->

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex63dowhile.html</title>
+</head>
+<body>
+    <h1>반복문- do~while루프문</h1>
+    <!-- 
+        while문은 조건을 먼저 체크하고 조건이 true일때만 실행하는 반면,
+        do~while문은 조건을 체크하기 전에 일단 실행문을 먼저 수행한 뒤에 조건체크를 함
+        조건식이 false일지라도 최소 한번은 실행함.
+                true이명 계속 반복 실행
+
+        변수선언및 초기화
+        do{
+            실행문
+            증감식
+        }while(조건식);
+
+     -->
+     <script>
+        let i=1;
+        do{
+            document.write(i,"<br>");
+            i--;
+        }while(i>-5);
+        /*do~while문을 이용해서 1~30까지의 수중 5단위 마다 '땅콩',
+            10단위 마다는 '찐콩'을 출력하세요.
+            10,20,30 => 땅콩
+            5, 15, 25=> 찐콩
+            나머지는 숫자 출력
+            1 2 3 4 땅콩 6 7 8 9 찐콩 11....
+	    */
+        let num = 1;
+        do{
+            if(num % 10 == 0) {
+                document.write("땅콩 ");
+            }else if(num % 5 == 0 ) {
+                document.write("찐콩 ");
+            }
+            else{
+                document.write(`${num} `);
+            }
+            num++;
+        }while(num <= 30);
+
+
+     </script>
+    
+</body>
+</html>
+<!-- ex63dowhile.html -->

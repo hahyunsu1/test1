@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap">
+        <div id="btns">
+            <span id="btn1" onclick="showMovie()">현재 상영작</span>
+            <span id="btnPlay">Play</span>
+            <span id="btnStop">Stop</span>
+        </div>
+        <div id="movies">
+            
+        </div>
+    </div>
+    <script>
+        let movies=['m1.JPG','m2.JPG','m3.JPG','m4.JPG','m5.JPG'];
+        let obj=document.getElementById('movies');
+    //showMovie()함수 만들어서 배열에 저장된 요소만큼 반목문 돌면서<img src='이미지파일명'>
+    //브라우저에 문자열 출력하기
+    function showMovie(){
+        let str='';
+        for(let i=0;i<movies.length;i++){
+            let movie=movies[i];
+            str+=`<img src="../images/${movie}">`;            
+        }
+        //document.write(str); //
+        obj.innerHTML=str;
+    }
+
+    </script>
+</body>
+</html>

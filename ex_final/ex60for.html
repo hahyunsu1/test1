@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex60for</title>
+</head>
+<body>
+    <h1>반복문 - for 루프문</h1>
+    <!-- 
+        for(let 변수=초기값; 조건식; 증감식){
+            실행문;
+        }
+     -->
+     <script>
+        for(let i=1;i<=3;i++){
+            document.write(`<h3>Hello JavaScript ${i}</h3>`);
+        }
+
+        //Hi 5  Hi 4  ~ Hi1  for루프 이용해서 출력해보세요
+        for(let i=5;i>0;i--){
+            document.write(`<h3>Hi ${i}</h3>`)
+        }
+        //[1]for루프를 이용해서 구구단의 7단을 출력해보세요
+        for(let j=1; j<=9; j++){
+            document.write(`”7 *${j}”=${7*j}<br>`);
+        }
+        //[2] prompt로 구구단의 단을 입력받아서 구구단을 table형태로 출력하세요
+        //    단, 짝수단이면 table의 배경색을 gold로 주고, 홀수단이면 skyblue로 주세요
+        let dan=Number(prompt("구구단 몇단을 할까요?","2"));
+        
+        let color=(dan%2==0)?"gold":"skyblue";
+
+        let str=`<table border="1" style="width:200px;background:${color}">
+                <tr><th>${dan} 단</th></tr>            
+            `;
+
+        for(let i=1;i<10;i++){
+            str+=`<tr><td align='center'>`
+            str+=`${dan}x${i}=${dan*i}<br>`;
+            str+=`</td></tr>`
+        }
+        str+=`</table>`
+        document.write(str);
+     </script>
+</body>
+</html>
+<!-- ex60for.html -->

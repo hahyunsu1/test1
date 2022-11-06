@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            width:400px;
+            padding: 3px;
+        }
+        #chat{
+            width:500px;
+            height:500px;
+            border: 1px solid silver;
+            margin: 1em;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //input에 값을 입력하면 해당 입력값을 얻어서 
+            //id가 chat인 div 요소 안에 해당 값을 출력하세요
+            //keydown이벤트 처리, input의 value속성을 이용해 값을 얻을 수 있다.
+            let input1=document.querySelector('#msg');
+            let chat1=document.querySelector('#chat');
+            //[a-zA-Z0-9]
+            input1.onkeydown=function(evt){
+                //alert(evt.keyCode); //A => 65 B=>66 엔터=>13을 반환
+                //console.log(this.value)
+                if(evt.keyCode==13){//엔터값을 입력했다면
+                    let str=this.value;
+                    chat1.innerHTML+=`<h4>${str}</h4>`;
+                    this.value='';//인풋 박스 비워주기
+                    this.focus();//입력 포커스 주기
+                }
+                console.log(evt.target);//evt.target=>이벤트가 발생된 객체
+                evt.target.style.border='1px solid red';
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <label for="msg">메시지:</label>
+        <input type="text" name="msg" id="msg">
+    </div>
+    <div id="chat">
+
+    </div>
+
+</body>
+</html>
+<!-- ex76event.html -->

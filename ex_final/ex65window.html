@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex65window</title>
+</head>
+<body>
+    <h1>BOM (Browser Object Model) - window객체</h1>
+    <button onclick="openWin()">팝업창 열기</button>
+    <button onclick="closeWin()">팝업창 닫기</button>
+    <button onclick="changeLoc()">팝업창 위치변경</button>
+    <button onclick="changeSize()">팝업창 크기변경</button>
+    <hr color="red">
+    <script>
+        /*window객체의 함수
+            - open(url,target,속성값)
+            - close()
+            - moveTo(x, y) : 같은 서버 내에 있는 파일을 띄웠을 때만 동작함
+            - resizeTo(w, h):  "
+        */
+        let win=null;//전역변수
+        function openWin(){
+            let url="ex01.html";
+            //let url="http://www.naver.com";
+            win=window.open(url,"popup","width=400, height=400, left=100, top=100")
+            //win => 새로 띄운 윈도창을 참조한다. 
+        }
+        function closeWin(){            
+            if(win!=null){
+                win.close();//팝업창 닫기
+            }
+        }
+        const changeLoc=function(){
+            if(win!=null){
+                win.moveTo(300,300);
+            }
+        }
+        const changeSize=function(){
+            if(win!=null){
+                win.resizeTo(700,700);
+            }
+        }
+
+    </script>
+    
+</body>
+</html>
+
+<!-- ex65window.html -->

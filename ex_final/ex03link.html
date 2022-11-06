@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>ex03link.html</title>
+    </head>
+    <body>
+        <h1>텍스트에 하이퍼링크를 걸어봅시다</h1>
+        <a href="http://www.naver.com">네이버</a> | 
+        <a href="http://www.google.com" target="_blank">구글</a> |
+        <a href="http://www.daum.net">다음</a>
+        <hr color="green">
+        <a href="ex01.html" target="_blank">내가만든 문서1-ex01.html</a>
+        <a href="./test.html">내가만든문서2-test.html</a>
+        <a href="../index.html">index.html문서로 이동</a>
+        <a href="../sample/sample.html">sample.html로 이동</a>
+        <!-- 
+            nginx1.22.0
+                +---html
+                      +---ex ---ex03link.html
+                            +---test.html
+                            +---ex01.html
+                      +---index.html
+            . : 현재 디렉토리를 의미
+            .. : 상위 디렉토리를 의미
+
+            ../../test.html : 2단계 상위 디렉토리
+            ../../../test2.html: 3단계 상위 디렉토리
+         -->
+    </body>
+</html>
+
+<!-- ex03link.html -->

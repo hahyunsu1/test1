@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>var, let, const</h1>
+    <script>
+        var a=10; //전역변수 function level scope
+        let b=20; //전역변수 block level scope
+        document.write("a: ", a,"<br>");//10
+        document.write("b: ", b, "<br>");
+        if(a>0){
+            var a=300;//전역변수 a
+            let b=400;//지역변수 b
+            document.write("if block 안 a: ", a,"<br>");//300
+            document.write("if block 안 b: ", b,"<br>");//400
+        }
+        document.write("a: ", a,"<br>");//300
+        document.write("b: ", b,"<br>");//20
+
+        var x='hello';
+        let y='hi';
+        document.write("x: ",x,"<br>");//hello
+        document.write("y: ",y,"<br>");//hi
+
+        var x=9.12;//var변수는 동일명으로 중복선언 가능
+        // let y=2.12;//let변수는 동일명으로 중복선언 할 수 없음
+        y=2.12;
+        document.write("x: ",x,"<br>");//9.14
+        document.write("y: ",y,"<br>");//9.14
+
+        document.write(i,"<br>"); //undefined
+        // document.write(j,"<br>"); [x]
+        var i='tiger';//var 변수는 hoisting이된다
+        let j='lion'; //let 변수는 hoisting [x]
+        document.write(i,"<br>");
+        document.write(j,"<br>");
+
+        const NONE=0;
+        let add=1;
+        document.write(NONE,"<br>");
+        document.write(add,"<br>");
+        add=100;//값을 변경
+        // NONE=200; 상수(const)는 값을 변경할 수 없다.
+        document.write(add,"<br>");
+        document.write(NONE,"<br>");
+
+        let edit;
+        const update='ok';
+
+
+
+    </script>
+</body>
+</html>
+
+<!-- ex55let.html -->

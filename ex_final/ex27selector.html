@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex27selector</title>
+    <style>
+        /* 모든 input을 선택해서 padding 5px margin 5px */
+        input{
+            padding:5px;
+            margin: 5px;
+        }
+        /* input요소 중 text인 요소만 선택해서 글자색을 blue로 주세요 */
+        input[type=text]{
+            color:blue;
+        }
+        /* input중 password요소를 선택해서 배경색을 주세요 */
+        input[type=password]{
+            background-color: antiquewhite;
+        }
+        /*   선택자:focus  선택자에 포커스가 왔을 때  */
+        /* text인 요소에 포커스 오면 글자색 red로 password=> green */
+        input[type=text]:focus{
+            color:red;
+        }
+        input[type=password]:focus{
+            color:green;
+            border: thick dashed violet;
+        }
+        /* input요소중에 disabled 된 요소를 찾아서 그 옆의 문자열 글자색을 변경해보세요 */
+        input:disabled+span{
+            color:red;
+        }
+        /* enabled된 input 요소들을 찾아서 글자색 blue로 주세요 */
+        input:enabled{
+            color:blue
+        }
+        input:enabled+span{
+            color:blue;
+        }
+        /* input 요소중 체크가 되면 그 옆의 span요소의 글자색을 orange로 주세요 */
+        input:checked+span{
+            color:orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>가상클래스 선택자</h1>
+    <input type="text" value="포커스가 오면 red로"><br>
+    <input type="password" value="포커스가 오면 green으로"><br>
+    <hr>
+    <label for="gender1"><input type="radio" name="gender" id="gender1" value="Male">Male</label>
+    <label for="gender2"><input type="radio" name="gender" id="gender2" value="Female">Female</label>
+    <hr>
+    <label for="ck1"><input type="checkbox" id="ck1" value="bicycle"><span>I have a bicycle</span></label>
+    <label for="ck2"><input type="checkbox" id="ck2" value="car"><span>I have a car</span></label>
+    <label for="ck3"><input type="checkbox" id="ck3" disabled value="motorcycle">
+        <span>I have a motorcycle</span></label>
+</body>
+</html>

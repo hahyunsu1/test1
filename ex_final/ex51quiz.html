@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex51quiz.html</title>
+</head>
+<body>
+    <script>
+        let num1=window.prompt("정수1을 입력하세요");
+        let num2=prompt("정수2를 입력하세요");
+        document.write("num1="+num1, typeof(num1), "<br>");//num1은 string
+        document.write("num2="+num2,"<br>");
+
+        //덧셈식을 브라우저에 출력하세요
+        //5+3=8
+        //string을 number변환할때 사용하는 내장함수
+        //[1] parseInt() : 숫자 문자열을 정수로 변환하는 함수
+        //[2] parseFloat():숫자 문자열을 실수로 변환하는 함수
+        //[3] Number() : 숫자로 만들어주는 함수
+        // let n1=parseInt(num1);
+        let n1=Number(num1);
+        let n2=parseInt(num2);
+        console.log(n1, typeof(n1));
+
+        document.write("<h3>"+num1+"+"+num2+"="+(n1+n2)+"</h3>");
+    </script>
+</body>
+</html>
+<!-- ex51quiz.html -->

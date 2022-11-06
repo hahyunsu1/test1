@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex53operator</title>
+</head>
+<body>
+    <h1>연산자</h1>
+    <script>
+        //5. 대입연산자, 연산후 대입연산자
+        // =, +=, -=,*=, /=, %=, <<=, >>=,>>>=, &=, |=,^= 
+        var a=8;
+        a+=3; // a= a+3; 누적
+        document.write(a,"<br>"); //11
+        a-=5; // a= a-5; 차감 6
+        document.write(a,"<br>");
+        a*=4; // a= a*4
+        document.write(a,"<br>");//24
+        a/=7; // a= a/7
+        document.write(a,"<br>");//3.4285714285714284
+        a%=3; // a= a%3
+        document.write(a,"<br>");//0.4285714285714284
+        var b=5;
+        b^=3;//b= b^3
+        document.write(b,"<br>");
+
+        //6. 삼항연산자(조건연산자)
+        /*
+            변수선언문 = (조건식)? 값1:값2;
+            : 조건식이 true이면 변수에 값1을 대입하고,
+                      false이면 변수에 값2를 대입한다
+        */
+       let x=30, y=40;
+       let z=(x<y)?"@@x가 y보다 커요":'##x가 y보다 작아요';
+       document.write("<h2>"+z+"</h2>");
+    </script>
+</body>
+</html>
+
+<!-- ex53operator.html -->

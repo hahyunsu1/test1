@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex08imageMap</title>
+</head>
+<body>
+    <h1>이미지 맵을 이용해봅시다</h1>
+    <p>
+        이미지맵은 이미지의 좌표점에 따라 위치를 지정하여
+        링크를 거는 형식을 사용합니다
+    </p>
+    <hr color="red">
+    <img src="../images/menu.JPG" usemap="#img_map">
+    <!-- map태그 안에 area태그를 통해서 좌표를 지정한다
+        area태그 속성
+        - shape : 링크모양을 지정 rect, circle, poly
+        - coords : 좌표. 
+                사각형: 시작x, 시작y, 끝x, 끝y
+                원   : 중심점의 x,y좌표, 반지름r
+                다각형: x1,y1, x2,y2, x3,y3
+        - href : 이동할 url 주소
+     -->
+    <map name="img_map">
+        <area shape="rect" coords="45,10,80,47" href="http://www.naver.com">
+        <area shape="circle" coords="105,25,15" href="http://www.google.com">
+        <area shape="poly" coords="153,2,130,38,174,38" href="http://www.daum.net">
+    </map>
+</body>
+</html>
+<!-- ex08imageMap.html -->

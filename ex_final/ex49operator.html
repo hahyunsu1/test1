@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex49operator</title>
+</head>
+<body>
+    <h1>연산자(operator)</h1>
+    <script>
+        //1. 산술연산자 (+, -, *, /, %)
+        var a=10;
+        var b=3;
+        function print(str){
+            document.write(str,"<br>");
+        }
+        print(a+b);
+        print(a-b);
+        print(a*b);//곱셈
+        print(a/b);//나눈 몫
+        print(a%b);//나눈 나머지
+        print("<hr>");
+        //2. 관계 연산자
+        /* == : 값이 같은가? 같으면 true, 다르면 false
+           != : 값이 다른가? 다르면 true, 같으면 false
+           = : 대입연산자, 할당연산자
+        */
+       print(a==b);
+       print(a!=b);
+       var c=3.0;
+       var d="10";
+       
+       print(b==c);//true
+       print(a==d);//true
+       // ==  : 값이 같으면 자료형이 달라도 true 
+       // === : 값도 같고 자료형도 같아야 true
+       print("<hr color='red'>");
+       print(a===d);//number === string   false
+       print(b===c);//number === number   true
+
+       //3. 관계연산자 > , >=, <, <=
+       let x=77;
+       let y=33;
+       let z=77.0;
+       print(x>y);//true
+       print(x>z);//false
+       print(x>=z);//true
+       //4. 증감연산자 ++, --  1씩 증가(감소)시켜줌
+       var m=5;
+       var n=9;
+       print("<hr color='blue'>");
+       m++;
+       n--;
+       print("m="+m);
+       print("n="+n);
+       ++m;
+       --n;
+       print("m="+m);
+       print("n="+n);
+       /* 증감 연산자는 단독으로 사용될 때는 변수 앞에 오든 뒤에 오든 차이가 없다
+          그러나 다른 연산자와 함께 사용할 경우는 차이가 있다*/ 
+       var i=10;
+       var j=7;
+       var k=i++; //k값과 i값은?   
+       print("k="+k);//10
+       print("i="+i);//11
+
+       var q=++j;//q값과 j값은?
+
+       print("q="+q);//8
+       print("j="+j);//8
+       print("<hr>");
+
+       var o= i-- + ++j;
+       //o, i, j의 값은?
+       print("o="+o);//20
+       print("i="+i);//10
+       print("j="+j);//9
+
+    </script>
+
+</body>
+</html>
+<!-- ex49operator.html -->
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span, div{
+            background-color: lightblue;
+            border: 1px solid red;
+        }
+        .top{
+            position: relative;
+            /* static위치를 기준으로 좌표를 잡는다 */
+            left:20px;
+            top:15px;
+            z-index: 1;
+        }
+        .right{
+            position: relative;
+            right: 10px;
+            z-index: 2;
+        }
+        .bottom{
+            position: relative;
+            bottom: 30px;
+        }
+        .left{
+            position: relative;
+            left:50px;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <h1>position-static, [relative], absolute, fixed</h1>
+    <span class="top">span1</span>
+    <span class="right">span2</span>
+    <span class="bottom">span3</span>
+    <div class="left">div1</div>
+    <!-- static (디폴트)
+        차례대로 왼쪽에서 오른쪽, 위에서 아래로
+        배치를 한다.
+    -->
+</body>
+</html>
+<!-- ex39position.html -->

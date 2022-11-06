@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>반복문- while루프문</h1>
+    <!-- 
+        변수선언및 초기화
+        while(조건식){
+            실행문;
+            증감식;
+        }
+        조건식이 true이면 실행문을 실행함
+                false면 while루프를 벗어남
+     -->
+     <script>
+        let a=1;
+        while(a<5){
+            document.write(a,"<br>");//1 3
+            a+=2;
+        }
+        document.write("<hr>")
+         //10, 9, 8, ...2,1 형태로 while루프를 이용해 출력하고,
+        //10+9+8+ ...+1=55 
+        //10부터 1까지의 합을 구해 출력하기
+        let b=10;
+        const sum=b*(b+1)/2;
+        while(b>0){
+            if(b>1)
+                document.write(b,"+");
+            else
+                document.write(b,"=");
+            b--;
+        }
+        document.write(sum);
+
+     </script>
+</body>
+</html>
+<!-- ex62while.html -->

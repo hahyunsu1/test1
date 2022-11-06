@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex48function</title>
+</head>
+<body>
+    <h1>함수</h1>
+    <script>
+        /*함수를 구성하는 방법
+        [1]
+            function 함수명([매개변수,...]){
+                함수내용구성
+            }
+            => hoisting (끌어올림)이 지원된다.
+
+            //literal방식
+        [2] var 변수명 = function([매개변수,...]){
+
+            }      
+            리터럴방식은 hosting이 지원되지 않는다.
+            함수를 구성한 후에야 호출 가능하다.
+        */
+       plus("Good","Luck");//hoisting
+    //    minus(7,2);     [x]
+       function plus(a, b){
+            document.write("<h2>"+a+"+"+b+"="+(a+b)+"</h2>");            
+       }
+       var minus= function(x, y){
+            document.write("<h2>"+x+"-"+y+"="+(x-y)+"</h2>");            
+       }
+
+       minus(7,2);
+       //함수 호출하세요
+       plus(10, 20);
+       plus(1.22, 4.55);
+       minus(20, 7);
+       minus(5.5,1.1);
+    </script>
+</body>
+</html>
+
+<!-- ex48function.html -->

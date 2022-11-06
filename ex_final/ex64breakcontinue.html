@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>보조제어문 - break, continue</h1>
+    <p>
+        주 제어문과 함께 사용되며, break 문은 반복문일 경우
+        가까운 반복문을 이탈한다. continue는 반복문을 계속 수행한다.
+    </p>
+    <script>
+        for(var i=1;i<11;i++){
+            if(i==5) 
+                break;//가장 가까운 반복문을 벗어난다.
+            document.write(i,"<br>")
+        }
+        
+        document.write("<hr>");
+
+        for(var i=1;i<11;i++){
+            if(i==5)
+                continue; //i가 5인 경우 continue 아래 실행문을 skip하고
+                            //반복문을 계속 수행한다
+            document.write(i,"<br>")
+        }
+
+    </script>
+</body>
+</html>
+
+<!-- ex64breakcontinue.html -->

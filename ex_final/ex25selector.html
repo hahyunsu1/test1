@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex25selector</title>
+    <style>
+        body *{
+            border: 1px solid silver;
+            padding: 10px;
+            margin: 5px;
+        }
+        /* 요소:first-child =>요소의 첫번째 자식을 선택
+           요소:last-child =>요소의 마지막 자식을 선택 
+        */
+        /* p요소 중 첫째 자식를 선택해서 테두리: thick dashed 색상 */
+        div>p:first-child{
+            border: thick dashed darkorange;
+        }
+        /*[1] ol>li중에서 첫째자식 선택해서 글자색:blue */
+        ol>li:first-child{
+            color:blue;
+        }
+        
+        /* [2] ol>li중 마지막자식 선택해서 배경색:알아서 */
+        ol>li:last-child{
+            background-color: chartreuse;
+        }
+        /* [3] ol>li중 둘째 자식 선택해서 글자색:maroon 글자크기 :2배 */
+        ol>li:first-child+li{
+            color:maroon;
+            font-size: 2em;
+        }
+        ol>li:nth-child(3){
+            background-color: beige;
+        }
+        /* ol>li중 짝수번째 찾아서 테두리 thick double 색상
+            2n
+            2n+1
+            홀수번째 찾아서 배경색 알아서
+        */
+        ol>li:nth-child(2n){
+            border: thick double mediumvioletred;
+        }
+        ol>li:nth-child(2n+1){
+            background-color: chocolate;            
+        }
+        /* li마지막에서 2번째 요소를 선택해서 글자크기 2배로 글자색 달리주세요 
+        nth-last-child(n) : 마지막에서 n번째 요소를 선택함
+        */
+        ol>li:nth-last-child(2){
+            font-size: 2em;
+            color:aliceblue;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- <h1>가상클래스 선택자 (Pseudo Selector) => 선택요소:특성</h1> -->
+    <p>body first child</p>
+    <h1>Welcome to my homepage</h1>
+    <p>body not first child</p>
+    <div>
+        <p>div>p first child</p>
+        <p>div>p not first child</p>
+    </div>
+    <hr color="green">
+    <ol>
+        <li>Espresso</li>
+        <li>Americano</li>
+        <li>CaffeLatte</li>
+        <li>Cappuccino</li>
+        <li>CafeMocha</li>
+        <li>Caramel Latte</li>
+    </ol>
+</body>
+</html>

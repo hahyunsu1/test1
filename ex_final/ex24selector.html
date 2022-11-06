@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex24selector</title>
+    <style>
+        /* 상태선택자
+        선택자:상태조건{속성명1:값1;...} */
+        /* 처음링크: 방문전 */
+        a:link{
+            color:red;
+            text-decoration: none;
+        }
+        /* 링크: 방문후 */
+        a:visited{
+            color:green;
+        }
+        /* 마우스클릭시 */
+        a:active{
+            background-color: turquoise;
+        }
+        /* 마우스오버시 */
+        a:hover{
+            color:salmon;
+            font-size: 1.5em;
+        }
+        /* [1] 버튼 중 비활성화(disabled)된 버튼을 선택해서 배경색을 darkgrey로 주세요 */
+        button:disabled{
+            background-color: darkgrey;
+        }
+        /* [2] class가 google인 a요소를 선택해서 배경색을 알아서 주세요 */
+        a.google{
+            background-color: magenta;
+        }
+        /* [3] class가 google이 아닌 a요소를 선택해서 배경색을 다른색으로 주세요
+            선택자:not(배제할요소)
+        */
+        a:not(.google){
+            background-color: paleturquoise;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="google">상태선택자</h1>
+    <h2>하이퍼링크 스타일</h2>
+    <a href="http://www.naver.com">네이버</a><br><br>
+    <a class="google" href="http://www.google.com">구글</a><br><br>
+    <a href="http://www.daum.net">다음</a><br><br>
+    <a href="http://www.nate.com">네이트</a><br><br>
+    <a href="http://www.yahoo.com">야후</a><br><br>
+    <hr color="red">
+    일반텍스트
+    <div>헤드라인 텍스트</div>
+    <button>활성화 버튼</button>
+    <button disabled>비활성화 버튼</button>
+
+</body>
+</html>
+<!-- ex24selector.html -->

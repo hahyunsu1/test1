@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex67window</title>
+    <style>
+        #circle{
+            background-color: blueviolet;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+            top:200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>window객체의 setInterval()/clearInterval() 활용</h1>
+    <button onclick="move()">Move</button>
+    <button onclick="stop()">Stop</button>
+    <hr>
+    <div id="circle"></div>
+    <script>
+        let wid=null;
+        let x=20;
+        // setInterval(함수,밀리초): 밀리초 단위로 함수를 주기적으로 계속 호출한다
+        //[1] Move버튼을 누르면 #circle의 x좌표를 이동시켜서 공이 굴러가게 만드세요
+        //[2] Stop버튼 누르면 공 굴리지 중지시키세요
+        //[3] 공이 다 구르면 다시 돌아오게 하세요
+        const move=function(){
+            let obj=document.getElementById('circle');
+            if(wid==null){
+                wid=setInterval(()=>{
+                    obj.style.position='absolute';
+                    obj.style.left=x+"px";
+                    x+=5;
+                },50);//0.5초 단위
+            }//if-----------
+        }//------------------
+
+        const stop=function(){
+            if(wid!=null){
+                clearInterval(wid);//중지
+                wid=null;
+            }
+        }
+    </script>
+</body>
+</html>
+<!--  -->
