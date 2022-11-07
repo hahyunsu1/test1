@@ -8,7 +8,7 @@ import java.util.*;
  * [2] doGet() 또는 doPost() 메서드를 오버라이드 한다
  * [3] 2번에서 재정의한 메서드 안에서 코드 구현
  * 
- * 서블릿은 구현하고 나면 서블릿을 web.xml 에 등록하던지,아니면 어노테잇ㄴ(@WebServlet)을 기술해야한다.
+ * 서블릿은 구현하고 나면 서블릿을 web.xml 에 등록하던지,아니면 어노테이션(@WebServlet)을 기술해야한다.
  * 
  */
 public class HelloServlet extends HttpServlet{
