@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("text.html; charset=UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=res.getWriter();//html태그를 출력할 때
 		//이미지나 동영상파일
 		//ServletOutputStream sos=res.getOutputStream();

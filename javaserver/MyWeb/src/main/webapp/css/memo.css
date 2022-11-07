@@ -34,3 +34,8 @@ div#wrap{
 	border:1px solid silver;
 	width:200px;
 }
+span.mdate{
+	
+	float:right;
+	margin-right:10px;
+}

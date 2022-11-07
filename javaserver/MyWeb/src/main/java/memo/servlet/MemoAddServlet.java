@@ -36,7 +36,13 @@ public class MemoAddServlet extends HttpServlet {
 		try {
 		int n=dao.insertMemo(vo);
 			String str=(n>0)?"글 등록 성공":"글 등록 실패";
-			out.println(str);
+			String loc=(n>0)?"MemoList":"memo/input.html";
+//			out.println(str);
+			out.println("<script>");
+			out.println("alert('"+str+"')");
+			out.println("location.href='"+loc+"'");
+			out.println("</script>");
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			out.print("error: "+e.getMessage()+"<br>");
