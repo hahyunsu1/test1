@@ -1,0 +1,11 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select * from memo order by idx desc;]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1667802883163]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[6]]></executed>
+		<execTime><![CDATA[0.044]]></execTime>
+	</historyItem>
+</history>

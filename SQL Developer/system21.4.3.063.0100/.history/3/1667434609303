@@ -1,0 +1,29 @@
+# 패키지
+여러 개의 프로시저, 함수, 커서 등을 하나의 패키지로 묶어 관리할 수 있다.
+- 선언부
+- 본몬(package body)
+
+create or replace package empInfo as
+procedure allEmp;
+procedure allSal;
+end empInfo;
+
+--패키지 본문 구성
+create or replace package body empInfo as
+    procedure allEmp
+    is
+    cursor empCr is
+    select empno,ename,hiredate from emp
+    order by 3;
+    
+    begin
+    for k in empCr loop
+        dbms_output.put_line(k.empno||lpad(k.ename,16' ')||lpad(k.hiredate,16,' '));
+    end loop;
+    exception
+        when others then
+        dbms_output.put_line(SQLERRM||'에러가 발생함');
+    end allEmp;
+end empInfo;
+
+-- allSal은 전체 급여 합계, 사원수, 급여평균, 최대급여, 최소급여를 가져와 출력하는 프로시저

@@ -1,0 +1,13 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select distinct(e.deptno),d.deptno
+from dept d right outer join emp e
+on d.deptno = e.deptno order by 2;]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666836983156]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.004]]></execTime>
+	</historyItem>
+</history>

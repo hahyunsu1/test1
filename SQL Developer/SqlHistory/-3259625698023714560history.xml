@@ -1,0 +1,11 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[file:/C:/Users/hysdd/AppData/Roaming/SQL Developer/day08_plsql.sql]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1667443154955]]></timestamp>
+		<type><![CDATA[Script]]></type>
+		<executed><![CDATA[107]]></executed>
+		<execTime><![CDATA[0.0]]></execTime>
+	</historyItem>
+</history>

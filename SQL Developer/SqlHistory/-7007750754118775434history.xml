@@ -1,0 +1,12 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select * from user_constraints
+where table_name='TEST_TAB2';]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666917729000]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[5]]></executed>
+		<execTime><![CDATA[0.001]]></execTime>
+	</historyItem>
+</history>

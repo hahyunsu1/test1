@@ -1,0 +1,14 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select*from member
+where (job,age)in(
+select job,max(age) from member
+group by job);]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666848956235]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.004]]></execTime>
+	</historyItem>
+</history>

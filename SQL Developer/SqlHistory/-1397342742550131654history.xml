@@ -1,0 +1,13 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select e.ename||'의 관리자는 '||m.ename||'이다'
+from emp e join emp m
+on e.mgr = m.empno]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666838769508]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.002]]></execTime>
+	</historyItem>
+</history>

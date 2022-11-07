@@ -1,0 +1,13 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select d.deptno, dname, e.deptno, ename,job,sal
+from dept d,emp e
+where d.deptno = e.deptno order by 1;]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666833780017]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[2]]></executed>
+		<execTime><![CDATA[0.004]]></execTime>
+	</historyItem>
+</history>

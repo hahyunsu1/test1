@@ -1,0 +1,12 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select deptno, ename, sal from emp
+where deptno <> 20 and sal > ALL (select sal from emp where job='SALESMAN');]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666846495230]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[2]]></executed>
+		<execTime><![CDATA[0.001]]></execTime>
+	</historyItem>
+</history>

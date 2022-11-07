@@ -1,0 +1,97 @@
+--# IN OUT PARAMETER
+--프로시저가 읽고 쓰는 작업을 동시에 할 수 있는 파라미터
+create or replace procedure inout_test(
+    a1 in number,
+    a2 in varchar2,
+    a3 in out varchar2,
+    a4 out varchar2
+)
+is
+    msg varchar2(30) := '';
+begin
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('프로시저 시작 전');
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('A1: '||a1);
+     dbms_output.put_line('A2: '||a2);
+     dbms_output.put_line('A3: '||a3);
+     dbms_output.put_line('A4: '||a4);
+     a3 := '프로시저 외부에서 이 값을 받을 수 있을까요?';
+    msg := 'SUCCESS';
+     a4 := msg;
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('프로시저 시작 후');
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('A1: '||a1);
+     dbms_output.put_line('A2: '||a2);
+     dbms_output.put_line('A3: '||a3);
+     dbms_output.put_line('A4: '||a4);
+ end;
+ /
+ variable c varchar2(100);
+  variable d varchar2(100);
+  exec inout_test(5000,'안녕',:c, :d);
+  print d
+  print c
+--사번을 인파라미터로 전달하면 사원의 부서번호에 따라 소속된 부서명을
+--문자열로 출력하는 프로시저
+--10 회계부서
+--20 연구부서
+--30 영업부서
+--40 운영부서
+create or replace procedure dept_find(pno in emp.empno%type)
+is
+vdno emp.deptno%type;
+vename emp.ename%type;
+vdname varchar2(20);
+begin
+    select ename,deptno into vename,vdno
+    from emp
+    where empno = pno;
+    if VDNO=10 then VDNAME :='회계부서';
+    elsif VDNO=20 then VDNAME :='연구부서';
+    elsif VDNO=30 then VDNAME :='영업부서';
+    elsif VDNO=40 then VDNAME :='운영부서';
+    else VDNAME:='아직 부서 배정 못받음';
+    end if;
+    dbms_output.put_line(VENAME||'님은 '||VDNO||'번 '||VDNAME||'에 있습니다');
+end;
+/
+set serveroutput on
+exec dept_find(7499);
+--
+--사원명을 인파라미터로 전달하면
+--해당 사원의 연봉을 계산해서 출력하는 프로시저를 작성하되,
+--연봉은 COMM이 NULL인 경우와 NULL아 아닌경우를 나눠서 계산하세요
+--출력문
+--사원명  월급여  보너스 연봉 
+--출력하세요
+
+create or replace procedure emp_sal(pname in emp.ename%type)
+is
+vsal emp.sal%type;
+vcomm emp.comm%type;
+total number(8);
+begin
+    select sal,comm into vsal,vcomm
+    from emp
+    where ename = upper(pname);
+    if vcomm is null then total := vsal*12;
+    else total := vsal*12+vcomm;
+    end if;
+    dbms_output.put_line(pname||'-------');
+    dbms_output.put_line('월급여: '||vsal);
+    dbms_output.put_line('보너스: '||vcomm);
+    dbms_output.put_line('연 봉: '||total);
+    exception
+    when no_data_found then
+    dbms_output.put_line(pname||'님은 없습니다.');
+
+end;
+/
+exec emp_sal('martin');
+exec emp_sal('king');
+exec emp_sal('tom');
+insert into emp(empno,ename,sal,comm)
+values(8002,'TOM',2000,3000);
+commit;

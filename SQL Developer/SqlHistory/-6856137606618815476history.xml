@@ -1,0 +1,15 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select   ep_name,category_name,products_name,output_price
+from supply_comp s right outer join products p
+on s.ep_code = p.ep_code_fk
+left outer join category c
+on p.category_fk = c.category_code;]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666838207475]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.003]]></execTime>
+	</historyItem>
+</history>

@@ -1,0 +1,14 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select deptno,min(sal)
+from emp
+group by deptno
+having min(sal)>(select min(sal) from emp where deptno=20);]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666845596784]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.014]]></execTime>
+	</historyItem>
+</history>

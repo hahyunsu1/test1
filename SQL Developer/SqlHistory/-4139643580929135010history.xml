@@ -1,0 +1,13 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select category_name,products_name,output_price
+from category c join products p
+on c.category_code = p.category_fk and c.category_name <> 'TV';]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666834803967]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.004]]></execTime>
+	</historyItem>
+</history>

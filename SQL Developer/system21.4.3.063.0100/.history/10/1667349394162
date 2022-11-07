@@ -1,0 +1,59 @@
+--# IN OUT PARAMETER
+--프로시저가 읽고 쓰는 작업을 동시에 할 수 있는 파라미터
+create or replace procedure inout_test(
+    a1 in number,
+    a2 in varchar2,
+    a3 in out varchar2,
+    a4 out varchar2
+)
+is
+    msg varchar2(30) := '';
+begin
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('프로시저 시작 전');
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('A1: '||a1);
+     dbms_output.put_line('A2: '||a2);
+     dbms_output.put_line('A3: '||a3);
+     dbms_output.put_line('A4: '||a4);
+     a3 := '프로시저 외부에서 이 값을 받을 수 있을까요?';
+    msg := 'SUCCESS';
+     a4 := msg;
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('프로시저 시작 후');
+     dbms_output.put_line('---------------');
+     dbms_output.put_line('A1: '||a1);
+     dbms_output.put_line('A2: '||a2);
+     dbms_output.put_line('A3: '||a3);
+     dbms_output.put_line('A4: '||a4);
+ end;
+ /
+ variable c varchar2(100);
+  variable d varchar2(100);
+  exec inout_test(5000,'안녕',:c, :d);
+  print d
+  print c
+--사번을 인파라미터로 전달하면 사원의 부서번호에 따라 소속된 부서명을
+--문자열로 출력하는 프로시저
+--10 회계부서
+--20 연구부서
+--30 영업부서
+--40 운영부서
+create or replace procedure dept_find(pno in emp.empno%type)
+is
+vdno emp.deptno%type;
+vename emp.ename%type;
+vdname varchar2(20);
+begin
+    select ename,deptno into vename,vdno
+    from emp
+    where empno=pno;
+    if vdno=10 then vdname:='회계부서';
+    elsif vdno=20 then vdname:='연구부서';
+    elsif vdno=30 then vdname:='영업부서';
+    elsif vdno=40 then vdname:='운영부서';\
+    else vdname:='아직 부서 배정 못받음';
+    end if;
+    dbms_output.put_line(vename||'님은 '||vdno||'번 '||vdname||'부서에 있습니다');
+end;
+/

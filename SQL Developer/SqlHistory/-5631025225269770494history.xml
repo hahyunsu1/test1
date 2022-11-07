@@ -1,0 +1,12 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[select avg(sal),max(sal),min(sal),sum(sal),count(empno) from emp
+where job='SALESMAN';]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666830108074]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.004]]></execTime>
+	</historyItem>
+</history>

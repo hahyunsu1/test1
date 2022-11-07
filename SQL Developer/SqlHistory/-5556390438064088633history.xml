@@ -1,0 +1,13 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[SELECT * FROM PRODUCTS
+WHERE OUTPUT_PRICE > ( SELECT AVG(OUTPUT_PRICE) FROM PRODUCTS
+WHERE OUTPUT_PRICE<=500000)]]></sql>
+		<connection><![CDATA[scott]]></connection>
+		<timestamp><![CDATA[1666848274549]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.003]]></execTime>
+	</historyItem>
+</history>

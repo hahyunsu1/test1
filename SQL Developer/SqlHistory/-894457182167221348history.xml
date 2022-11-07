@@ -1,0 +1,11 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[file:/C:/Users/hysdd/AppData/Roaming/SQL Developer/day05_object.sql]]></sql>
+		<connection><![CDATA[mystar]]></connection>
+		<timestamp><![CDATA[1667195684030]]></timestamp>
+		<type><![CDATA[Script]]></type>
+		<executed><![CDATA[6]]></executed>
+		<execTime><![CDATA[0.0]]></execTime>
+	</historyItem>
+</history>

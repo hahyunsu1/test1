@@ -1,0 +1,133 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<client-settings class="java.util.HashMap" xmlns="http://xmlns.oracle.com/jdeveloper/110000/client-preferences">
+   <Item>
+      <Key>editors-options</Key>
+      <Value class="oracle.ide.editor.EditorsOptions">
+         <editorsData/>
+         <lruFiles>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>false</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../../../../Desktop/sample2.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>false</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../../../../Desktop/demo2.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>false</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../../../../../../myjava/scott.sql"/>
+               <projectURL/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../day03_join.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../day02_func.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>false</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../../../../../../myjava/day02_select.sql"/>
+               <projectURL/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../day03_subquery.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../day04_ddl.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../test1.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../day08_plsql.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.worksheet.editor.Worksheet</editor>
+               <explicit>true</explicit>
+               <nodeClass>oracle.ide.db.model.SqlNode</nodeClass>
+               <nodeURL path="../../day07_plsql.sql"/>
+               <projectURL path="../o.sqldeveloper/projects/IdeConnections#scott.jpr"/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL path="../o.sqldeveloper/projects/Databases.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ideimpl.editor.DeclarativeEditorAddin-oracle.dbtools.raptor.startpage.StartPageViewer</editor>
+               <explicit>false</explicit>
+               <nodeClass>oracle.dbtools.raptor.startpage.StartPageNode</nodeClass>
+               <nodeURL protocol="bundleresource" host="146.fwk560045635" port="0" path="/oracle/dbtools/raptor/startpage/StartPage.html"/>
+               <projectURL/>
+               <recentTime>0</recentTime>
+               <reopen>false</reopen>
+               <workspaceURL/>
+            </Item>
+         </lruFiles>
+         <recentFilesShowAll>false</recentFilesShowAll>
+         <recentFilesShowClosedOnly>true</recentFilesShowClosedOnly>
+      </Value>
+   </Item>
+</client-settings>

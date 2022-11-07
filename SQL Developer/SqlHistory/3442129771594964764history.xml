@@ -1,0 +1,11 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<history>
+	<historyItem>
+		<sql><![CDATA[grant create user,alter user,drop user to scott;]]></sql>
+		<connection><![CDATA[system]]></connection>
+		<timestamp><![CDATA[1667261430721]]></timestamp>
+		<type><![CDATA[SQL]]></type>
+		<executed><![CDATA[1]]></executed>
+		<execTime><![CDATA[0.049]]></execTime>
+	</historyItem>
+</history>
