@@ -37,7 +37,7 @@ public class MemoDeleteServlet extends HttpServlet {
 			e.printStackTrace();
 			out.print("error: "+e.getMessage()+"<br>");
 		}
-		
+		out.close();
 		
 	}
 
