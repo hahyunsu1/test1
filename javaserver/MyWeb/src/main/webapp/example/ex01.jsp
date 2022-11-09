@@ -15,3 +15,4 @@
 	<%= %> : 출력식(expression) =>out.println(변수) 과 동일하다.
  --%>
  <h2 style="color:tomato"><%=str %></h2>
+ <h2>ex07페이지에서 넘어온 파라미터 psge: <%=request.getParameter("page") %></h2>
