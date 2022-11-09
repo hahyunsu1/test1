@@ -1,8 +1,8 @@
 package common.util;
 import java.sql.*;
-public class DBUtil {
+public class DBUtilScott {
 	static String url="jdbc:oracle:thin:@localhost:1521:XE";
-	static String user="multi",pwd="tiger";		
+	static String user="scott",pwd="tiger";		
 	static {
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");

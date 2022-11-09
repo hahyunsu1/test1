@@ -114,3 +114,44 @@ footer{
     border-radius: 5px;
     font-size: 0.8em;
 }
+div.container{
+	text-align:center;
+}
+table{
+	border-collapse:collapse;
+}
+table .m1{
+	background-color:#efefef;
+	padding: 5px;
+}
+table .m2{
+	text-align:left;
+	padding:5px;
+}
+table .m2 input{
+	width:50%;
+	
+	padding:5px;
+}
+table .m2 button{
+	padding:4px;
+	width:25%;
+	background-color:bisque;
+	border: 1px solid silver;
+}
+table .m3{
+	padding: 5px;
+}
+table .m3 button{
+	padding: 4px;
+	width: 25%;
+	background-color: bisque;
+	border: 1px solid silver;
+}
+#hp1, #hp2, #hp3{
+	width:20%;
+}
+#addr1, #addr2{
+	width:80%;
+	margin-bottom:7px;
+}
