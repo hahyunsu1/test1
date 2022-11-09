@@ -1,6 +1,10 @@
 package user.model;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import common.util.*;
+import memo.model.MemoVO;
 public class UserDAO {
 	Connection con;
 	PreparedStatement ps;
@@ -31,7 +35,43 @@ public class UserDAO {
 			close();
 		}
 	}
+	public List<UserVO> listUser() throws SQLException{
+		try {
+			con=DBUtil.getCon();
+			StringBuilder buf=new StringBuilder("select * from member order by idx desc");
+			String sql=buf.toString();
+			ps=con.prepareStatement(sql);
+			rs=ps.executeQuery();
+			List<UserVO> arr=makeList(rs);
+			return arr;
+		}finally {
+			close();
+		}
+	}
 	
+	private List<UserVO> makeList(ResultSet rs) throws SQLException{
+		List<UserVO> arr=new ArrayList<>();
+		while(rs.next()) {
+			int idx=rs.getInt("idx");
+			String name=rs.getString("name");
+			String userid=rs.getString("userid");
+			String pwd=rs.getString("pwd");
+			String hp1=rs.getString("hp1");
+			String hp2=rs.getString("hp2");
+			String hp3=rs.getString("hp3");
+			String post=rs.getString("post");
+			String addr1=rs.getString("addr1");
+			String addr2=rs.getString("addr2");
+			java.sql.Date indate=rs.getDate("indate");
+			int mileage=rs.getInt("mileage");
+			int status=rs.getInt("status");
+			UserVO user
+			=new UserVO(idx,name,userid,pwd,hp1,hp2,hp3,post,addr1,addr2,indate,mileage,status);
+			arr.add(user);
+		}
+		return arr;
+	}
+
 	public void close() {
 		try {
 			if(rs!=null) rs.close();

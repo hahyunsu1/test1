@@ -155,3 +155,16 @@ table .m3 button{
 	width:80%;
 	margin-bottom:7px;
 }
+.state0{
+	color:green;
+}
+.state-1{
+	color:orange;
+}
+.state-2{
+	color:red;
+}
+span.ck{
+	font-size:0.8em;
+	color:maroon;
+}

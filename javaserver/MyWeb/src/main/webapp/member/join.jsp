@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/top.jsp"/>
+<<script type="text/javascript" src="../js/userCheck.js"></script>
 <div class="container">
 	<h1>Signup</h1>
 	<form name="mf" action="joinEnd.jsp" method="post">
@@ -9,6 +10,7 @@
 				<td width="20%" class="m1"><b>이름</b></td>
 				<td width="80%" class="m2">
 				<input type="text" name="name" id="name" placehoder="Name">
+				<br><span class='ck'>*이름은 한글만 가능해요</span>
 				</td>
 			</tr>
 			<tr>
@@ -16,12 +18,14 @@
 				<td width="80%" class="m2">
 				<input type="text" name="userid" id="userid" placehoder="User ID">
 				<button type="button">아이디 중복 체크</button>
+				<br><span class='ck'>*아이디는 영문자,숫자, _, !만 사용 가능해요</span>
 				</td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1"><b>비밀번호</b></td>
 				<td width="80%" class="m2">
 				<input type="password" name="pwd" id="" placehoder="Password">
+				<br><span class='ck'>*비밀번호는 문자,숫자,!,. 포함해서4~12자리 이내</span>
 				</td>
 			</tr>
 			<tr>
@@ -36,6 +40,7 @@
 				<input type="text" name="hp1" id="hp1" placehoder="HP1">-
 				<input type="text" name="hp2" id="hp2" placehoder="HP2">-
 				<input type="text" name="hp3" id="hp3" placehoder="HP3">
+				<br><span class='ck'>*앞자리(010|011)중에 하나-(숫자3~4자리)-(숫자4자리) 가능해요</span>
 				</td>
 			</tr>
 			<tr>
@@ -54,7 +59,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="m3">
-					<button>회원가입</button>
+					<button type="button" onclick="member_check()">회원가입</button>
 					<button type="reset">다시쓰기</button>
 				</td>
 			</tr>
