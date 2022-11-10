@@ -64,7 +64,8 @@ article{
     float: left;
     padding: 10px;
     margin: 5px 0;
-    height: 500px;
+    height: 680px;
+    overflow: scroll-y;
 }
 article section{
     border: 1px solid lightblue;
@@ -82,7 +83,7 @@ aside{
     float: right;
     padding: 10px;
     margin: 5px 0;
-    height: 500px;
+    height: 680px;
 }
 aside nav{
     background: none;
@@ -124,25 +125,25 @@ table .m1{
 	background-color:#efefef;
 	padding: 5px;
 }
-table .m2{
+.m2{
 	text-align:left;
 	padding:5px;
 }
-table .m2 input{
+.m2 input{
 	width:50%;
 	
 	padding:5px;
 }
-table .m2 button{
+.m2 button{
 	padding:4px;
 	width:25%;
 	background-color:bisque;
 	border: 1px solid silver;
 }
-table .m3{
+.m3{
 	padding: 5px;
 }
-table .m3 button{
+.m3 button{
 	padding: 4px;
 	width: 25%;
 	background-color: bisque;

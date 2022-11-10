@@ -13,6 +13,18 @@ public class UserDAO {
 	public UserDAO() {
 		System.out.println("UserDAO생성자()...");
 	}
+	public boolean idCheck(String userid) throws SQLException{
+		try {
+			con=DBUtil.getCon();
+			StringBuilder buf=new StringBuilder("select idx from member where userid=?");
+			String sql=buf.toString();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, userid);
+			rs=ps.executeQuery();
+		}finally {
+			close();
+		}
+	}
 	
 	public int insertUser(UserVO user) throws SQLException{
 		try {

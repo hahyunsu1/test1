@@ -27,6 +27,7 @@
                 <li><a href="<%=myctx%>/index.jsp">Home</a></li>
                 <li><a href="<%=myctx%>/member/join.jsp">Signup</a></li>
                 <li><a href="<%=myctx%>/login/login.jsp">Signin</a></li>
+                <li><a href="<%=myctx%>/member/list.jsp">Users</a></li>
                 <li><a href="#">Borard</a></li>
             </ul>
         </nav>
