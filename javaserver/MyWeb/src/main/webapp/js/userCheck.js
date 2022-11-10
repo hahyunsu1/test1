@@ -2,12 +2,26 @@
  function open_idcheck(){
 	win=window.open("idCheck.jsp","idCheck","width=400,height=400,left=200,top=200");
 }
+function setId(uid){
+	//alert(uid);
+	//uid값을 부모창(window)의 userid의 value값에 전달하자
+	//부모창(opener==> window객체)
+	//window>document>forms
+	opener.document.mf.userid.value=uid;
+	//팝업창 닫기==>self(window객체)
+	self.close();
+}
 function id_check(){
 	if(!idf.userid.value){
 		alert('아이디를 입력해야 해요');
 		idf.userid.focus();
 		return;
+	}if(!isUserid(idf.userid)){
+		alert('아이디는 영문자,숫자, _ , ! 로 4~8자까지 가능해요')
+		idf.userid.select();
+		return;
 	}
+	
 	idf.submit();
 }
  
@@ -71,6 +85,8 @@ function isDate(input){
 	\d{4} : 숫자가 4자 나와야 함을 의미
 
  */	
+
+
 function isMobile(input1,input2,input3){
 	let val=input1.value+"-"+input2.value+"-"+input3.value;
 	//alert(val);
