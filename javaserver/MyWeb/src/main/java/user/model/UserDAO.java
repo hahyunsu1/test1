@@ -34,7 +34,7 @@ public class UserDAO {
 	private UserVO selectUserByUserid(String userid) throws SQLException{
 		try {
 			con=DBUtil.getCon();
-			String sql="select * from member where userid=?";
+			String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',3,'관리자') statusStr from member where userid=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, userid);
 			rs=ps.executeQuery();
@@ -88,7 +88,9 @@ public class UserDAO {
 	public List<UserVO> listUser() throws SQLException{
 		try {
 			con=DBUtil.getCon();
-			StringBuilder buf=new StringBuilder("select * from member order by idx desc");
+			StringBuilder buf=new StringBuilder("select member.*,")
+				.append(" decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',3,'관리자') statusStr")
+				.append(" from member order by idx desc");
 			String sql=buf.toString();
 			ps=con.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -115,13 +117,37 @@ public class UserDAO {
 			java.sql.Date indate=rs.getDate("indate");
 			int mileage=rs.getInt("mileage");
 			int status=rs.getInt("status");
+			String statusStr=rs.getString("statusStr");
 			UserVO user
-			=new UserVO(idx,name,userid,pwd,hp1,hp2,hp3,post,addr1,addr2,indate,mileage,status);
+			=new UserVO(idx,name,userid,pwd,hp1,hp2,hp3,post,addr1,addr2,indate,mileage,status,statusStr);
 			arr.add(user);
 		}
 		return arr;
 	}
-
+	public int updateUser(UserVO user) throws SQLException{
+		try {
+			con=DBUtil.getCon();
+			StringBuilder buf=new StringBuilder("update member set name=?, userid=?,pwd=?, hp1=?,hp2=?,hp3=?, ")
+										.append(" post=?, addr1=?,addr2=?, status=? where idx=?");
+			String sql=buf.toString();
+			ps=con.prepareStatement(sql);
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getUserid());
+			ps.setString(3, user.getPwd());
+			ps.setString(4, user.getHp1());
+			ps.setString(5, user.getHp2());
+			ps.setString(6, user.getHp3());
+			ps.setString(7, user.getPost());
+			ps.setString(8, user.getAddr1());
+			ps.setString(9, user.getAddr2());
+			ps.setInt(10, user.getStatus());
+			ps.setInt(11, user.getIdx());
+			
+			return ps.executeUpdate();
+		} finally {
+			close();
+		}
+	}
 	public void close() { 
 		try {
 			if(rs!=null) rs.close();

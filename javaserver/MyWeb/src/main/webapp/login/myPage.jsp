@@ -16,11 +16,12 @@
 		</li>
 		<li>마일리지: <b><%=user.getMileage()%></b>
 		</li>
-		<li>회원상태: <b><%=user.getStatus()%></b>
+		<li>회원상태: <b><%=user.getStatusStr()%></b>
 		</li>
 		<li>주소: <b><%=user.getAllAddr()%></b>
 		</li>
 	</ul>
+	<button onclick="location.href='../member/modify.jsp'">회원정보 수정|탈퇴</button>
 </div>
 
 <jsp:include page="/foot.jsp" />

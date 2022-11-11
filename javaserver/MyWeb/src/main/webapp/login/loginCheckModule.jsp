@@ -11,5 +11,15 @@
 		<%
 		return;
 	}
+	if(user.getStatus()==-1){
+		String str="정지회원 입니다. 활동회원으로 전환해야 서비스 이용 가능합니다.";
+		%>
+		<script>
+			alert('<%=str%>');
+			location.href="<%=request.getContextPath()%>/member/modify.jsp";
+		</script>
+		<%
+		return;
+	}
 	
 %>
