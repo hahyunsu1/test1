@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex01.html</title>
+    <!-- jquery라이브러리 참조-------------------------------->
+    <script src="jquery-3.6.1.min.js"></script>
+    <!-- ---------------------------------------------------->
+    <script>
+        window.onload=function(){
+        let obj=document.getElementById("a");
+        obj.innerHTML="<h1>Hello JavaScript</h1>";
+    }
+    //아이디가 b인 요소 찾아서 Hi jQuery를 넣어보자
+    //[1] jquery방법1
+    $(document).ready(function(){
+        $('#b').html("<h1>Hi jQuery</h1>");
+        //window.jQuery('#b').html("<h1>Hi jQuery22</h1>");
+        //window.jQury => window.$
+        //jQuery =$
+    })
+    //아이디가 c인 요소 찾아서"Bye jQuery"문자열 넣기
+    //[2] jquery 방법2
+    $(function(){
+        $('#c').html("<h1>Bye jQuery</h1>")
+                .css("color","green");
+    })
+    </script>
+</head>
+<body>
+    <h1>jQuery 시작하기</h1>
+   <p>jQuery: 자바스크립트 라이브러리</p>
+   <p>1. 다운로드: http://jquery.com<br>
+               http://jqueryui.com[확장 기능 제공]<br>
+      2. CDN방식: Content Delivery Network           
+   
+   </p>
+    <div id="a"></div>
+    <div id="b"></div>
+    <div id="c"></div>
+
+</body>
+</html>
