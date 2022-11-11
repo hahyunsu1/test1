@@ -25,7 +25,7 @@ user = userDao.selectUserByIdx(idx);
 <style>
 #ra1, #ra2, #ra3, #ra4 {
 	padding: 3px;
-	width: 60px;
+	width: 40px;
 	border: 1px solid red;
 }
 </style>
@@ -96,7 +96,10 @@ user = userDao.selectUserByIdx(idx);
 					type="radio" name="status" value="-1"
 					<%=(user.getStatus() == -1) ? "checked" : ""%> id="ra2">정지회원 <input
 					type="radio" name="status" value="-2"
-					<%=(user.getStatus() == -2) ? "checked" : ""%> id="ra3">탈퇴회원 <!--<input type="radio" name="status" value="3" id="ra4">관리자회원-->
+					<%=(user.getStatus() == -2) ? "checked" : ""%> id="ra3">탈퇴회원 
+					<input
+					type="radio" name="status" value="9"
+					<%=(user.getStatus() == 9) ? "checked" : ""%> id="ra4">관리자 
 
 				</td>
 			</tr>

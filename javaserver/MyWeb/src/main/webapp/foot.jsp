@@ -9,7 +9,7 @@
                 <ul>
                     <li><a href="<%=myctx%>/example/ex06.jsp">성적계산</a></li>
                     <li><a href="<%=myctx%>/login/sessionTest.jsp">Session</a></li>
-                    <li><a href="<%=myctx%>/">Cookie</a></li>
+                    <li><a href="<%=myctx%>/login/cookieTest.jsp">Cookie</a></li>
                     <li><a href="<%=myctx%>/login/myPage.jsp">MyPage</a></li>
                 </ul>
             </nav>

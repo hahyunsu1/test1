@@ -31,10 +31,21 @@ public class UserDAO {
 			close();
 		}
 	}
+	/*
+	grant create view, create synonym to multi; 
+	create or replace view memberView
+	as
+	select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr
+	from member where status > -2;
+
+	select * from memberView order by idx desc;
+	 
+	 */
 	private UserVO selectUserByUserid(String userid) throws SQLException{
 		try {
 			con=DBUtil.getCon();
-			String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr from member where userid=?";
+			//String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr from member where userid=?";
+			String sql="select * from memberView where userid=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, userid);
 			rs=ps.executeQuery();
@@ -127,7 +138,8 @@ public class UserDAO {
 	public UserVO selectUserByIdx(int idx) throws SQLException{
 		try {
 			con=DBUtil.getCon();
-			String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr from member where idx=?";
+			//String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr from member where idx=?";
+			String sql="select * from memberView where idx=?";
 			ps=con.prepareStatement(sql);
 			ps.setInt(1, idx);
 			rs=ps.executeQuery();
