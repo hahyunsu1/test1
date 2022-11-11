@@ -34,7 +34,7 @@ public class UserDAO {
 	private UserVO selectUserByUserid(String userid) throws SQLException{
 		try {
 			con=DBUtil.getCon();
-			String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',3,'관리자') statusStr from member where userid=?";
+			String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr from member where userid=?";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, userid);
 			rs=ps.executeQuery();
@@ -89,7 +89,7 @@ public class UserDAO {
 		try {
 			con=DBUtil.getCon();
 			StringBuilder buf=new StringBuilder("select member.*,")
-				.append(" decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',3,'관리자') statusStr")
+				.append(" decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr")
 				.append(" from member order by idx desc");
 			String sql=buf.toString();
 			ps=con.prepareStatement(sql);
@@ -123,6 +123,23 @@ public class UserDAO {
 			arr.add(user);
 		}
 		return arr;
+	}
+	public UserVO selectUserByIdx(int idx) throws SQLException{
+		try {
+			con=DBUtil.getCon();
+			String sql="select member.*, decode(status,0,'활동회원',-1,'정지회원',-2,'탈퇴회원',9,'관리자') statusStr from member where idx=?";
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, idx);
+			rs=ps.executeQuery();
+			List<UserVO> arr=makeList(rs);
+			if(arr==null&&arr.size()==0) {
+				return null;
+			}
+			UserVO user=arr.get(0);
+			return user;
+		} finally {
+			close();
+		}
 	}
 	public int updateUser(UserVO user) throws SQLException{
 		try {

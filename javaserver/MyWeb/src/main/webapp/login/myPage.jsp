@@ -4,7 +4,11 @@
 <%@ include file="/login/loginCheckModule.jsp" %>
 <!-- ------------------------------------------------------- -->
 <jsp:include page="/top.jsp" />
-
+<%
+	int idx=user.getIdx();
+	UserDAO userDao=new UserDAO();
+	user=userDao.selectUserByIdx(idx);
+%>
 <div class="container">
 	<h1><%=user.getName()%>님의 정보
 	</h1>
