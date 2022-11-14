@@ -15,12 +15,14 @@
 <body>
     <div id="wrap" class="container">
         <header>
-            <a href="<%=myctx%>/index.jsp" ><img src="<%=myctx%>/images/로고.png"></a>
+            <a href="<%=myctx%>/index.do" ><img src="<%=myctx%>/images/로고.png"></a>
         </header>
         <div class="clear"></div>
         <nav>
             <ul>
-                <li><a href="<%=myctx%>/index.jsp">Home</a></li>
+                <li><a href="<%=myctx%>/index.do">Home</a></li>
+                <li><a href="<%=myctx%>/boardWrite.do">Board 글쓰기</a></li>
+                <li><a href="<%=myctx%>/boardList.do">Board 목록</a></li>
                
             </ul>
         </nav>

@@ -8,5 +8,8 @@
 </head>
 <body>
 <h1 style="color:red"><%=request.getAttribute("msg") %></h1>
+<p style="color:blue">
+	${requestScope.msg} == ${msg}
+</p>
 </body>
 </html>

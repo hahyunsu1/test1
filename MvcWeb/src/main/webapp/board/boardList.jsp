@@ -2,11 +2,10 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/top.jsp"/>
 <div class="container">
-	<h1>Index</h1>
-	<p><%=request.getAttribute("msg") %></p>
-	<div style='color:tomato;font-size:2em'>
-	e1 표현식을 이용해서 출력할 수 있다.<br>
-	${msg}
-	</div>
+	<h1>Board List</h1>
+	<p>
+	<a href="boardWrite.do">글쓰기</a> <a href="boardList.do">글목록</a>
+	<h3>총 게시글 수: ${totalCount}개</h3>
+	</p>
 </div>
 <jsp:include page="/foot.jsp"/>
