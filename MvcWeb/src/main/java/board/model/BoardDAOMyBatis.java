@@ -44,6 +44,36 @@ public class BoardDAOMyBatis {
 		}else {
 			ses.rollback();
 		}
+		if(ses!=null) ses.close();
 		return n;
+	}
+
+	public List<BoardVO> listBoard() {
+		ses=this.getSessionFactory().openSession();
+		//다중행을 가져올 떄는 selectList()
+		//단일행을 가져올 떄는 selectOne()
+		List<BoardVO> arr=ses.selectList(NS+".listBoard");
+		if(ses!=null) ses.close();
+		return arr;
+	}
+
+	public List<BoardVO> viewBoard(String num) {
+		ses=this.getSessionFactory().openSession();
+		List<BoardVO> arr=ses.selectList(NS+".boardView",num);
+		if(ses!=null) ses.close();
+		return arr;
+	}
+
+	public BoardVO viewBoard(int num) {
+		try {
+		ses=this.getSessionFactory().openSession();
+		BoardVO vo=ses.selectOne(NS+".viewBoard",num);
+		return vo;
+		}finally {
+			close();
+		}
+	}
+	public void close() {
+		if(ses!=null) ses.close();
 	}
 }
