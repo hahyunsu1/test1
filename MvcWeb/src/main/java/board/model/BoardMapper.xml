@@ -19,4 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="viewBoard" resultType="board.model.BoardVO" parameterType="_int">
 		select * from board where num=#{value}
 	</select>
+	<select id="deleteBoard"  parameterType="_int">
+		delete from board where num=#{value}
+	</select>
 </mapper>

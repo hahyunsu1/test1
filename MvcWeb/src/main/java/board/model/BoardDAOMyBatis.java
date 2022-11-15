@@ -76,4 +76,16 @@ public class BoardDAOMyBatis {
 	public void close() {
 		if(ses!=null) ses.close();
 	}
+
+	public int deleteBoard(int num) {
+		try {
+		ses=this.getSessionFactory().openSession(true);
+		//디폴트가 수동 커밋이다. 매개변수로 true를 넘기면 auto commit된다
+		int n=ses.insert(NS+".deleteBoard",num);		
+		return n;
+		}finally {
+			close();
+		}
+	
+	}
 }

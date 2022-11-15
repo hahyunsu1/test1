@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/top.jsp"/>
 <style>
 ul li{
@@ -49,28 +51,41 @@ div.bbs{
 	}
 </script>
 <div class="container">
-	<h1>Board 글쓰기</h1>
-	<p class="bbs">
-	<form name="boardF" id="boardFrm" action="boardWriteEnd.do" method="post" onsubmit="return board_check()">
+	<h1>Board 글수정</h1>
+	<c:if test="${board==null}">
+		<script>
+			alert('해당 글은 없습니다');
+			history.back();
+		</script>
+	</c:if>
+	<c:if test="${board!=null}">
+	
+	<div class="bbs">
+	<form name="boardF" id="boardFrm" action="boardEditEnd.do" method="post" 
+	onsubmit="return board_check()">
+	<input type="hidden" name="num" value="${board.num}">
 		<ul>
 			<li>제목</li>
 			<li>
-				<input type="text" name="subject" id="subject" placeholder="Subject">
+				<input type="text" name="subject" value="${board.subject}" id="subject" placeholder="Subject">
 			</li>
 			<li>글내용</li>
 			<li>
-			<textarea name="content" id="content" rows="10" cols="50" placeholder="Content"></textarea>
+			<textarea name="content" id="content" rows="10" cols="50" 
+			placeholder="Content">${board.content}</textarea>
 			</li>
 			<li>첨부파일</li>
 			<li>
+			${board.filename}[${board.filesize}bytes]<br>
 			<input type="file" name="filename" id="filename">
 			</li>
 			<li>
-				<button class='btn'>글 등록</button>
+				<button class='btn'>글 수정</button>
 				<button type="reset" class='btn'>다시 쓰기</button>
 			</li>
 		</ul>
 	</form>
-	</p>
+	</div>
+	</c:if>
 </div>
 <jsp:include page="/foot.jsp"/>
