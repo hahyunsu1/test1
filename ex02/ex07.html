@@ -32,20 +32,25 @@ $(function(){
 		//메뉴와 관련된 문단내용 보여주기
 
 	$('p').hide();
-	$('span.books').on('click',function(){
-		$('p.books').show(3000);
-		$('p.movies').hide();
-		$('p.music').hide();
-	})
-	$('span.movies').on('click',function(){
-		$('p.movies').show(3000);
-		$('p.books').hide();
-		$('p.music').hide();
-	})
-	$('span.music').on('click',function(){
-		$('p.music').show(3000);
-		$('p.movies').hide();
-		$('p.books').hide();
+	// $('span.books').on('click',function(){
+	// 	$('p.books').show(3000);
+	// 	$('p.movies').hide();
+	// 	$('p.music').hide();
+	// })
+	// $('span.movies').on('click',function(){
+	// 	$('p.movies').show(3000);
+	// 	$('p.books').hide();
+	// 	$('p.music').hide();
+	// })
+	// $('span.music').on('click',function(){
+	// 	$('p.music').show(3000);
+	// 	$('p.movies').hide();
+	// 	$('p.books').hide();
+	// })
+	$('span').on('click',function(){
+		$('p').hide()
+		let cls=$(this).attr('class');
+		$('p.'+cls).show(1000);
 	})
 
 })
