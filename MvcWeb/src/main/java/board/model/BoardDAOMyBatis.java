@@ -50,11 +50,14 @@ public class BoardDAOMyBatis {
 		return n;
 	}
 
-	public List<BoardVO> listBoard() {
+	public List<BoardVO> listBoard(int start, int end) {
 		ses=this.getSessionFactory().openSession();
 		//다중행을 가져올 떄는 selectList()
 		//단일행을 가져올 떄는 selectOne()
-		List<BoardVO> arr=ses.selectList(NS+".listBoard");
+		Map<String,Integer> map=new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+		List<BoardVO> arr=ses.selectList(NS+".listBoard",map);
 		if(ses!=null) ses.close();
 		return arr;
 	}

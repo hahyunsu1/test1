@@ -10,5 +10,9 @@
 	</p>
 	<hr color='red'>
 	${content }
+	<br>
+	<h2>올린이: ${name }</h2>
+	<h2>첨부파일명: ${fname }</h2>
+	<h2>첨부파일크기: ${fsize } bytes</h2>
 </div>
 <jsp:include page="/foot.jsp"/>

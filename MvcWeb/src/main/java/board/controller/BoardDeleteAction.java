@@ -1,5 +1,7 @@
 package board.controller;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +24,18 @@ public class BoardDeleteAction extends AbstractAction {
 //		[3] dao의 deleteBoard(num)
 		
 		BoardDAOMyBatis dao=new BoardDAOMyBatis();		
+		
+		BoardVO vo=dao.viewBoard(Integer.parseInt(numStr.trim()));
+		
+		if(vo.getFilename()!=null) {
+			//첨부파일이 있다면 서버 Upload디렉토리에서 해당 파일을 먼저 삭제하자
+			String upDir=req.getServletContext().getRealPath("/Upload");
+			File delFile=new File(upDir,vo.getFilename());
+			if(delFile!=null) {
+				delFile.delete();
+			}
+		}
+		
 		int n = dao.deleteBoard(Integer.parseInt(numStr.trim()));
 //		[4] 실행결과 메시지 및 이동 경로 지정
 //		   => req에 저장. msg, loc

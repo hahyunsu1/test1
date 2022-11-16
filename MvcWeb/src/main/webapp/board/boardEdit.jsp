@@ -62,7 +62,7 @@ div.bbs{
 	
 	<div class="bbs">
 	<form name="boardF" id="boardFrm" action="boardEditEnd.do" method="post" 
-	onsubmit="return board_check()">
+	enctype="multipart/form-data" onsubmit="return board_check()">
 	<input type="hidden" name="num" value="${board.num}">
 		<ul>
 			<li>제목</li>
@@ -77,7 +77,9 @@ div.bbs{
 			<li>첨부파일</li>
 			<li>
 			${board.filename}[${board.filesize}bytes]<br>
-			<input type="file" name="filename" id="filename">
+			<input type="file" name="filename" id="filename"><br>
+			<!-- 예전에 첨부했던 파일명을 old_file 이란 이름으로 넘기자 -->
+			<input type="hidden" name="old_file" value="${board.filename}">			
 			</li>
 			<li>
 				<button class='btn'>글 수정</button>

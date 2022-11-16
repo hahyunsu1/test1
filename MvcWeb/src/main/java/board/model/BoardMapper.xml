@@ -21,7 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- BoardVO객체의 getSubject()를 호출해서 #(subject) 값으로 셋팅한다
 		ps.setString(1,vo.getSubject()) -->
 	</insert>
-	<select id="listBoard" resultType="board.model.BoardVO">
+	<select id="listBoard" resultType="Board" parameterType="map">
+	select*from(
+	select  a.*,rownum rn from
+	(select *from board order by num desc)a
+	)where rn between #{start} and #{end}
+	</select>
+	<select id="listBoard_old" resultType="board.model.BoardVO">
 		select * from board order by num desc
 	</select>
 	<select id="viewBoard" resultType="board.model.BoardVO" parameterType="_int">
@@ -38,6 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="filename!=null and filename!=''">
 			, filename=#{filename},filesize=#{filesize}
 		</if>
-		where num=#{num} and userid=#{userid}
+		where num=#{num} and userid=#{userid} 
 	</update>
 </mapper>

@@ -9,7 +9,7 @@ public class UploadFormAction extends AbstractAction {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setCharacterEncoding("UTF-8");
+		
 		this.setViewPage("board/upload.jsp");
 		this.setRedirect(false);
 

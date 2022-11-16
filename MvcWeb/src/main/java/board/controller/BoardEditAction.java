@@ -1,7 +1,14 @@
 package board.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import board.model.*;
 import common.controller.AbstractAction;
@@ -11,14 +18,39 @@ public class BoardEditAction extends AbstractAction {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		//0.post방식일떈 한글처리
-		req.setCharacterEncoding("UTF-8"); 
-		//1. num,userid,subject,content,filename,
-		String numStr = req.getParameter("num");
+		//req.setCharacterEncoding("UTF-8"); 
+		//1. num,userid,subject,content,filename 값 받기
+		ServletContext application=req.getServletContext();
+		String upDir=application.getRealPath("/Upload");
+		System.out.println("upDir="+upDir);
+		
+		MultipartRequest mr=null;
+		try {
+			mr=new MultipartRequest(req, upDir,100*1024*1024,"utf-8",new DefaultFileRenamePolicy());
+			System.out.println("파일 업로드 성공!!");
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}
+		String numStr = mr.getParameter("num");
 		String userid = "hong";		
-		String subject = req.getParameter("subject");
-		String content = req.getParameter("content");
-		String filename = null;
+		String subject = mr.getParameter("subject");
+		String content = mr.getParameter("content");
+		String filename = mr.getFilesystemName("filename");
+		File file=mr.getFile("filename");
 		long filesize=0;
+		if(file!=null) {//첨부한 파일이 있다면
+			filesize=file.length();
+			//예전에 첨부한 파일명 얻기
+			String old_file=mr.getParameter("old_file");
+			if(old_file!=null&& !old_file.trim().isEmpty()) {
+				File delFile=new File(upDir,old_file);
+				if(delFile!=null) {
+					boolean b=delFile.delete();
+					System.out.println("파일 삭제 여부: "+b);
+				}
+			}
+		}
 		//2.유효성 체크(num,subject,userid)
 		if(numStr==null||userid==null||subject==null||numStr.trim().isEmpty()||userid.trim().isEmpty()||subject.trim().isEmpty()) {
 			this.setViewPage("boardWrite.do");
