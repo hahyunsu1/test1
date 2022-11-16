@@ -19,7 +19,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="viewBoard" resultType="board.model.BoardVO" parameterType="_int">
 		select * from board where num=#{value}
 	</select>
-	<select id="deleteBoard"  parameterType="_int">
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard"  parameterType="_int">
 		delete from board where num=#{value}
-	</select>
+	</delete>
+	<!-- 글수정 -->
+	<update id="updateBoard"  parameterType="board">
+		update board set subject=#{subject},content=#{content:VARCHAR},
+			wdate=systimestamp
+		<if test="filename!=null and filename!=''">
+			, filename=#{filename},filesize=#{filesize}
+		</if>
+		where num=#{num} and userid=#{userid}
+	</update>
 </mapper>

@@ -88,4 +88,14 @@ public class BoardDAOMyBatis {
 		}
 	
 	}
+
+	public int updateBoard(BoardVO vo) {
+		try {
+			ses=this.getSessionFactory().openSession(true);
+			int n=ses.insert(NS+".updateBoard",vo);
+			return n;
+		} finally {
+			close();
+		}
+	}
 }
