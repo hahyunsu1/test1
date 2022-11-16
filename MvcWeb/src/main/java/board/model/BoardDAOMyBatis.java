@@ -38,7 +38,9 @@ public class BoardDAOMyBatis {
 
 	public int insertBoard(BoardVO vo) {
 		ses=this.getSessionFactory().openSession();//디폴트가 수동 커밋이다.
+//		System.out.println("insert전:"+vo.getNum());
 		int n=ses.insert(NS+".insertBoard",vo);
+//		System.out.println("insert후:"+vo.getNum());
 		if(n>0) {
 			ses.commit();
 		}else {
