@@ -6,17 +6,30 @@ import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import board.model.*;
 import common.controller.AbstractAction;
+import user.model.UserVO;
 
 public class BoardEditAction extends AbstractAction {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		HttpSession session=req.getSession();
+		UserVO user=(UserVO)session.getAttribute("loginUser");
+		if(user==null) {
+			req.setAttribute("msg", "로그인해야 글쓰기가 가능합니다");
+			req.setAttribute("loc", "javascript:history.back()");
+			
+			this.setViewPage("message.jsp");
+			this.setRedirect(false);
+			return;
+		}		
+		
 		//0.post방식일떈 한글처리
 		//req.setCharacterEncoding("UTF-8"); 
 		//1. num,userid,subject,content,filename 값 받기
@@ -33,7 +46,7 @@ public class BoardEditAction extends AbstractAction {
 			
 		}
 		String numStr = mr.getParameter("num");
-		String userid = "hong";		
+		String userid = user.getUserid();		
 		String subject = mr.getParameter("subject");
 		String content = mr.getParameter("content");
 		String filename = mr.getFilesystemName("filename");
