@@ -20,9 +20,20 @@ public class BoardListAction extends AbstractAction {
 		if(cpage<1) {
 			cpage=1;//1페이지를 기본값으로 설정
 		}
+		//검색 유형과 검색어 받기
+		String findType=req.getParameter("findType");
+		String findKeyword=req.getParameter("findKeyword");
+		
+		if(findType==null) {
+			findType="";
+		}
+		if(findKeyword==null) {
+			findKeyword="";
+		}
+		String qStr="&findType="+findType+"&findKeyword="+findKeyword;
 		BoardDAOMyBatis dao=new BoardDAOMyBatis();
 		//1. 총 게시글 수 구하기
-		int totalCount=dao.getTotalCount();
+		int totalCount=dao.getTotalCount(findType,findKeyword);
 		//2. 한 페이지 당 보여줄 목록 개수 정하기
 		int pageSize=5;
 		//3.페이지 수 구하기
@@ -45,19 +56,19 @@ public class BoardListAction extends AbstractAction {
 		}
 		if(cpage>pageCount) {
 			cpage=pageCount;//마지막 페이지로 지정
-		}
+		} 
 		
 		int end=cpage*pageSize;
-		int start = end -(pageSize-1);
+		int start = end -(pageSize-1); 
 		
-		List<BoardVO> boardArr=dao.listBoard(start,end);
+		List<BoardVO> boardArr=dao.listBoard(start,end, findType, findKeyword);
 		
 		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("boardArr", boardArr);
 		req.setAttribute("pageSize", pageSize);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("cpage", cpage);
-		
+		req.setAttribute("qStr", qStr);
 		this.setViewPage("board/boardList.jsp");
 		this.setRedirect(false);
 	}

@@ -9,9 +9,10 @@ import java.io.*;
 
 public class BoardDAOMyBatis {
 	// 어떤 mapper를 사용할지 정함(네임스페이스 지정 필수)
-	private final String NS = "board.model.BoardMapper";
+	
 	// 세션팩토리를 얻는 메소드 구성
 	String resource = "common/config/mybatis-config.xml";
+	private final String NS = "board.model.BoardMapper";
 	private SqlSession ses;
 
 	private SqlSessionFactory getSessionFactory() {
@@ -27,10 +28,16 @@ public class BoardDAOMyBatis {
 
 	}
 
-	/**[게시판 목록 관련]총 게시글 수 가져오기*/
-		public int getTotalCount() {
+	/**[게시판 목록 관련]총 게시글 수 가져오기
+	 * @param findKeyword 
+	 * @param findType */
+		public int getTotalCount(String type, String keyword) {
+		Map<String,String> map=new HashMap<>();
+		map.put("findType", type);
+		map.put("findKeyword", keyword);
+		
 		ses=this.getSessionFactory().openSession();
-		int count=ses.selectOne(NS+".totalCount");
+		int count=ses.selectOne(NS+".totalCount", map);
 		if(ses!=null) ses.close();
 		return count;
 		
@@ -50,13 +57,15 @@ public class BoardDAOMyBatis {
 		return n;
 	}
 
-	public List<BoardVO> listBoard(int start, int end) {
+	public List<BoardVO> listBoard(int start, int end, String type, String keyword) {
 		ses=this.getSessionFactory().openSession();
 		//다중행을 가져올 떄는 selectList()
 		//단일행을 가져올 떄는 selectOne()
-		Map<String,Integer> map=new HashMap<>();
-		map.put("start", start);
-		map.put("end", end);
+		Map<String,String> map=new HashMap<>();
+		map.put("start", String.valueOf(start));
+		map.put("end", end+"");
+		map.put("findType", type);
+		map.put("findKeyword", keyword);
 		List<BoardVO> arr=ses.selectList(NS+".listBoard",map);
 		if(ses!=null) ses.close();
 		return arr;
