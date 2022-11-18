@@ -10,7 +10,7 @@ public class BoardWriteFormAction extends AbstractAction{
 	public void execute(HttpServletRequest req,HttpServletResponse res)  throws Exception{
 	
 		//뷰페이지 지정
-		this.setViewPage("board/boardWrite.jsp");
+		this.setViewPage("/board/boardWrite.jsp");
 		//이동방식 지정
 		this.setRedirect(false);
 	}

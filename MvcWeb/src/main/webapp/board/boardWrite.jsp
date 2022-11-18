@@ -61,10 +61,13 @@ div.bbs{
 		(2) multipart/form-data 
 		이 중 파일업로드를 하려면 (2) multipart/form-data 로 지정해야 한다.
 		    => 파일 이름과 함께 파일 데이터가 서버에 전송된다.
-
+			
+			
+			${pageContext.request.contextPath}==>컨텍스트명을 반환함 "/MyWeb"
+			<%=request.getContextPath()%> 코드와 동일함
 --%>
 	
-	<form name="boardF" id="boardFrm" action="boardWriteEnd.do" 
+	<form name="boardF" id="boardFrm" action="${pageContext.request.contextPath}/boardWriteEnd.do" 
 	method="post" enctype="multipart/form-data"  onsubmit="return board_check()">
 		<ul>
 			<li>제목</li>

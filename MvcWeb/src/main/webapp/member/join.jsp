@@ -20,7 +20,7 @@
 			<tr>
 				<td width="20%" class="m1"><b>아이디</b></td>
 				<td width="80%" class="m2">
-				<input type="text" name="userid" id="userid"  placehoder="User ID">
+				<input type="text" name="userid" id="userid"  placehoder="User ID" readonly>
 				<button type="button" onclick="open_idcheck()">아이디 중복 체크</button>
 				<br><span class='ck'>*아이디는 영문자,숫자, _, !포함해서4~8자리 이내</span>
 				</td>
