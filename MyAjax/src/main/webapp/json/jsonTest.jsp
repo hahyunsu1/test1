@@ -29,6 +29,23 @@
 			str+='</table>';
 			$('#msg').html(str);
 	}
+	function showList2(data){
+		//alert(data.length)
+		let str='<table class="table">';
+			$.each(data,function(i,book){
+				let date=(book.published.year+1900)+"-"+(book.published.month+1)+"-"+book.published.date;
+				str+='<tr>';
+				str+='<td><img src="../book/images/'+book.bimage+'"></td>';
+				str+='<td>'+book.isbn+'</td>';
+				str+='<td>'+book.title+'</td>';
+				str+='<td>'+book.price+'</td>';
+				str+='<td>'+book.publish+'</td>';
+				str+='<td>'+date+'</td>';
+				str+='</tr>';
+			})
+			str+='</table>';
+			$('#msg').html(str);
+	}
 	function showData(data){
 		let str='<table class="table">';
 		
@@ -170,7 +187,7 @@
 				cache:false,
 				success:function(res){
 					//alert(JSON.stringify(res));
-					showList(res);
+					showList2(res);
 										
 				},
 				error:function(err){

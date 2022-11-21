@@ -10,6 +10,8 @@
    Java Bean객체를 JSON형태로 변환해주는 라이브러리
 --%>
 <%
+	//JSONObject obj=JSONObject.fromObject(bookDto);
+
 	JSONObject obj=new JSONObject();
 	obj.put("isbn","7777");
 	obj.put("title","JSON라이브러리 활용");
