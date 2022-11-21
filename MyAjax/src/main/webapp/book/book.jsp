@@ -130,9 +130,10 @@ response.setDateHeader ("Expires", 0);
 			type:'post',
 			url:'bookUpdate.jsp',			
 			data:paramStr,
-			dataType:'xml',
+			//dataType:'xml',
+			dataType:'json',
 			cache:false,
-			success:function(res){
+			/*success:function(res){
 				let n=$(res).find("result").text();
 				if(n>0){
 					getAllBook()
@@ -141,8 +142,18 @@ response.setDateHeader ("Expires", 0);
 			},
 			error:function(err){
 				alert('errer : '+err.status);
+			}*/
+		}).done(function(res){
+			//alert('성공: '+JSON.stringify(res));
+			let n=res.result;
+			//alert(n)
+			if(n>0){
+				getAllBook();
+				alert('수정완료했습니다');
 			}
-		}) 
+		}).fail(function(err){
+			alert('실패: '+err.status);
+		})
 	}
 	function getAllBook(){
 		//alert('#');
