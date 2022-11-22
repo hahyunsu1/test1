@@ -42,6 +42,7 @@ function send(url,keyword,cpage){
 			display:20
 		}
 		showList(res.items, obj);
+		showPage(obj);
 	})
 	.fail(function(err){
 		alert('err: '+err.status);
@@ -69,6 +70,39 @@ function showList(items,obj){
 	str+='</table>';
 	
 	$('#openApiBook').html(str);
+}/////
+function showPage(obj){
+	let total=obj.total;//총 검색한 도서계수
+	let display=obj.display;//한페이지 당 보여줄 목록 갯수
+	if(total>200){
+		total=200;
+	}
+	//let pageCount=Math.floor((total-1)/display+1);//JAVA
+	let pageCount=Math.ceil((total-1)/display);//javacript
+	//alert('pageCount: '+pageCount);
+	
+	let query=obj.keyword;//검색어
+	let str='<ul class="pagination">';
+		for(let i=1;i<=pageCount;i++){
+			let start=(i-1)*display+1;//시작값=>네이버에 넘길 파라미터값
+			console.log('start: '+start);
+			if(i==obj.cpage){
+			str+='<li class="active">';
+			}else{
+			str+='<li>';
+			}
+			str+='<a href="#" onclick="fetch(\''+query+'\','+start+','+i+')">';
+			str+=i;
+			str+='</a>';
+			str+='</li>';
+		}
+		str+='</ul>';
+	$('#pageNavi').html(str);
+}
+function fetch(query,start,cpage){
+	//alert(query+"/"+start+"/"+cpage);
+	let url="openApiResult.jsp?query="+encodeURIComponent(query)+"&display=20&start="+start;
+	send(url,query,cpage);
 }
 </script>
 <div class="container">
