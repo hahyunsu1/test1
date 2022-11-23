@@ -18,8 +18,17 @@
 		</constructor-arg>
 	</bean>
 	<!--[4] 부서,이름,급여  -->
-	
+	<bean id="e4" class="ex05.EmpImpl">
+		<constructor-arg index="0" type="java.lang.String" value="Research"/>
+		<constructor-arg index="1" type="java.lang.String" >
+			<value>Scott</value>
+		</constructor-arg>
+		<constructor-arg index="2" type="int" value="3000"/>
+	</bean>
 	
 	<!--[5] Random객체를 받는 생성자 -->
-
+	<bean id="e5" class="ex05.EmpImpl">
+		<constructor-arg ref="Random" index="0" type="java.util.Random"/>
+	</bean>
+	<bean id="Random" class="java.util.Random"/>
 </beans>

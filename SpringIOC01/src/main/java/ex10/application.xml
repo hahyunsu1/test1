@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	<!--[1] ConsoleOutput 빈 생성한 뒤, path프로퍼티 값으로 "^^"주입하세요  -->
+	<bean id="console" class="ex10.ConsoleOutput">
+		<property name="path" value="^^"/>
+	</bean>
+	<!--[2] FileOuput빈 생성  path주입하기  C:/myjava/spring.txt -->
+	<bean id="file" class="ex10.FileOutput">
+		<property name="path" value="C:/myjava/spring.txt"/>
+	</bean>
+	<!--[3] MessageBeanImpl빈 생성. greeting,name주입하기=>setter 인젝션, output주입하기=>생성자 인젝션  -->
+	<bean id="mb" class="ex10.MessageBeanImpl">
+		<constructor-arg index="0" type="ex10.Output" ref="file"/>
+		<property name="greeting" value="Have a nice Day~~"/>
+		<property name="name" value="홍길동"/>
+	</bean>
+	
+	
+</beans>
