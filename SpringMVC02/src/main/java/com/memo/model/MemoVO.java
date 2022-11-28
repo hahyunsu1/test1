@@ -6,6 +6,8 @@ import lombok.*;
 @Setter
 @Getter
 @ToString(includeFieldNames = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemoVO {
 
 	private int idx;

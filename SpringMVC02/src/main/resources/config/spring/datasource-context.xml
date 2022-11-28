@@ -15,10 +15,21 @@
 	<!--[3] DataSource빈 등록 (DBCP,HikariCP) -->
 	<!-- Oracle -->
 	<bean id="dataSource-oracle" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="${Global.DriverClassName}"></property>
-		<property name="url" value="${Global.Url}"></property>
-		<property name="username" value="${Global.Username}"></property>
-		<property name="password" value="${Global.Password}"></property>
+		<property name="driverClassName" value="${Global.DriverClassName}"/>
+		<property name="url" value="${Global.Url}"/>
+		<property name="username" value="${Global.Username}"/>
+		<property name="password" value="${Global.Password}"/>
+	</bean>
+	
+	<!-- HikariCP 커넥션풀 빈 등록  -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${Global.DriverClassName}"/>
+		<property name="jdbcUrl"  value="${Global.Url}"/>
+		<property name="username" value="${Global.Username}"/>
+		<property name="password" value="${Global.Password}"/>
+	</bean>
+	<bean id="dataSource-hikari" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"/>
 	</bean>
 	<!-- MySQL -->
 	<!-- <bean id="dataSource-mysql" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
