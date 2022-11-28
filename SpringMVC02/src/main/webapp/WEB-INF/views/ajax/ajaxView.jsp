@@ -58,10 +58,10 @@
 			};
 			//json데이터를 파라미터로 보내고,응답도 json으로 반아보자
 			$.ajax({
-				type:'post',
+				type:'post',//요청방식은 post로 보내야 한다.
 				url:'ajaxRestJson',
-				contentType:'application/json',
-				data: JSON.stringify(jsonData),
+				contentType:'application/json',//contentType을 json형으로 지정하자
+				data: JSON.stringify(jsonData),//json객체로 문자열로 직렬화해서 보내자.
 				dataType:'json',
 				chche:false,
 				success:function(res){
