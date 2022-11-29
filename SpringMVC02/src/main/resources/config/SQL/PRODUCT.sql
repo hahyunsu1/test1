@@ -89,3 +89,6 @@ ALTER TABLE PRODUCT
 			UPCG_CODE
 		);
 create sequence product_seq nocache;
+alter table product modify pimage1 varchar2(200);
+alter table product modify pimage2 varchar2(200);
+alter table product modify pimage3 varchar2(200);

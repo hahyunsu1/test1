@@ -7,12 +7,16 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.shop.mapper.CategoryMapper;
+import com.shop.mapper.ProductMapper;
 import com.shop.model.CategoryVO;
 import com.shop.model.ProductVO;
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Inject
 	private CategoryMapper categoryMapper;
+	
+	@Inject
+	private ProductMapper productMapper; 
 	@Override
 	public List<CategoryVO> getUpcategory() {
 		// TODO Auto-generated method stub
@@ -39,14 +43,14 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int productInsert(ProductVO prod) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.productMapper.productInsert(prod);
 	}
 
 	@Override
 	public List<ProductVO> productList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.productMapper.getProducts();
 	}
 
 }

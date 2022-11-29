@@ -5,8 +5,16 @@
 
 <c:import url="/top"/>
 
-<div class="container mt-3" style="height: 600px;overFlow:auto;">
-	<h1 class="text-center">Index Page</h1>
+<div class="container mt-3" style="height: 700px;overFlow:auto;">
+	<c:import url="/prodPspec">
+		<c:param name="pspec" value="HIT"/>
+	</c:import>
+	<c:import url="/prodPspec">
+		<c:param name="pspec" value="NEW"/>
+	</c:import>
+	<c:import url="/prodPspec">
+		<c:param name="pspec" value="BEST"/>
+	</c:import>
 </div>
 
 <c:import url="/foot"/>
