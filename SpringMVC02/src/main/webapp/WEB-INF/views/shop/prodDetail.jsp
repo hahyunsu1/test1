@@ -16,7 +16,7 @@
 	}/////////////
 	const goCart=function(){
 		//pnum,oqty가 파라미터로 넘어감
-		frm.action="user/catAdd";
+		frm.action="user/cartAdd";
 		//frm.method='get';
 		frm.submit();
 	}

@@ -26,5 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="userDelete" parameterType="int">
 		delete from member where idx=#{value}
 	</delete>
-	
+	<select id="selectUserByUserid" parameterType="string" resultType="User">
+		select * from member where userid=#{value}
+	</select>
 </mapper>

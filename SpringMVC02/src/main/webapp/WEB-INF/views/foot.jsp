@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<style>
+<style>
 .footer{
 	/* position: fixed; */
 	width: 100%;
@@ -15,6 +15,8 @@
 <div class="text-center footer">
   <p>Footer</p>
 </div>
-
+<!-- loginModal.jsp include------------------  -->
+<%@ include file="/WEB-INF/views/login/loginModal.jsp" %>
+<!-- ----------------------------------------- -->
 </body>
 </html>

@@ -33,16 +33,23 @@
 	
 	<h2>회원정보 수정(일단 세개만)</h2>
 	<table class="table table-bordered mt-3">
-	
+		<tr>
+			<td>회원 번호</td>
+			<td>회원이름</td>
+			<td>회원 전화번호</td>
+			<td>회원 우편번호</td>			
+			<td>회원 주소</td>
+			
+			
+		</tr>
 		<tr>
 			<td>${userArr.idx}</td>
 			<td>${userArr.name}</td>
-			<td>${userArr.hp1}</td>
-			<td>${userArr.hp2}</td>
-			<td>${userArr.hp3}</td>
+			<td>${userArr.allHp}</td>
+			
 			<td>${userArr.post}</td>
-			<td>${userArr.addr1}</td>
-			<td>${userArr.addr2}</td>
+			<td>${userArr.allAddr2}</td>
+			
 			
 		</tr>
 			

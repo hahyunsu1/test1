@@ -27,4 +27,7 @@ public class UserVO {
 	public String getAllAddr() {
 		return "["+post+"] "+addr1+" "+addr2;
 	}
+	public String getAllAddr2() {
+		return addr1+" "+addr2;
+	}
 }
