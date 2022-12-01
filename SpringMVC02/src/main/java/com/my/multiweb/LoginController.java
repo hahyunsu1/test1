@@ -24,7 +24,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public String loginProcess(HttpSession session,@ModelAttribute("user") UserVO user) throws NotUserException {
-		log.info(user);
+		//log.info(user);
 		if(user.getUserid().trim().isEmpty()||user.getPwd().trim().isEmpty()) {
 			return "redirect:index";
 		}

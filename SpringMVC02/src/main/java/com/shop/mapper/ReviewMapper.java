@@ -4,16 +4,16 @@ import java.util.List;
 
 import com.shop.model.ReviewVO;
 
-	public interface ReviewMapper {
-		List<ReviewVO> listReview();
+public interface ReviewMapper {
+	public int addReview(ReviewVO rvo);
 
-		int ReviewAdd(ReviewVO rvo);
+	public List<ReviewVO> listReview(int pnum_fk);
 
-		int ReviewDel(int num);
+	public int getReviewCount(int pnum_fk);
 
-		int ReviewEdit(ReviewVO rvo);
+	public ReviewVO getReview(int num);
 
-		int getTotalCount();
+	public int updateReview(ReviewVO rvo);
 
-		ReviewVO getReview(int num);
+	public int deleteReview(int num);
 }

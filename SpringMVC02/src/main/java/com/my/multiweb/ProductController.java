@@ -3,6 +3,7 @@ package com.my.multiweb;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class ProductController {
 	//pspec(HIT,NEW,BEST) 별로 상품목록 가져오기
 	@GetMapping("/prodPspec")
 	public String productByPspec(Model m,@RequestParam(name="pspec",defaultValue = "HIT")String pspec) {
-		log.info("pspec====>"+pspec);
+		//log.info("pspec====>"+pspec);
 		List<ProductVO> pList=shopService.selectByPspec(pspec);
 		
 		m.addAttribute("pList",pList);
@@ -44,11 +45,12 @@ public class ProductController {
 	 * 가져오기
 	 */
 	@GetMapping("/prodDetail")
-	public String productDetail(Model m,@RequestParam(defaultValue = "0")int pnum) {
-		log.info(pnum);
+	public String productDetail(Model m,@RequestParam(defaultValue = "0")int pnum,HttpSession ses) {
+		//log.info(pnum);
 		if(pnum==0) {
 			return "redirect:index";//redirect방식으로 이동
 		}
+		ses.setAttribute("pnum", pnum);
 		ProductVO vo=shopService.selectByPnum(pnum);
 		m.addAttribute("prod",vo);
 		return "shop/prodDetail";

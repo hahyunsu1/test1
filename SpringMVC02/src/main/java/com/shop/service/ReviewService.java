@@ -5,17 +5,19 @@ import java.util.List;
 import com.shop.model.ReviewVO;
 
 public interface ReviewService {
+	
+	public int addReview(ReviewVO rvo);
 
-	List<ReviewVO> listReview();
+	public List<ReviewVO> listReview(int pnum_fk);	
+	
+	public int getReviewCount(int pnum_fk);
 
-	int ReviewAdd(ReviewVO rvo);
+	public ReviewVO getReview(int num);	
+	
+	public int updateReview(ReviewVO rvo);
 
-	int ReviewDel(int num);
+	public int deleteReview(int num);
 
-	int ReviewEdit(ReviewVO rvo);
-
-	int getTotalCount();
-
-	ReviewVO getReview(int num);
+	
 
 }

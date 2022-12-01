@@ -36,7 +36,7 @@ public class AdminController {
 	@GetMapping("/prodForm")
 	public String productForm(Model m) {
 		List<CategoryVO> upCgList=adminService.getUpcategory();
-		log.info("upCgList"+upCgList);
+		//log.info("upCgList"+upCgList);
 		m.addAttribute("upCgList",upCgList);
 		return "/admin/prodForm";
 	}
@@ -44,7 +44,7 @@ public class AdminController {
 	@GetMapping(value="/getDownCategory",produces="application/json")
 	@ResponseBody
 	public List<CategoryVO> getDownCategory(@RequestParam("upCg_code") String upCg_code){
-		log.info(upCg_code);
+		//log.info(upCg_code);
 		List<CategoryVO> downCgList=adminService.getDowncategory(upCg_code);
 		return downCgList;
 	}
@@ -52,11 +52,11 @@ public class AdminController {
 	public String  productRegister(Model m,@RequestParam("pimage")List<MultipartFile> pimage,
 			@ModelAttribute("product") ProductVO product,HttpServletRequest req) {
 			
-		log.info("product===="+product);
+		//log.info("product===="+product);
 		//1. 업로드 디렉토리 절대경로 얻기
 		ServletContext app=req.getServletContext();
 		String upDir=app.getRealPath("/resources/product_images");
-		log.info("upDir====>"+upDir);
+		//log.info("upDir====>"+upDir);
 		File dir=new File(upDir);
 		if(!dir.exists()) {
 			dir.mkdirs();//업로드할 디렉토리 생성
@@ -81,7 +81,7 @@ public class AdminController {
 				}
 			}
 		}//for
-			log.info("업로드 이후 product===="+product);
+			//log.info("업로드 이후 product===="+product);
 		
 	}
 		int n=adminService.productInsert(product);

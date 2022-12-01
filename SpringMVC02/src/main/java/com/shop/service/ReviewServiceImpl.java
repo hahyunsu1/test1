@@ -2,36 +2,33 @@ package com.shop.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.shop.mapper.ReviewMapper;
 import com.shop.model.ReviewVO;
 
+@Service
 public class ReviewServiceImpl implements ReviewService {
-
+	
+	@Inject
+	private ReviewMapper reviewMapper;
+	
 	@Override
-	public List<ReviewVO> listReview() {
-		// TODO Auto-generated method stub
-		return null;
+	public int addReview(ReviewVO rvo) {
+		
+		return this.reviewMapper.addReview(rvo);
 	}
 
 	@Override
-	public int ReviewAdd(ReviewVO rvo) {
+	public List<ReviewVO> listReview(int pnum_fk) {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.reviewMapper.listReview(pnum_fk);
 	}
 
 	@Override
-	public int ReviewDel(int num) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int ReviewEdit(ReviewVO rvo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getTotalCount() {
+	public int getReviewCount(int pnum_fk) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -39,7 +36,19 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ReviewVO getReview(int num) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.reviewMapper.getReview(num);
+	}
+
+	@Override
+	public int updateReview(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteReview(int num) {
+		
+		return this.reviewMapper.deleteReview(num);
 	}
 
 }
