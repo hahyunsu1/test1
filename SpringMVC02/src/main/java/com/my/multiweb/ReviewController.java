@@ -7,14 +7,18 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,14 +73,22 @@ public class ReviewController {
 	public List<ReviewVO> reviewList(HttpSession ses){
 		Integer pnum=(Integer)ses.getAttribute("pnum");
 		
-		log.info(pnum);
+		//log.info(pnum);
 		List<ReviewVO> arr=this.reviewService.listReview(pnum);
 		return arr;
 		
 	}
+	@GetMapping(value="/reviewCnt",produces="application/json")
+	public ModelMap getReviewCount(HttpSession ses) {
+		Integer pnum=(Integer) ses.getAttribute("pnum");
+		int count=this.reviewService.getReviewCount(pnum);
+		ModelMap map=new ModelMap();
+		map.put("count", count);
+		return map;
+	}
 	
 	@PostMapping(value="/user/reviews", produces = "application/xml")
-	public ModelMap reviewInsert(@RequestParam("mfilename") MultipartFile mf,@ModelAttribute("rvo") ReviewVO rvo,HttpSession ses) {
+	public ModelMap reviewInsert(@RequestParam(value="mfilename",required =false) MultipartFile mf,@ModelAttribute("rvo") ReviewVO rvo,HttpSession ses) {
 		log.info("Post rvo===>"+rvo);
 		
 		ServletContext app=ses.getServletContext();
@@ -110,12 +122,23 @@ public class ReviewController {
 		map.addAttribute("result",n);
 		return map;
 	}
-	@GetMapping(value="/reviews/{num}", produces= "application/json")
+	@GetMapping(value="/user/reviews/{num}", produces= "application/json")
 	public ReviewVO getReview(@PathVariable("num")int num) {
 		
 		ReviewVO arr=this.reviewService.getReview(num);
 		
 		return arr;
 	}
+	@PutMapping(value="/user/reviews/{num}", produces= "application/json")	
+	public ModelMap reviewSerevice(@PathVariable("num")int num,@RequestBody ReviewVO rvo) {
+		log.info("put rvo===="+rvo);
+		int n=this.reviewService.updateReview(rvo);
+		log.info(n);
+		ModelMap map=new ModelMap();
+		map.addAttribute("result",n);
+		return map;
+		
+	}
+	
 	
 }

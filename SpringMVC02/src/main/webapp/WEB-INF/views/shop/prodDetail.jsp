@@ -54,7 +54,7 @@
 
                      <td align="left" width="50%" style="padding-left: 40px">
                         <h4>
-                           <span class="label label-danger">a </span>
+                           <span class="label label-danger">${prod.pname} </span>
                         </h4> 
                         	상품번호: ${prod.pnum} <br> 
                         	상품이름: ${prod.pname} <br> 
@@ -112,16 +112,24 @@
       			<c:import url="/reviewForm"/>
       		</div>
       </div>
+       <div class="row">
+      		<div class="col-md-12" id="reviewTitle">
+      			<h4>Review List <span class="badge badge-success"id='review_cnt'></span></h4>
+      		</div>
+      </div>
       <!-- 리뷰 목록 --------------------------------------------------------  -->
       <div class="row">
       		<div class="col-md-12" id="reviewList">
       			
       		</div>
       </div>
+      <div class="row">
+      <div calss="col-md-10 offset-md-1">
       <!--리뷰 수정 모달-----------------------------------------------------  -->
       <%@ include file="/WEB-INF/views/review/reviewEdit.jsp" %>
       <!---------------------------------------------------------------------  -->
-      
+      </div>
+      </div>
 	</div><!--container end  -->
 	
 

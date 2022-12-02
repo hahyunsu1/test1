@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!--reviewAjax.js  -->
-    <script src="js/reviewAjax.js"></script>
+    <!-- <script src="js/reviewAjax.js"></script> -->
+<script>
+<%@ include file="/js/reviewAjax.js" %>
+</script>
 <form method="post" enctype="multipart/form-data" name="rf" id="rf">
 	<!-- hidden data------------------------------------ -->
 		<input type="hidden" name="pnum_fk" id="pnum_fk" value="${prod.pnum}">
 		<input type="hidden" name="userid" id="userid" value="${loginUser.userid}">
+		
 	<!-- ---------------------------------------------- -->
 	<table class="table">
 	<tr>

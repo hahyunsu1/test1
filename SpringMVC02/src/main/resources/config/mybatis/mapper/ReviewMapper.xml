@@ -16,7 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listReview" resultType="Review" parameterType="_int">
 		select * from review where pnum_fk=#{value} order by num desc
 	</select>
-	
+	<select id="getReviewCount" resultType="int" parameterType="int">
+		select count(num) from review where pnum_fk=#{value}
+	</select>
 	<select id="getReview" resultType="Review" parameterType="_int">
 		select * from review where num=#{value}
 	</select>
@@ -24,4 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteReview" parameterType="_int">
 		delete from review where num=#{value}
 	</delete>
+	<update id="updateReview" parameterType="Review">
+		update review set userid=#{userid},content=#{content:VARCHAR},score=#{score:NUMERIC},
+		<if test="filename!=null and filename!=''">
+		filename=#{filename},
+		</if>
+		wdate=sysdate where num=#{num}
+	</update>
+	
 </mapper>
