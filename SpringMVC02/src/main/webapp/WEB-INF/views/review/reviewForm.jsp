@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
     <!--reviewAjax.js  -->
     <!-- <script src="js/reviewAjax.js"></script> -->
-<script>
-<%@ include file="/js/reviewAjax.js" %>
-</script>
+
+<%@ include file="/WEB-INF/views/review/reviewScript.jsp" %>
+
 <form method="post" enctype="multipart/form-data" name="rf" id="rf">
 	<!-- hidden data------------------------------------ -->
 		<input type="hidden" name="pnum_fk" id="pnum_fk" value="${prod.pnum}">
