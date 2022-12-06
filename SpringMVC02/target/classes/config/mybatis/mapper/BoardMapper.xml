@@ -13,4 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{num},#{name},#{passwd},#{subject},#{content:VARCHAR},SYSDATE,#{readnum},
 		#{filename:VARCHAR},#{originFilename:VARCHAR},#{filesize:NUMERIC},#{num},#{lev},#{sunbun})
 	</insert>
+	<select id="selectBoardAll" resultType="Board" parameterType="map">
+		select * from spring_board order by num desc
+	</select>
+	<select id="selectBoardByIdx" resultType="Board" parameterType="_int">
+		select * from spring_board where num=#{value}
+	</select>
+	
+	<update id="updateReadnum"  parameterType="_int">
+		update spring_board set readnum = readnum+1 where num=#{value}
+	</update>
 </mapper>

@@ -1,6 +1,7 @@
 package com.my.multiweb;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,4 +105,20 @@ public class BoardController {
 		//m.addAttribute("loc","list");
 		return util.addMsgLoc(m, str, loc);//msg를 반환
 	}
+	@GetMapping("/list")
+	public String boardList(Model m) {
+		List<BoardVO> boardArr=this.boardService.selectBoardAll(null);
+		m.addAttribute("boardArr",boardArr);
+		return "board/boardList";
+	}
+	@GetMapping("/view/{num}")
+	public String boardView(Model m,@PathVariable("num") int num) {
+		//log.info("num====>"+num);
+		int n=this.boardService.updateReadnum(num);
+		BoardVO board=this.boardService.selectBoardByIdx(num);
+		m.addAttribute("board",board);
+		return "board/boardView";
+	}
+	
+	
 }
