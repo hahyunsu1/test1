@@ -25,4 +25,6 @@ public class BoardVO {
 	private int refer;//글그룹 번호
 	private int lev;//답변 레벨
 	private int sunbun;//같은 그그룹 내의 순서
+	
+	private String Old_filename;//예전에 첨부했던 파일
 }

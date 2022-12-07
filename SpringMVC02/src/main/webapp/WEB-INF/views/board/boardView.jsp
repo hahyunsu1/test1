@@ -73,13 +73,54 @@
 		<input type="hidden" name="fname" value="<c:out value="${board.filename}"/>">
 		<input type="hidden" name="origin_fname" value="<c:out value="${board.originFilename}"/>">
 	</form>
+	<!-- 편집 또는 삭제를 위한 form----------------------------------------- -->
+	<form name="frm" id="frm">
+		<input type="hidden" name="num" value="<c:out value="${board.num}"/>">
+		<input type="hidden" name="mode">
+		<div class="row mt-4" id="divPasswd" style="display: none">
+			<div class="col-md-3 offset-md-1 text-right mr-2">
+				<label for="passwd">글 비밀번호</label>
+			</div>
+			<div class="col-md-4">
+				<input type="password" name="passwd" id="passwd" class="form-control" placeholder="Password" required>
+			</div>
+			<div class="col-md-3 text-left mr-2">
+				<button id="btn" class="btn btn-outline-primary"></button>
+			</div>
+		</div>
+	</form>
+	<!-- 답변달기 form시작 ---------------------------------------------------->
+	<form name="ref" id="reF" action="../rewrite" method="post">
+		<!-- hidden으로 부모글의 글번호(num)와 제목(subject)를 넘기자  -->
+		<input type="hidden" name="num" value="<c:out value="${board.num}"/>">
+		<input type="hidden" name="subject" value="<c:out value="${board.subject}"/>">
+	</form>
 	<!-- ------------------------------------------------------------------- -->
 </div>
 
 <script>
 //파일 다운로드 처리
+	function goRe(){
+		reF.submit();
+	}
 	function down(){
 		fileF.submit();
+	}
+	function go(flag){
+		if(flag==1){
+			frm.mode.value='edit';
+			$('btn').text('글수정');
+			$('#passwd').focus();
+			frm.action='../edit';
+			frm.method='post';
+		}else if(flag==2){
+			frm.mode.value='delete';
+			$('btn').text('글삭제');
+			$('#passwd').focus();
+			frm.action='../delete';
+			frm.method='post';
+		}
+		$('#divPasswd').show(500);
 	}
 </script>
 
