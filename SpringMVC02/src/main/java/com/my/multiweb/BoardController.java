@@ -1,7 +1,9 @@
 package com.my.multiweb;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.board.model.BoardVO;
+import com.board.model.PagingVO;
 import com.board.service.BoardService;
 import com.common.CommonUtil;
 
@@ -44,7 +47,7 @@ public class BoardController {
 	}
 	@PostMapping("/write")
 	public String boardInsert(Model m,@RequestParam("mfilename") MultipartFile mfilename,@ModelAttribute BoardVO board,HttpServletRequest req) {
-		log.info("board=====>"+board);
+		//log.info("board=====>"+board);
 		//1.파일 업로드 처리
 		ServletContext app=req.getServletContext();
 		//업로드 디렉토리 절대경로 얻기
@@ -59,13 +62,13 @@ public class BoardController {
 			//1)먼저 첨부파일명과 파일크기를 알아내자
 			String originFname=mfilename.getOriginalFilename();//원본파일명
 			long fsize=mfilename.getSize();//파일크기
-			log.info(originFname+">>>"+fsize);
+			//log.info(originFname+">>>"+fsize);
 			
 			//2)동일한 파일명이 서버에 있을 경우 덮어쓰기를 방지하기 위해
 			// "랜덤한문자열_원본파일명"==>물리적 파일명을 생성하자
 			UUID uuid=UUID.randomUUID();
 			String filename=uuid.toString()+"_"+originFname;
-			log.info("filename===>"+filename);
+			//log.info("filename===>"+filename);
 			//3_1)mode가 edit(수정)이고 예전에 첨부했던 파일이 있다면
 			//예전 파일삭제 처리
 			if(board.getMode().equals("edit")&& board.getOld_filename()!=null) {
@@ -73,7 +76,7 @@ public class BoardController {
 				File delF=new File(upDir,board.getOld_filename());
 				if(delF.exists()) {
 					boolean b=delF.delete();
-					log.info("old file삭제 여부: "+b);
+					//log.info("old file삭제 여부: "+b);
 				}
 			}
 		//3-2 업로드 처리
@@ -100,6 +103,7 @@ public class BoardController {
 		int n=0;
 		String str="",loc="";
 		if("write".equals(board.getMode())) {//글쓰기 모드라면
+			//for(int i=0;i<30;i++)
 			n=this.boardService.insertBoard(board);
 			str="글쓰기 ";
 		}else if("rewrite".equals(board.getMode())) {//답변 글쓰기 모드라면
@@ -118,9 +122,58 @@ public class BoardController {
 		return util.addMsgLoc(m, str, loc);//msg를 반환
 	}
 	@GetMapping("/list")
-	public String boardList(Model m) {
-		List<BoardVO> boardArr=this.boardService.selectBoardAll(null);
+	public String boardListPaging(Model m,@ModelAttribute("page") PagingVO page) {
+		log.info("page===>"+page);
+		//1.총 게시글 수 가져오기
+		int totalCount=this.boardService.getTotalCount(page);
+		page.setTotalCount(totalCount);
+		page.setPageSize(5);//한 페이지 당 보여줄 목록 개수
+		page.setPagingBlock(5);//페이징 블럭 단위값:5
+		//////////////////////
+		page.init();//페이징 관련 연산을 수행하는 매서드 호출
+		//////////////////////
+		log.info("page2===>"+page);
+		List<BoardVO> boardArr=this.boardService.selectBoardAllPaging(page);
+		
+		m.addAttribute("paging",page);
 		m.addAttribute("boardArr",boardArr);
+		return "board/boardList2";
+	}
+	@GetMapping("/list_old")
+	public String boardList(Model m,@RequestParam(defaultValue = "1") int cpage) {
+		//log.info("cpag1===>"+cpage);
+		if(cpage<=0) {
+			cpage=1;
+		}
+		//1.총 게시글 수 가져오기
+		int totalCount=this.boardService.getTotalCount(null);
+		//2. 한 페이지 당 보여줄 목록 개수 정하기
+		
+		int pageSize=5;
+		int pageCount=(totalCount-1)/pageSize+1;
+		
+		if(cpage>pageCount) {
+			cpage=pageCount;
+		}
+		//log.info("cpage2===>"+cpage);
+		//3.게시판 목록 가져와서 모델에 저장하기
+		//[1] where rn between A and B를 사용할 경우
+//		int end=cpage*pageSize;
+//		int start=end-(pageSize-1);
+		
+		//[2] where rn > A and rn < B 를 사용할 경우
+		int start=(cpage-1)*pageSize;
+		int end = start + (pageSize+1);
+		
+		Map<String,Integer> map=new HashMap<>();
+		map.put("start", Integer.valueOf(start));
+		map.put("end", Integer.valueOf(end));
+		//"boardArr
+		List<BoardVO> boardArr=this.boardService.selectBoardAll(map);
+		m.addAttribute("boardArr",boardArr); 
+		m.addAttribute("totalCount",totalCount);
+		m.addAttribute("pageCount",pageCount);
+		m.addAttribute("cpage",cpage);
 		return "board/boardList";
 	}
 	@GetMapping("/view/{num}")
@@ -136,7 +189,7 @@ public class BoardController {
 			HttpServletRequest req,
 			@RequestParam(defaultValue = "0") int num,
 			@RequestParam(defaultValue = "") String passwd) {
-		log.info("num==="+num+"/ passwd==="+passwd);
+		//log.info("num==="+num+"/ passwd==="+passwd);
 		if(num==0||passwd.isEmpty()) {
 			return "redirect:list";
 		}
@@ -155,13 +208,13 @@ public class BoardController {
 		
 		ServletContext app=req.getServletContext();
 		String upDir=app.getRealPath("/resources/spring_board_images");
-		log.info("updir===>"+upDir);
+		//log.info("updir===>"+upDir);
 		//서버에 업로드한 첨부파일이 있다면 서버에서 삭제 처리
 		if(n>0 && vo.getFilename()!=null) {
 			File f=new File(upDir,vo.getFilename());
 			if(f.exists()) {
 				boolean b=f.delete();
-				log.info("파일삭제 여부: "+b);
+				//log.info("파일삭제 여부: "+b);
 			}
 		}
 		String str=(n>0)?"글 삭제 성공":"삭제 실패";
@@ -194,7 +247,7 @@ public class BoardController {
 	}
 	@PostMapping("/rewrite")
 	public String boardRewrite(Model m, @ModelAttribute BoardVO vo) {
-		log.info("vo==="+vo);
+		//log.info("vo==="+vo);
 		m.addAttribute("num",vo.getNum());
 		m.addAttribute("subject",vo.getSubject());
 		return "board/boardRewrite";
