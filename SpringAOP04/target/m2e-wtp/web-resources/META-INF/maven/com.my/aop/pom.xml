@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.my</groupId>
-	<artifactId>multiweb</artifactId>
-	<name>SpringMVC02</name>
+	<artifactId>aop</artifactId>
+	<name>SpringAOP04</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -71,12 +71,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		<!-- @Resource -->
-		<dependency>
-		    <groupId>javax.annotation</groupId>
-		    <artifactId>javax.annotation-api</artifactId>
-		    <version>1.3.2</version>
-		</dependency>		
+				
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -95,6 +90,30 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<!-- Add My module -->
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.9.6</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.12</version>
+		    <scope>provided</scope>
+		</dependency>
 	
 		<!-- Test -->
 		<dependency>
@@ -102,137 +121,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>
-		<!-- Add My Module ====================== -->   
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
-		    <version>${org.springframework-version}</version>
-		    <scope>test</scope>
-		</dependency>
-			    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.12</version>
-		    <scope>provided</scope>
-		</dependency>
-		<!-- Ajax JSON (json, xml, yaml, csv) -->
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.8</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>2.9.8</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.dataformat</groupId>
-		    <artifactId>jackson-dataformat-xml</artifactId>
-		    <version>2.9.8</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.8</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.5</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>5.0.7.RELEASE</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.6</version>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<!-- MyBatis 라이브러리 -->
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.5.6</version>
-		</dependency>
-		
-		<!-- mybatis spring 연동 -->
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis-spring</artifactId>
-		    <version>1.3.2</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-ibatis -->
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-ibatis</artifactId>
-		    <version>2.0.8</version>
-		</dependency>
-		
-		<!-- 오라클 JDBC 드라이버 -->
-		<dependency>
-		    <groupId>com.oracle.database.jdbc</groupId>
-		    <artifactId>ojdbc8</artifactId>
-		    <version>12.2.0.1</version>
-		</dependency>
-		
-		<!-- spring jdbc module -->
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
-		<dependency>
-		    <groupId>com.zaxxer</groupId>
-		    <artifactId>HikariCP</artifactId>
-		    <version>2.7.4</version>
-		</dependency>
-		
-		<!-- File Upload -->
-		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.3</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
-		</dependency>
-		
-		     
+		</dependency>        
 	</dependencies>
     <build>
         <plugins>
