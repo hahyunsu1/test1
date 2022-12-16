@@ -30,32 +30,76 @@
 		showPosts();
 		$('#frm button').click(function(e){
 			e.preventDefault();
+			let str=$(this).text();
+			//alert(str);
 			let author=$('#author').val();
 			let title=$('#title').val();
 			//alert(author+"/"+title);
-			let jsonData={
-					"author":author,
-					"title":title
-			}
-			$.ajax({
-				type:'post',
-				url:'posts',
-				contentType:'application/json',
-				data:JSON.stringify(jsonData),
-				dataType:'json',
-				cache:false,
-				success:function(res){
-					//alert(JSON.stringify(res));
-					if(res.result>0){
-						showPosts()
-					}
-				},
-				error:function(err){
-					alert('err: '+err.status);
+			let _id=$('#id').val();
+			if(str=='글쓰기'){
+				let jsonData={
+						"author":author,
+						"title":title
 				}
-			});
+				addPosts(jsonData);
+			}else if(str=='글수정'){
+				let jsonData={
+						"author":author,
+						"title":title,
+						"id":_id
+				}
+				console.dir(jsonData);
+				updatePosts(jsonData);
+			}
 		})//button
 	})//end
+	
+	const updatePosts=function(jsonData){
+		$.ajax({
+			type:'post',
+			url:'postsEdit',
+			contentType:'application/json',
+			data:JSON.stringify(jsonData),
+			dataType:'json',
+			cache:false,
+			success:function(res){
+				//alert(res.result);
+			    if(res.result>0){
+					showPosts();
+					$('#author').val("");
+					$('#title').val("");
+					$('#id').val("");					
+					$('#frm button').text('글쓰기');
+				} 
+			},
+			error:function(err){
+				alert('err: '+err.status);
+			}
+		});
+	}
+	
+	const addPosts=function(jsonData){
+		$.ajax({
+			type:'post',
+			url:'posts',
+			contentType:'application/json',
+			data:JSON.stringify(jsonData),
+			dataType:'json',
+			cache:false,
+			success:function(res){
+				//alert(JSON.stringify(res));
+				if(res.result>0){
+					showPosts();
+					$('#author').val("");
+					$('#title').val("");
+					$('#author').focus();
+				}
+			},
+			error:function(err){
+				alert('err: '+err.status);
+			}
+		});
+	}
 	const showPosts=function(){
 		$.ajax({
 			type:'get',
