@@ -87,12 +87,17 @@ public class KomoranUtil {
 		return arr;
 	}//-----------------------------------
 	
-	//pos태깅 중에서 지정된 풍사의 문자열만 추출해서 카운터를 반환하는
+	//pos태깅 중에서 지정된 풍사의 문자열만 추출해서 카운터를 세어 반환하는 메서드
 	public static List<WordCount> getWordByTag(String text,int nimCnt,String...tags){
 		KomoranResult res=nlp.analyze(text);
 		List<String> arr=res.getMorphesByTags(tags);
-		
+		if(arr==null) {
+			arr=new ArrayList<>();
+		}
 		Map<String,Integer> wordCount=getWordCount(arr);
+		if(wordCount==null) {
+			wordCount=new HashMap<String,Integer>();
+		}
 		
 		List<WordCount> arr2=getWordCountSortProc(wordCount, nimCnt);
 		
