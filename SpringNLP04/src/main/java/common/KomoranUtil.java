@@ -1,6 +1,7 @@
 package common;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,13 +26,13 @@ public class KomoranUtil {
 	static Komoran nlp=new Komoran(DEFAULT_MODEL.FULL);
 	
 	public static List<String> getWordNouns(String str){
-		String txt=str.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
-		txt=txt.trim();//ì•ë’¤ ê³µë°± ì œê±°
+		String txt=str.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
+		txt=txt.trim();//¾ÕµÚ °ø¹é Á¦°Å
 		System.out.println(txt);
 		System.out.println("----------------------------");
-		//í˜•íƒœì†Œ ë¶„ì„ ì‹œì‘
+		//ÇüÅÂ¼Ò ºĞ¼® ½ÃÀÛ
 		KomoranResult res=nlp.analyze(txt);
-		//í˜•íƒœì†Œ ë¶„ì„ ê²°ê³¼ ì¤‘ ëª…ì‚¬ë§Œ ì¶”ì¶œí•´ë³´ì.
+		//ÇüÅÂ¼Ò ºĞ¼® °á°ú Áß ¸í»ç¸¸ ÃßÃâÇØº¸ÀÚ.
 		List<String> nounList=res.getNouns();
 		
 		if(nounList==null) {
@@ -46,16 +47,16 @@ public class KomoranUtil {
 		if(nounList==null) {
 			nounList=new ArrayList<>();
 		}
-		//(ë‹¨ì–´, ë¹ˆë„ìˆ˜) (ëˆˆ, 3)
+		//(´Ü¾î, ºóµµ¼ö) (´«, 3)
 		Map<String, Integer> wMap=new HashMap<>();
 		Set<String> set=new HashSet<>(nounList);
-		//Setìœ í˜•ì€ ì¤‘ë³µëœ ë°ì´í„°ê°€ ì €ì¥ë˜ì§€ ì•ŠìŒ.
+		//SetÀ¯ÇüÀº Áßº¹µÈ µ¥ÀÌÅÍ°¡ ÀúÀåµÇÁö ¾ÊÀ½.
 		
 		Iterator<String> it=set.iterator();
 		
 		while(it.hasNext()) {
 			String word=it.next();
-			//ì¤‘ë³µëœ ë‹¨ì–´ëª©ë¡ì—ì„œ ì¤‘ë³µë˜ì§€ ì•Šì€ ë‹¨ì–´ì˜ ì¹´ìš´íŠ¸ìˆ˜ë¥¼ êµ¬í•¨
+			//Áßº¹µÈ ´Ü¾î¸ñ·Ï¿¡¼­ Áßº¹µÇÁö ¾ÊÀº ´Ü¾îÀÇ Ä«¿îÆ®¼ö¸¦ ±¸ÇÔ
 			int frequency=Collections.frequency(nounList, word);
 			log.info(word+": "+word+", frequency: "+frequency);
 			wMap.put(word, frequency);
@@ -63,11 +64,11 @@ public class KomoranUtil {
 		return wMap;
 	}//--------------------------------
 	
-	//ì¹´ìš´íŒ… ëœ ë‹¨ì–´ ë¹ˆë„ìˆ˜ ë§µì—ì„œ ë¹ˆë„ìˆ˜ê°€ 2ê°œ ì´ìƒì¸ ë‹¨ì–´ë“¤ë§Œ sortingí•´ì„œ ë°˜í™”ëŠ” ë©”ì„œë“œ
+	//Ä«¿îÆÃ µÈ ´Ü¾î ºóµµ¼ö ¸Ê¿¡¼­ ºóµµ¼ö°¡ 2°³ ÀÌ»óÀÎ ´Ü¾îµé¸¸ sortingÇØ¼­ ¹İÈ­´Â ¸Ş¼­µå
 	public static List<WordCount> getWordCountSortProc(Map<String, Integer> map, int n){
 		
 		PriorityQueue<WordCount> pq=new PriorityQueue<WordCount>();
-		Set<String> set=map.keySet();//keyê°’ë“¤ë§Œ setìœ í˜•ìœ¼ë¡œ ì¶”ì¶œ
+		Set<String> set=map.keySet();//key°ªµé¸¸ setÀ¯ÇüÀ¸·Î ÃßÃâ
 		for(String key:set) {
 			Integer val=map.get(key);
 			WordCount wc=new WordCount();
@@ -80,29 +81,33 @@ public class KomoranUtil {
 		while(! pq.isEmpty()) {
 			WordCount wc=pq.poll();
 			if(wc.getWord().length()>=1&& wc.getCnt()>n) {
-				//íŠ¹ì • ë¹ˆë„ìˆ˜ ì´ìƒì¸ ìš”ì†Œë“¤ë§Œ ArrayListì— ë‹´ì
+				//Æ¯Á¤ ºóµµ¼ö ÀÌ»óÀÎ ¿ä¼Òµé¸¸ ArrayList¿¡ ´ãÀÚ
 				arr.add(wc);
 			}			
 		}
 		return arr;
 	}//-----------------------------------
 	
-	//posíƒœê¹… ì¤‘ì—ì„œ ì§€ì •ëœ í’ì‚¬ì˜ ë¬¸ìì—´ë§Œ ì¶”ì¶œí•´ì„œ ì¹´ìš´í„°ë¥¼ ì„¸ì–´ ë°˜í™˜í•˜ëŠ” ë©”ì„œë“œ
-	public static List<WordCount> getWordByTag(String text,int nimCnt,String...tags){
+	//posÅÂ±ë Áß¿¡¼­ ÁöÁ¤µÈ Ç°»çÀÇ ¹®ÀÚ¿­¸¸ ÃßÃâÇØ¼­ Ä«¿îÆ®¸¦ ¼¼¾î ¹İÈ¯ÇÏ´Â ¸Ş¼­µå
+	public static List<WordCount> getWordByTag(String text, int minCnt,String...tags){
 		KomoranResult res=nlp.analyze(text);
 		List<String> arr=res.getMorphesByTags(tags);
 		if(arr==null) {
 			arr=new ArrayList<>();
 		}
-		Map<String,Integer> wordCount=getWordCount(arr);
+		
+		Map<String, Integer> wordCount=getWordCount(arr);
 		if(wordCount==null) {
 			wordCount=new HashMap<String,Integer>();
 		}
 		
-		List<WordCount> arr2=getWordCountSortProc(wordCount, nimCnt);
-		
-		return arr2;
+		List<WordCount> arr2=getWordCountSortProc(wordCount, minCnt);
+		return arr2;		
 	}
+	
+	
 
 }
+
+
 

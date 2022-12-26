@@ -8,58 +8,60 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CommonUtil {
-	
-		//nullê°’ì„ ë¹ˆë¬¸ìì—´ë¡œ ì¹˜í™˜
-		public static String nvl(String str, String chg_str) {
-			String res = "";
-			if (str == null) {
-				res = chg_str;
-			} else if (str.equals("")) {
-				res = chg_str;
-			} else {
-				res = str;
-			}
-			return res;
-		}//----------------------------------------
 
-		public static String nvl(String str) {
-			return nvl(str, "");
-		}//----------------------------------------
-		//ì•ŒíŒŒë²³ê³¼ ê³µë°±ì„ ì œì™¸í•˜ê³  ëª¨ë‘ ì œê±°í•˜ëŠ” ë©”ì„œë“œ
-		public static String remainAlphaSpace(String str) {
-			if(str!=null)
-//				String replace_text = text.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
-				str=str.replaceAll("[^a-zA-Z ]", " ");
-			return str;
-		}//----------------------------------------
-		// í•œê¸€,ì•ŒíŒŒë²³, ìˆ«ìê°€ ì•„ë‹Œ ë¬¸ìëŠ” ë¹ˆê³µë°±ìœ¼ë¡œ ì¹˜í™˜í•œë‹¤
-		public static String remainKorAlpha(String str) {
-			if(str!=null)
-				str = str.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
-			return str;
-		}//----------------------------------------
-		//í•œê¸€ê³¼ ê³µë°±ì´ ì•„ë‹Œ ë¬¸ìëŠ” ë¹ˆë¬¸ìë¡œ ì¹˜í™˜
-		public static String remainKorSpace(String str) {
-			if(str!=null)
-				str=str.replaceAll("[^ã„±-ã…ã…-ã…£ê°€-í£ ]", " ");
-			return str;
-		}//----------------------------------------
-		//ê³µë°±ë¬¸ìê°€ ì—¬ëŸ¬ê°œ ìˆì„ ê²½ìš° ë¹ˆë¬¸ìì—´ë¡œ ëŒ€ì¹˜
-		public static String spaceToEmpty(String str) {
-			if(str!=null)
-				str=str.replaceAll("\\s+", " ");
-			return str;
-		}//----------------------------------------
+	// null°ªÀ» ºó¹®ÀÚ¿­·Î Ä¡È¯
+	public static String nvl(String str, String chg_str) {
+		String res = "";
+		if (str == null) {
+			res = chg_str;
+		} else if (str.equals("")) {
+			res = chg_str;
+		} else {
+			res = str;
+		}
+		return res;
+	}// ----------------------------------------
 
-	
-	public Map<String,Long> getFrequency(String str) {
-		//String [] tks=str.toLowerCase().split("[\\.\\s]+");		
-		//System.out.println(Arrays.toString(tks));
-		Stream<String> stream=Stream.of(str.toLowerCase().split("[\\.\\s,']+")).parallel();
-		
-		Map<String, Long> wordCountMap=stream.collect(Collectors.groupingBy(String::toString, Collectors.counting()));
-		//collect()ë©”ì„œë“œë¥¼ ì´ìš©í•´ì„œ ë‹¨ì–´ì™€ ë‹¨ì–´ ë¹ˆë„ë¥¼ ìˆ˜ì§‘í•œë‹¤. ìˆ˜ì§‘ëœ ê°’ì€ Mapìœ í˜•ìœ¼ë¡œ ë°˜í™˜ëœë‹¤. Stringì€ ë‹¨ì–´, Long ì€ í•´ë‹¹ ë‹¨ì–´ì˜ ë¹ˆë„ìˆ˜ë¥¼ ê°–ëŠ”ë‹¤.		
-		//wordCountMap.forEach((k,v)->System.out.println(k+": "+v));
+	public static String nvl(String str) {
+		return nvl(str, "");
+	}// ----------------------------------------
+
+	// ¾ËÆÄºª°ú °ø¹éÀ» Á¦¿ÜÇÏ°í ¸ğµÎ Á¦°ÅÇÏ´Â ¸Ş¼­µå
+	public static String remainAlphaSpace(String str) {
+		if (str != null)
+//				String replace_text = text.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
+			str = str.replaceAll("[^a-zA-Z ]", " ");
+		return str;
+	}// ----------------------------------------
+		// ÇÑ±Û,¾ËÆÄºª, ¼ıÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ´Â ºó°ø¹éÀ¸·Î Ä¡È¯ÇÑ´Ù
+
+	public static String remainKorAlpha(String str) {
+		if (str != null)
+			str = str.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
+		return str;
+	}// ----------------------------------------
+		// ÇÑ±Û°ú °ø¹éÀÌ ¾Æ´Ñ ¹®ÀÚ´Â ºó¹®ÀÚ·Î Ä¡È¯
+
+	public static String remainKorSpace(String str) {
+		if (str != null)
+			str = str.replaceAll("[^¤¡-¤¾¤¿-¤Ó°¡-ÆR ]", " ");
+		return str;
+	}// ----------------------------------------
+
+	// °ø¹é¹®ÀÚ°¡ ¿©·¯°³ ÀÖÀ» °æ¿ì ºó¹®ÀÚ¿­·Î ´ëÄ¡
+	public static String spaceToEmpty(String str) {
+		if (str != null)
+			str = str.replaceAll("\\s+", " ");
+		return str;
+	}// ----------------------------------------
+
+	public Map<String, Long> getFrequency(String str) {
+		// String [] tks=str.toLowerCase().split("[\\.\\s]+");
+		// System.out.println(Arrays.toString(tks));
+		Stream<String> stream = Stream.of(str.toLowerCase().split("[\\.\\s,']+")).parallel();
+
+		Map<String, Long> wordCountMap = stream.collect(Collectors.groupingBy(String::toString, Collectors.counting()));
+
 		return wordCountMap;
 	}
 

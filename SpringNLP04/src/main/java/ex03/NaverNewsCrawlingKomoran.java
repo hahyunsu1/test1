@@ -19,45 +19,48 @@ import common.nlp.CloudImageGenerator;
 import common.nlp.CloudViewer;
 import common.nlp.StringProcessor;
 import common.nlp.WordCount;
-import kr.co.shineware.nlp.komoran.model.KomoranResult;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class NaverNewsCrawlingKomoran {
 
 	public static void main(String[] args) throws Exception{
-		
-		String url="https://n.news.naver.com/mnews/article/001/0013655987?sid=103";
+		// TODO Auto-generated method stub
+		String url="https://n.news.naver.com/mnews/article/277/0005195057?sid=105";
 		
 		NaverNewsCrawlingKomoran app=new NaverNewsCrawlingKomoran();
-		
 		app.getNewsContents(url);
-
-	}
+		
+		
+	}//----------------------------------
 	public String getNewsContents(String url) throws Exception{
 		String str="";
-		//httpí”„ë¡œíŠ¸ì½œë§Œ ê°€ëŠ¥,httpsí”„ë¡œí† ì½œì€ ë³´ì•ˆìƒ ì•ˆëœë‹¤
+		//httpÇÁ·ÎÅäÄİ¸¸ °¡´É. httpsÇÁ·ÎÅäÄİÀº º¸¾È»ó ¾ÈµÈ´Ù
 		Document doc=Jsoup.connect(url).get();
 		//System.out.println(doc);
 		//#newsct_article
-		Elements newsCountent=doc.select("div#newsct_article");
-		str=newsCountent.text();
-		List<String> noumArr=KomoranUtil.getWordNouns(str);
-		Map<String,Integer> wordCountMap=KomoranUtil.getWordCount(noumArr);
+		Elements newsContent=doc.select("div#newsct_article");
+		str=newsContent.text();
+		
+		List<String> nounArr=KomoranUtil.getWordNouns(str);
+		Map<String,Integer> wordCountMap= KomoranUtil.getWordCount(nounArr);
 		List<WordCount> wordCountList=KomoranUtil.getWordCountSortProc(wordCountMap, 0);
 		
 		log.info(wordCountList);
-		HashSet<String> stopWord=new HashSet<>();//ë¶ˆìš©ì–´ ì»¬ë ‰ì…˜
-		stopWord.add("ê¸°ì");
-		stopWord.add("10");
-		stopWord.add("ë‚¨");
+		HashSet<String> stopWord=new HashSet<>();//ºÒ¿ë¾î ÄÃ·º¼Ç
+		stopWord.add("¹Î°£");
+		stopWord.add("ºñ±³");
+		stopWord.add("¿¬·á");
+		
 		StringProcessor strProc=new StringProcessor(str, stopWord);
 		
-		ArrayList<WordCount> arrList=strProc.processString2(wordCountMap,0);
+		ArrayList<WordCount> arrList=strProc.processString2(wordCountMap, 0);
 		
 		makeWordCloudView(strProc);
-		return str;		
-	}
+		
+		return str;
+	}//-----------------------------------
+	
 	public static final int WIDTH=1200;
 	public static final int HEIGHT=800;
 	public static final int PADDING=30;
@@ -66,23 +69,26 @@ public class NaverNewsCrawlingKomoran {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLocationByPlatform(true);
 		f.pack();
-		Insets inset=f.getInsets();//ì•ˆìª½ ì—¬ë°±
-		Dimension dim=calcScreenSize(inset);//í­,ë†’ì´,íŒ¨íŒ… ì ìš©í•œ ê°ì²´ ë°˜í™˜
+		Insets inset=f.getInsets();//¾ÈÂÊ ¿©¹é
+		Dimension dim=calcScreenSize(inset);//Æø,³ôÀÌ, ÆĞµù Àû¿ëÇÑ °´Ã¼ ¹İÈ¯
 		f.setSize(dim);
 		
-		CloudImageGenerator gen=new CloudImageGenerator(WIDTH, HEIGHT, PADDING);
-												//w:1200,h:800,padding:30
-		BufferedImage bufImg= gen.generateImage(strProc, 1);
+		CloudImageGenerator gen=new CloudImageGenerator(WIDTH,HEIGHT,PADDING);
+							//w:1200, h:800, padding:30
+		BufferedImage bufImg=gen.generateImage(strProc, 1);
 		CloudViewer panel=new CloudViewer(bufImg);//JPanel
 		f.setContentPane(panel);
 		f.setVisible(true);
 		
 	}
-	private static Dimension calcScreenSize(Insets insets) {
-        int width = insets.left + insets.right + WIDTH + PADDING * 2;
-        int height = insets.top + insets.bottom + HEIGHT + PADDING * 2;
-        return new Dimension(width, height);
-    }
-
+	
+	 private static Dimension calcScreenSize(Insets insets) {
+	        int width = insets.left + insets.right + WIDTH + PADDING * 2;
+	        int height = insets.top + insets.bottom + HEIGHT + PADDING * 2;
+	        return new Dimension(width, height);
+	  }
 
 }
+
+
+

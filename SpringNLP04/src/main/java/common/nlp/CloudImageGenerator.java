@@ -1,6 +1,5 @@
 package common.nlp;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -25,7 +24,6 @@ public class CloudImageGenerator {
     private static final int FONT_STEP_SIZE = 5;
     private static final int MINIMUM_FONT_SIZE = 20;
     private static final int MINIMUM_WORD_COUNT = 2;
-//    public static final String FONT_FAMILY = "나눔명조";
     public static final String FONT_FAMILY = "Helvetica";
     public static final String[] THEME = ColorCombinations.THEME1;
     

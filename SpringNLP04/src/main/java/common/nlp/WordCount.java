@@ -3,20 +3,20 @@ package common.nlp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//ë¹ˆë„ìˆ˜ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•  ìˆ˜ ìˆë„ë¡ Comparableë¥¼ êµ¬í˜„í•¨
+//ºóµµ¼ö ³»¸²Â÷¼øÀ¸·Î Á¤·ÄÇÒ ¼ö ÀÖµµ·Ï Comparable¸¦ ±¸ÇöÇÔ
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class WordCount implements Comparable<WordCount>{
 	
-	private String word;//ë‹¨ì–´
-	private int cnt;//ë¹ˆë„ìˆ˜
+	private String word;//´Ü¾î
+	private int cnt;//ºóµµ¼ö
 	
 	@Override
 	public int compareTo(WordCount o) {
 
-		//return this.cnt-o.cnt;//ì˜¤ë¦„ì°¨ìˆœ
-		return o.cnt-this.cnt;//ë‚´ë¦¼ì°¨ìˆœ
+		//return this.cnt-o.cnt;//¿À¸§Â÷¼ø
+		return o.cnt-this.cnt;//³»¸²Â÷¼ø
 	}
 
 }
