@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommonUtil {
 
-	// null°ªÀ» ºó¹®ÀÚ¿­·Î Ä¡È¯
+	// nullê°’ì„ ë¹ˆë¬¸ìì—´ë¡œ ì¹˜í™˜
 	public static String nvl(String str, String chg_str) {
 		String res = "";
 		if (str == null) {
@@ -26,29 +26,29 @@ public class CommonUtil {
 		return nvl(str, "");
 	}// ----------------------------------------
 
-	// ¾ËÆÄºª°ú °ø¹éÀ» Á¦¿ÜÇÏ°í ¸ğµÎ Á¦°ÅÇÏ´Â ¸Ş¼­µå
+	// ì•ŒíŒŒë²³ê³¼ ê³µë°±ì„ ì œì™¸í•˜ê³  ëª¨ë‘ ì œê±°í•˜ëŠ” ë©”ì„œë“œ
 	public static String remainAlphaSpace(String str) {
 		if (str != null)
-//				String replace_text = text.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
+//				String replace_text = text.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
 			str = str.replaceAll("[^a-zA-Z ]", " ");
 		return str;
 	}// ----------------------------------------
-		// ÇÑ±Û,¾ËÆÄºª, ¼ıÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ´Â ºó°ø¹éÀ¸·Î Ä¡È¯ÇÑ´Ù
+		// í•œê¸€,ì•ŒíŒŒë²³, ìˆ«ìê°€ ì•„ë‹Œ ë¬¸ìëŠ” ë¹ˆê³µë°±ìœ¼ë¡œ ì¹˜í™˜í•œë‹¤
 
 	public static String remainKorAlpha(String str) {
 		if (str != null)
-			str = str.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
+			str = str.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
 		return str;
 	}// ----------------------------------------
-		// ÇÑ±Û°ú °ø¹éÀÌ ¾Æ´Ñ ¹®ÀÚ´Â ºó¹®ÀÚ·Î Ä¡È¯
+		// í•œê¸€ê³¼ ê³µë°±ì´ ì•„ë‹Œ ë¬¸ìëŠ” ë¹ˆë¬¸ìë¡œ ì¹˜í™˜
 
 	public static String remainKorSpace(String str) {
 		if (str != null)
-			str = str.replaceAll("[^¤¡-¤¾¤¿-¤Ó°¡-ÆR ]", " ");
+			str = str.replaceAll("[^ã„±-ã…ã…-ã…£ê°€-í£ ]", " ");
 		return str;
 	}// ----------------------------------------
 
-	// °ø¹é¹®ÀÚ°¡ ¿©·¯°³ ÀÖÀ» °æ¿ì ºó¹®ÀÚ¿­·Î ´ëÄ¡
+	// ê³µë°±ë¬¸ìê°€ ì—¬ëŸ¬ê°œ ìˆì„ ê²½ìš° ë¹ˆë¬¸ìì—´ë¡œ ëŒ€ì¹˜
 	public static String spaceToEmpty(String str) {
 		if (str != null)
 			str = str.replaceAll("\\s+", " ");
