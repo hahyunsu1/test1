@@ -35,7 +35,7 @@ public class NaverNewsCrawlingKomoran {
 	}//----------------------------------
 	public String getNewsContents(String url) throws Exception{
 		String str="";
-		//httpÇÁ·ÎÅäÄİ¸¸ °¡´É. httpsÇÁ·ÎÅäÄİÀº º¸¾È»ó ¾ÈµÈ´Ù
+		//httpí”„ë¡œí† ì½œë§Œ ê°€ëŠ¥. httpsí”„ë¡œí† ì½œì€ ë³´ì•ˆìƒ ì•ˆëœë‹¤
 		Document doc=Jsoup.connect(url).get();
 		//System.out.println(doc);
 		//#newsct_article
@@ -47,10 +47,10 @@ public class NaverNewsCrawlingKomoran {
 		List<WordCount> wordCountList=KomoranUtil.getWordCountSortProc(wordCountMap, 0);
 		
 		log.info(wordCountList);
-		HashSet<String> stopWord=new HashSet<>();//ºÒ¿ë¾î ÄÃ·º¼Ç
-		stopWord.add("¹Î°£");
-		stopWord.add("ºñ±³");
-		stopWord.add("¿¬·á");
+		HashSet<String> stopWord=new HashSet<>();//ë¶ˆìš©ì–´ ì»¬ë ‰ì…˜
+		stopWord.add("ë¯¼ê°„");
+		stopWord.add("ë¹„êµ");
+		stopWord.add("ì—°ë£Œ");
 		
 		StringProcessor strProc=new StringProcessor(str, stopWord);
 		
@@ -69,8 +69,8 @@ public class NaverNewsCrawlingKomoran {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLocationByPlatform(true);
 		f.pack();
-		Insets inset=f.getInsets();//¾ÈÂÊ ¿©¹é
-		Dimension dim=calcScreenSize(inset);//Æø,³ôÀÌ, ÆĞµù Àû¿ëÇÑ °´Ã¼ ¹İÈ¯
+		Insets inset=f.getInsets();//ì•ˆìª½ ì—¬ë°±
+		Dimension dim=calcScreenSize(inset);//í­,ë†’ì´, íŒ¨ë”© ì ìš©í•œ ê°ì²´ ë°˜í™˜
 		f.setSize(dim);
 		
 		CloudImageGenerator gen=new CloudImageGenerator(WIDTH,HEIGHT,PADDING);

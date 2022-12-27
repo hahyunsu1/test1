@@ -26,13 +26,13 @@ public class KomoranUtil {
 	static Komoran nlp=new Komoran(DEFAULT_MODEL.FULL);
 	
 	public static List<String> getWordNouns(String str){
-		String txt=str.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
-		txt=txt.trim();//¾ÕµÚ °ø¹é Á¦°Å
+		String txt=str.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
+		txt=txt.trim();//ì•ë’¤ ê³µë°± ì œê±°
 		System.out.println(txt);
 		System.out.println("----------------------------");
-		//ÇüÅÂ¼Ò ºĞ¼® ½ÃÀÛ
+		//í˜•íƒœì†Œ ë¶„ì„ ì‹œì‘
 		KomoranResult res=nlp.analyze(txt);
-		//ÇüÅÂ¼Ò ºĞ¼® °á°ú Áß ¸í»ç¸¸ ÃßÃâÇØº¸ÀÚ.
+		//í˜•íƒœì†Œ ë¶„ì„ ê²°ê³¼ ì¤‘ ëª…ì‚¬ë§Œ ì¶”ì¶œí•´ë³´ì.
 		List<String> nounList=res.getNouns();
 		
 		if(nounList==null) {
@@ -47,16 +47,16 @@ public class KomoranUtil {
 		if(nounList==null) {
 			nounList=new ArrayList<>();
 		}
-		//(´Ü¾î, ºóµµ¼ö) (´«, 3)
+		//(ë‹¨ì–´, ë¹ˆë„ìˆ˜) (ëˆˆ, 3)
 		Map<String, Integer> wMap=new HashMap<>();
 		Set<String> set=new HashSet<>(nounList);
-		//SetÀ¯ÇüÀº Áßº¹µÈ µ¥ÀÌÅÍ°¡ ÀúÀåµÇÁö ¾ÊÀ½.
+		//Setìœ í˜•ì€ ì¤‘ë³µëœ ë°ì´í„°ê°€ ì €ì¥ë˜ì§€ ì•ŠìŒ.
 		
 		Iterator<String> it=set.iterator();
 		
 		while(it.hasNext()) {
 			String word=it.next();
-			//Áßº¹µÈ ´Ü¾î¸ñ·Ï¿¡¼­ Áßº¹µÇÁö ¾ÊÀº ´Ü¾îÀÇ Ä«¿îÆ®¼ö¸¦ ±¸ÇÔ
+			//ì¤‘ë³µëœ ë‹¨ì–´ëª©ë¡ì—ì„œ ì¤‘ë³µë˜ì§€ ì•Šì€ ë‹¨ì–´ì˜ ì¹´ìš´íŠ¸ìˆ˜ë¥¼ êµ¬í•¨
 			int frequency=Collections.frequency(nounList, word);
 			log.info(word+": "+word+", frequency: "+frequency);
 			wMap.put(word, frequency);
@@ -64,11 +64,11 @@ public class KomoranUtil {
 		return wMap;
 	}//--------------------------------
 	
-	//Ä«¿îÆÃ µÈ ´Ü¾î ºóµµ¼ö ¸Ê¿¡¼­ ºóµµ¼ö°¡ 2°³ ÀÌ»óÀÎ ´Ü¾îµé¸¸ sortingÇØ¼­ ¹İÈ­´Â ¸Ş¼­µå
+	//ì¹´ìš´íŒ… ëœ ë‹¨ì–´ ë¹ˆë„ìˆ˜ ë§µì—ì„œ ë¹ˆë„ìˆ˜ê°€ 2ê°œ ì´ìƒì¸ ë‹¨ì–´ë“¤ë§Œ sortingí•´ì„œ ë°˜í™”ëŠ” ë©”ì„œë“œ
 	public static List<WordCount> getWordCountSortProc(Map<String, Integer> map, int n){
 		
 		PriorityQueue<WordCount> pq=new PriorityQueue<WordCount>();
-		Set<String> set=map.keySet();//key°ªµé¸¸ setÀ¯ÇüÀ¸·Î ÃßÃâ
+		Set<String> set=map.keySet();//keyê°’ë“¤ë§Œ setìœ í˜•ìœ¼ë¡œ ì¶”ì¶œ
 		for(String key:set) {
 			Integer val=map.get(key);
 			WordCount wc=new WordCount();
@@ -81,14 +81,14 @@ public class KomoranUtil {
 		while(! pq.isEmpty()) {
 			WordCount wc=pq.poll();
 			if(wc.getWord().length()>=1&& wc.getCnt()>n) {
-				//Æ¯Á¤ ºóµµ¼ö ÀÌ»óÀÎ ¿ä¼Òµé¸¸ ArrayList¿¡ ´ãÀÚ
+				//íŠ¹ì • ë¹ˆë„ìˆ˜ ì´ìƒì¸ ìš”ì†Œë“¤ë§Œ ArrayListì— ë‹´ì
 				arr.add(wc);
 			}			
 		}
 		return arr;
 	}//-----------------------------------
 	
-	//posÅÂ±ë Áß¿¡¼­ ÁöÁ¤µÈ Ç°»çÀÇ ¹®ÀÚ¿­¸¸ ÃßÃâÇØ¼­ Ä«¿îÆ®¸¦ ¼¼¾î ¹İÈ¯ÇÏ´Â ¸Ş¼­µå
+	//posíƒœê¹… ì¤‘ì—ì„œ ì§€ì •ëœ í’ˆì‚¬ì˜ ë¬¸ìì—´ë§Œ ì¶”ì¶œí•´ì„œ ì¹´ìš´íŠ¸ë¥¼ ì„¸ì–´ ë°˜í™˜í•˜ëŠ” ë©”ì„œë“œ
 	public static List<WordCount> getWordByTag(String text, int minCnt,String...tags){
 		KomoranResult res=nlp.analyze(text);
 		List<String> arr=res.getMorphesByTags(tags);

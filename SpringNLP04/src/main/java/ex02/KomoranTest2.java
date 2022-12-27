@@ -15,12 +15,12 @@ public class KomoranTest2 {
 	static Komoran nlp=new Komoran(DEFAULT_MODEL.LIGHT);
 
 	public static void main(String[] args) {
-		String str="´«ÀÌ ºÎ½Ã°Ô Çª¸£¸¥ ³¯Àº ¡Ú¡Ú ±×¸®¿î »ç¶÷À» ±×¸®¿ö ÇÏÀÚ. Àú±â Àú±â Àú, °¡À» ²É ÀÚ¸® ÃÊ·ÏÀÌ ÁöÃÄ ´ÜÇ³ µå´Âµ¥";
-		str+="´«ÀÌ ³»¸®¸é ¾îÀÌ ÇÏ¸®¾ß º½ÀÌ ¶Ç ¿À¸é ¾îÀÌ ÇÏ¸®¾ß ³»°¡ Á×°í¼­ ³×°¡ »ê´Ù¸é!¡Ú¡Ú¡Ú ³×°¡ Á×°í¼­ ³»°¡ »ê´Ù¸é? ";
-		str+="´«ÀÌ ºÎ½Ã°Ô Çª¸£¸¥ ³¯Àº ±×¸®¿î »ç¶÷À» ±×¸®¿ö ÇÏÀÚ -¼­Á¤ÁÖ Çª¸£¸¥ ³¯ Poem  12345";
+		String str="ëˆˆì´ ë¶€ì‹œê²Œ í‘¸ë¥´ë¥¸ ë‚ ì€ â˜…â˜… ê·¸ë¦¬ìš´ ì‚¬ëŒì„ ê·¸ë¦¬ì›Œ í•˜ì. ì €ê¸° ì €ê¸° ì €, ê°€ì„ ê½ƒ ìë¦¬ ì´ˆë¡ì´ ì§€ì³ ë‹¨í’ ë“œëŠ”ë°";
+		str+="ëˆˆì´ ë‚´ë¦¬ë©´ ì–´ì´ í•˜ë¦¬ì•¼ ë´„ì´ ë˜ ì˜¤ë©´ ì–´ì´ í•˜ë¦¬ì•¼ ë‚´ê°€ ì£½ê³ ì„œ ë„¤ê°€ ì‚°ë‹¤ë©´!â˜…â˜…â˜… ë„¤ê°€ ì£½ê³ ì„œ ë‚´ê°€ ì‚°ë‹¤ë©´? ";
+		str+="ëˆˆì´ ë¶€ì‹œê²Œ í‘¸ë¥´ë¥¸ ë‚ ì€ ê·¸ë¦¬ìš´ ì‚¬ëŒì„ ê·¸ë¦¬ì›Œ í•˜ì -ì„œì •ì£¼ í‘¸ë¥´ë¥¸ ë‚  Poem  12345";
 		
 		KomoranResult res=nlp.analyze(str);
-		//getTokenList(): tokenÇüÅÂ·Î °á°ú¸¦ ´ã´Âµ¥, ÀÌ ÅäÅ«¿¡´Â ÇüÅÂ¼Ò°¡ ¹®ÀÚ¿­ÀÇ ¾î´À À§Ä¡¿¡¼­ »ı¼ºµÇ´ÂÁö, ³¡³ª´ÂÁö, ÇüÅÂ¼Ò ºĞ¼® °á°ú µîÀ» ¹İÈ¯ÇÑ´Ù.
+		//getTokenList(): tokení˜•íƒœë¡œ ê²°ê³¼ë¥¼ ë‹´ëŠ”ë°, ì´ í† í°ì—ëŠ” í˜•íƒœì†Œê°€ ë¬¸ìì—´ì˜ ì–´ëŠ ìœ„ì¹˜ì—ì„œ ìƒì„±ë˜ëŠ”ì§€, ëë‚˜ëŠ”ì§€, í˜•íƒœì†Œ ë¶„ì„ ê²°ê³¼ ë“±ì„ ë°˜í™˜í•œë‹¤.
 		List<Token> tkList=res.getTokenList();
 		log.info("====1. getTokenList==================");
 		for(Token tk:tkList) {
@@ -30,13 +30,13 @@ public class KomoranTest2 {
 		log.info("==2. getPlainText====================");
 		String info=res.getPlainText();
 		log.info(info);
-		//pos tagging ÀÌ ºÙ¾îÀÖ´Â ÅØ½ºÆ® ÇüÅÂ·Î ¹İÈ¯
+		//pos tagging ì´ ë¶™ì–´ìˆëŠ” í…ìŠ¤íŠ¸ í˜•íƒœë¡œ ë°˜í™˜
 		
 		log.info("==3. getMorphByTag=====================");
-		List<String> arr=res.getMorphesByTags("NNG","NNP","NNB");//¸í»çµé¸¸ ÃßÃâÇÑ´Ù.
+		List<String> arr=res.getMorphesByTags("NNG","NNP","NNB");//ëª…ì‚¬ë“¤ë§Œ ì¶”ì¶œí•œë‹¤.
 		log.info(arr);
 		
-		log.info(res.getMorphesByTags("VV"));//µ¿»ç¸¸ ÃßÃâ
+		log.info(res.getMorphesByTags("VV"));//ë™ì‚¬ë§Œ ì¶”ì¶œ
 
 		
 		

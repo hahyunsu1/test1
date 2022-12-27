@@ -29,7 +29,7 @@ import lombok.extern.log4j.Log4j;
 		</repository>
 	</repositories>
 	<dependencies>
-	<!--dependencies ºÎºĞ¿¡ ¾Æ·¡ ¶óÀÌºê·¯¸® µî·Ï-->
+	<!--dependencies ë¶€ë¶„ì— ì•„ë˜ ë¼ì´ë¸ŒëŸ¬ë¦¬ ë“±ë¡-->
 	<!-- https://mvnrepository.com/artifact/com.github.shin285/KOMORAN -->
 		<dependency>
 			<groupId>com.github.shin285</groupId>
@@ -44,13 +44,13 @@ public class KomoranTest {
 	static Komoran nlp=new Komoran(DEFAULT_MODEL.FULL);
 	
 	public static List<String> getWordNouns(String str){
-		String txt=str.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
-		txt=txt.trim();//¾ÕµÚ °ø¹é Á¦°Å
+		String txt=str.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
+		txt=txt.trim();//ì•ë’¤ ê³µë°± ì œê±°
 		System.out.println(txt);
 		System.out.println("----------------------------");
-		//ÇüÅÂ¼Ò ºĞ¼® ½ÃÀÛ
+		//í˜•íƒœì†Œ ë¶„ì„ ì‹œì‘
 		KomoranResult res=nlp.analyze(txt);
-		//ÇüÅÂ¼Ò ºĞ¼® °á°ú Áß ¸í»ç¸¸ ÃßÃâÇØº¸ÀÚ.
+		//í˜•íƒœì†Œ ë¶„ì„ ê²°ê³¼ ì¤‘ ëª…ì‚¬ë§Œ ì¶”ì¶œí•´ë³´ì.
 		List<String> nounList=res.getNouns();
 		
 		if(nounList==null) {
@@ -65,10 +65,10 @@ public class KomoranTest {
 		if(nounList==null) {
 			nounList=new ArrayList<>();
 		}
-		//(´Ü¾î, ºóµµ¼ö) (´«, 3)
+		//(ë‹¨ì–´, ë¹ˆë„ìˆ˜) (ëˆˆ, 3)
 		Map<String, Integer> wMap=new HashMap<>();
 		Set<String> set=new HashSet<>(nounList);
-		//SetÀ¯ÇüÀº Áßº¹µÈ µ¥ÀÌÅÍ°¡ ÀúÀåµÇÁö ¾ÊÀ½.
+		//Setìœ í˜•ì€ ì¤‘ë³µëœ ë°ì´í„°ê°€ ì €ì¥ë˜ì§€ ì•ŠìŒ.
 		
 		Iterator<String> it=set.iterator();
 		
@@ -83,18 +83,18 @@ public class KomoranTest {
 	
 	
 	public static void main(String[] args) {
-		String str="´«ÀÌ ºÎ½Ã°Ô Çª¸£¸¥ ³¯Àº ¡Ú¡Ú ±×¸®¿î »ç¶÷À» ±×¸®¿ö ÇÏÀÚ. Àú±â Àú±â Àú, °¡À» ²É ÀÚ¸® ÃÊ·ÏÀÌ ÁöÃÄ ´ÜÇ³ µå´Âµ¥";
-		str+="´«ÀÌ ³»¸®¸é ¾îÀÌ ÇÏ¸®¾ß º½ÀÌ ¶Ç ¿À¸é ¾îÀÌ ÇÏ¸®¾ß ³»°¡ Á×°í¼­ ³×°¡ »ê´Ù¸é!¡Ú¡Ú¡Ú ³×°¡ Á×°í¼­ ³»°¡ »ê´Ù¸é? ";
-		str+="´«ÀÌ ºÎ½Ã°Ô Çª¸£¸¥ ³¯Àº ±×¸®¿î »ç¶÷À» ±×¸®¿ö ÇÏÀÚ -¼­Á¤ÁÖ Çª¸£¸¥ ³¯ Poem  12345";
-		//ÇÑ±Û,¾ËÆÄºª,¼ıÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ¿­Àº Á¦°ÅÇØº¸ÀÚ.
+		String str="ëˆˆì´ ë¶€ì‹œê²Œ í‘¸ë¥´ë¥¸ ë‚ ì€ â˜…â˜… ê·¸ë¦¬ìš´ ì‚¬ëŒì„ ê·¸ë¦¬ì›Œ í•˜ì. ì €ê¸° ì €ê¸° ì €, ê°€ì„ ê½ƒ ìë¦¬ ì´ˆë¡ì´ ì§€ì³ ë‹¨í’ ë“œëŠ”ë°";
+		str+="ëˆˆì´ ë‚´ë¦¬ë©´ ì–´ì´ í•˜ë¦¬ì•¼ ë´„ì´ ë˜ ì˜¤ë©´ ì–´ì´ í•˜ë¦¬ì•¼ ë‚´ê°€ ì£½ê³ ì„œ ë„¤ê°€ ì‚°ë‹¤ë©´!â˜…â˜…â˜… ë„¤ê°€ ì£½ê³ ì„œ ë‚´ê°€ ì‚°ë‹¤ë©´? ";
+		str+="ëˆˆì´ ë¶€ì‹œê²Œ í‘¸ë¥´ë¥¸ ë‚ ì€ ê·¸ë¦¬ìš´ ì‚¬ëŒì„ ê·¸ë¦¬ì›Œ í•˜ì -ì„œì •ì£¼ í‘¸ë¥´ë¥¸ ë‚  Poem  12345";
+		//í•œê¸€,ì•ŒíŒŒë²³,ìˆ«ìê°€ ì•„ë‹Œ ë¬¸ìì—´ì€ ì œê±°í•´ë³´ì.
 		//[^\\w]
-		String txt=str.replaceAll("[^°¡-ÆRa-zA-Z0-9]", " ");
-		txt=txt.trim();//¾ÕµÚ °ø¹é Á¦°Å
+		String txt=str.replaceAll("[^ê°€-í£a-zA-Z0-9]", " ");
+		txt=txt.trim();//ì•ë’¤ ê³µë°± ì œê±°
 		System.out.println(txt);
 		System.out.println("----------------------------");
-		//ÇüÅÂ¼Ò ºĞ¼® ½ÃÀÛ
+		//í˜•íƒœì†Œ ë¶„ì„ ì‹œì‘
 		KomoranResult res=nlp.analyze(txt);
-		//ÇüÅÂ¼Ò ºĞ¼® °á°ú Áß ¸í»ç¸¸ ÃßÃâÇØº¸ÀÚ.
+		//í˜•íƒœì†Œ ë¶„ì„ ê²°ê³¼ ì¤‘ ëª…ì‚¬ë§Œ ì¶”ì¶œí•´ë³´ì.
 		List<String> nounList=res.getNouns();
 		
 		if(nounList==null) {
@@ -105,7 +105,7 @@ public class KomoranTest {
 		
 		Map<String,Integer> map=getWordCount(nounList);
 		
-		List<WordCount> wordList=KomoranUtil.getWordCountSortProc(map, 1);//ºóµµ¼ö°¡ 2°³ÀÌ»ó ³ª¿À´Â ´Ü¾î ¸ñ·Ï °¡Á®¿À±â
+		List<WordCount> wordList=KomoranUtil.getWordCountSortProc(map, 1);//ë¹ˆë„ìˆ˜ê°€ 2ê°œì´ìƒ ë‚˜ì˜¤ëŠ” ë‹¨ì–´ ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
 		
 		System.out.println(wordList);
 		System.out.println("***************************");
