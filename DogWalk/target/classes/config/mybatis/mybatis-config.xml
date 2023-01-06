@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- typeAlias 타입 별칭 설정================ -->
+	<typeAliases>
+		<typeAlias type="com.family.model.AnimalBoardVO" alias="Animal"/>
+		<typeAlias type="com.family.model.PagingVO" alias="Paging"/>
+		<typeAlias type="com.member.model.MemberVO" alias="Member"/>
+		<typeAlias type="com.message.model.Message" alias="Message"/>
+		<typeAlias type="com.family.board.model.BoardVO" alias="Board"/>
+		<typeAlias type="com.family.web.animalCareBoard.model.AnimalCareBoardVO" alias="AnimalCareBoardVO"/>
+		<typeAlias type="com.family.web.secondHandBoard.model.SecondHandBoardVO" alias="SecondHandBoardVO"/>
+		<typeAlias type="com.family.pet.model.PetVO" alias="Pet"/>
+		<typeAlias type="com.family.pet.model.ScheduleVO" alias="Schedule"/>
+		<typeAlias type="com.family.pet.model.Mrecord" alias="Mrecord"/>
+		
+		
+		 
+	</typeAliases>
+	<!-- mapper 정의 -->
+	<mappers>
+		<mapper resource="config/mybatis/mapper/AnimalMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/MemberMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/MessageMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/boardMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/AnimalCareBoardMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/SecondHandBoardMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/ScheduleMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/MrecordMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/PetMapper.xml"/>
+		
+	</mappers>
+</configuration>

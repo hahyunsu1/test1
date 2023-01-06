@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.pet.mapper.ScheduleMapper">
+
+	<insert id="newSchedule" parameterType="Schedule">
+		<selectKey keyProperty="sindex" resultType="_int" order="BEFORE">
+			select SCHEDULE_seq.nextval from dual
+		</selectKey>
+		insert into SCHEDULE (sindex,petindex, userid, title, content,is_complete,  start_date, end_date, allDay, daysofweek, adncdnoti, color, groupId) 
+			values(#{sindex},#{petindex}, #{userid}, #{title}, #{content},#{is_complete},  #{start_date} , #{end_date}, 
+			#{allDay}, #{daysofweek}, #{adncdnoti}, #{color}, #{groupId})
+	</insert>
+
+</mapper>

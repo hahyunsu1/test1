@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.web.animalCareBoard.mapper.AnimalCareBoardMapper">
+    <select id="selectAll" resultType="animalCareBoardVO" parameterType="String">
+        select * from
+            (
+                select *
+                from ANIMAL_CARE_BOARD
+                <where>
+                    <if test="kinds != null and kinds != ''">
+                        AND kinds = #{kinds}
+                    </if>
+                    <if test="tag != null and tag != ''">
+                        AND tags like '%' || #{tag} || '%'
+                    </if>
+                    <if test="start != null and end != null">
+                        AND cnum <![CDATA[<=]]> #{end}
+                    </if>
+                </where>
+                order by cnum
+            )
+        <where>
+            <if test="start != null and end != null">
+                AND cnum <![CDATA[>]]> #{start}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO ANIMAL_CARE_BOARD(cnum,
+                                      nick_fk,
+                                      cpss,
+                                      title,
+                                      content,
+                                      kinds,
+                                      tags,
+                                      cnt,
+                                      wdate,
+                                      filename,
+                                      old_filename,
+                                      filesize)
+        VALUES (ANIMAL_CARE_BOARD_SEQ.NEXTVAL,
+                #{nickFk},
+                #{cpss},
+                #{title},
+                #{content},
+                #{kinds},
+                #{tags},
+                0,
+                sysdate,
+                #{filename},
+                #{oldFilename},
+                #{filesize})
+    </insert>
+
+    <select id="count" resultType="int">
+        <![CDATA[
+            select count(cnum)
+            from ANIMAL_CARE_BOARD
+            where cnum > 0
+        ]]>
+
+    </select>
+
+
+</mapper>

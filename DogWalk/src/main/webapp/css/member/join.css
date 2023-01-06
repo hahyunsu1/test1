@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.footer{
+	/* position:fixed; */
+	width:100%;
+	left:0;
+	bottom:0;
+	margin-bottom:0; 
+	height:50px; 
+	line-height:50px;
+	background-color:#efefef;
+}
+
+.id_input_re_1{
+	color:green;
+	display: none;
+}
+
+.id_input_re_2{
+	color:red;
+	display:none;
+}
+
+#mail_check_false{
+	background-color: #c0c0c0;
+}
+#mail_check_true{
+	background-color: white;
+}
+
+/* 유효성 검사 문구 */
+
+.final_id_ck{
+    display: none;
+}
+.final_pw_ck{
+    display: none;
+}
+.final_pwck_ck{
+    display: none;
+}
+.final_name_ck{
+    display: none;
+}
+.final_mail_ck{
+    display: none;
+}
+.final_addr_ck{
+    display: none;
+}
+.final_nick_ck{
+    display: none;
+}
+ 
+ /* 비밀번호 확인 일치 유효성검사 */
+.pwck_input_re_1{
+        color : green;
+        display : none;    
+}
+.pwck_input_re_2{
+        color : red;
+        display : none;    
+}    
+
+/* 중복닉네임 존재하지 않는경우 */
+.nick_input_re_1{
+	color : green;
+	display : none;
+}
+
+/* 중복닉네임 존재하는 경우 */
+.nick_input_re_2{
+	color : red;
+	display : none;
+}
+ 

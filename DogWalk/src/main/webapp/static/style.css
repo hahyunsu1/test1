@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+
+.header {
+    border: 2px solid;
+    padding: 10px;
+    text-align: center
+}
+
+.my-box {
+    border: 1px solid;
+    padding: 5px
+}
+
+.page {
+    border: 1px solid;
+    width: 1440px;
+    margin: 0 auto;
+}
+
+#menu {
+    height: 30px;
+    width: 850px;
+}
+
+#menu ul li {
+    list-style: none;
+    color: white;
+    float: left;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#menu .menuLink {
+    text-decoration: none;
+    display: block;
+    width: 150px;
+    font-size: 20px;
+}
+
+#kinds {
+    height: 30px;
+    width: 850px;
+}
+
+#kinds ul li {
+    list-style: none;
+    color: white;
+    float: left;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#kinds .menuLink {
+    text-decoration: none;
+    display: block;
+    width: 75px;
+    font-size: 15px;
+}
+
+#tags {
+    height: 30px;
+    width: 1050px;
+}
+
+#tags ul li {
+    list-style: none;
+    color: white;
+    float: left;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#tags .menuLink {
+    text-decoration: none;
+    display: block;
+    width: 100px;
+    font-size: 15px;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: gray;
+    text-decoration: underline;
+}
+
+.product-list {
+    width: 740px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product {
+    display: block;
+    width: 350px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.product-left {
+    width: 200px;
+    float: left;
+    box-sizing: border-box;
+    background: #8977ad;
+}
+.product-right {
+    width: 150px;
+    float: right;
+    box-sizing: border-box;
+    background: #ece6cc;
+}
+
+li {
+    list-style: none;
+    float: left;
+    padding: 6px;
+}
+
+.clearfix{
+    clear: both;
+}

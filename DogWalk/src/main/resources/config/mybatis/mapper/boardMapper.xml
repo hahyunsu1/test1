@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.board.mapper.BoardMapper">
+	<select id="boardCount" resultType="_int">
+		select count(cnum) from com_ani_inquire_board
+	</select>
+	
+	<select id="insert">
+		insert into COM_ANI_INQUIRE_BOARD (CNUM,NICK_FK,CPSS,TITLE,CONTENT,WDATE,CNT,FILENAME,OLD_FILENAME,FILESIZE)
+		values (COM_ANI_INQUIRE_BOARD_SEQ.nextval, '닉네임', 'pass'})
+		--values (COM_ANI_INQUIRE_BOARD_SEQ.nextval, #{NICK_FK},#{CPSS},#{TITLE},#{CONTENT},#{WDATE},#{CNT},#{FILENAME},#{OLD_FILENAME})
+	</select>
+	
+	<select id="read" resultType="Board">
+		select * from com_ani_inquire_board where cnum=#{cnum}
+	</select>
+	
+	<delete id="delete">
+		delete from com_ani_inquire_board where cnum=#{cnum}
+	</delete>
+	
+	<update id="update">
+		update from com_ani_inquire_board 
+		set title = #{title},
+		content = #{content},
+		writer = #{writer},
+		WDATE = sysdate,
+		where cnum = #{cnum}
+	</update>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.pet.mapper.PetMapper">
+
+	<insert id="newPet" parameterType="Pet">
+		<selectKey keyProperty="petindex" resultType="_int" order="BEFORE">
+			select PET_seq.nextval from dual
+		</selectKey>
+		insert into PET
+		(petindex, userid, mcategory, scategory, petname, sex, age, petsize, weight, hlength, nstate, petimg, memo)
+		values( #{petindex}, #{userid}, #{mcategory}, #{scategory}, #{petname}, #{sex}, #{age}, #{petsize}, #{weight}, 
+		#{hlength}, #{nstate}, #{petimg}, #{memo} )
+	</insert>
+	<select id="getPet" parameterType="int" resultType="Pet">
+		select p.*, s.SCANAME as scaname, m.MCANAME as mcaname, u.nick as nick  
+					from PET p
+					left outer join Members u on p.userid = u.userid 
+					left outer join SUBCATEGORY s on p.SCATEGORY = s.SCATEGORY 
+				    left outer join MAINCATEGORY m on p.MCATEGORY = m.MCATEGORY 
+				    where petindex = #{petindex}
+	</select>
+
+</mapper>

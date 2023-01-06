@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.message.mapper.MessageMapper">
+
+	<!-- 메시지 리스트 조회 -->
+	<select id="getMessageList" resultType="Message">
+		SELECT * FROM (SELECT ROWNUM, m.* FROM MESSAGE m 
+						WHERE suserid = #{param3} order by m.msindex desc) s 
+		WHERE ROWNUM 
+		BETWEEN ${param1}*${param2}-(${param2}-1) AND ${param1}*${param2}
+	</select>
+	
+	<!-- 메시지 리스트 조회 -->
+	<select id="getMessageSendList" resultType="Message">
+		SELECT * FROM (SELECT ROWNUM, m.* FROM MESSAGE m 
+						WHERE RUSERID = #{param3} order by m.msindex desc) s 
+		WHERE ROWNUM 
+		BETWEEN ${param1}*${param2}-(${param2}-1) AND ${param1}*${param2}
+	</select>
+	
+	<!--  사용자가 사용자에게 쪽지를 보냈으나 아직 읽지 않은 모든 쪽지 카운트 시작 -->
+	<select id="getCountNotRead" resultType="Integer">
+		select count(*) from MESSAGE where READTIME IS NULL and ruserid=#{ruserid}
+	</select>
+	
+	<!--  사용자가 사용자에게 쪽지를 보냈으나 아직 읽지 않은 모든 쪽지 카운트 끝 -->
+	<select id="getCountUserNotRead" resultType="Integer">
+   		select count(*) from MESSAGE where READTIME IS NULL; 
+	</select>
+	
+	<!-- 메시지 수 조회 -->
+	<select id="getMessageCount" resultType="int">
+		select count(*) from MESSAGE where suserid = #{param1}
+	</select>
+	
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.web.secondHandBoard.mapper.SecondHandBoardMapper">
+    <select id="selectAll" resultType="secondHandBoardVO" parameterType="String">
+        select * from
+        (
+        select *
+        from SECOND_HAND_BOARD
+        <where>
+            <if test="searchType != null">
+                <if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
+                <if test="searchType == 'w'.toString()">AND nick_fk LIKE '%' || #{keyword} || '%'</if>
+                <if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT LIKE '%' || #{keyword} || '%')</if>
+            </if>
+            <if test="start != null and end != null">
+                AND cnum <![CDATA[<=]]> #{end}
+            </if>
+        </where>
+        order by cnum
+        )
+        <where>
+            <if test="start != null and end != null">
+                AND cnum <![CDATA[>]]> #{start}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCnum" resultType="secondHandBoardVO" parameterType="Long">
+        select *
+        from SECOND_HAND_BOARD
+        where cnum = #{cnum}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO SECOND_HAND_BOARD(cnum,
+                                      nick_fk,
+                                      cpss,
+                                      title,
+                                      content,
+                                      price,
+                                      category,
+                                      cnt,
+                                      wdate,
+                                      filename,
+                                      old_filename,
+                                      filesize)
+        VALUES (SECOND_HAND_BOARD_SEQ.NEXTVAL,
+                #{nick_fk},
+                #{cpss},
+                #{title},
+                #{content},
+                #{price},
+                #{category},
+                0,
+                sysdate,
+                #{filename},
+                #{oldFilename},
+                #{filesize})
+    </insert>
+
+    <select id="count" resultType="int">
+        <![CDATA[
+        select count(cnum)
+        from SECOND_HAND_BOARD
+        where cnum > 0
+        ]]>
+    </select>
+
+
+</mapper>

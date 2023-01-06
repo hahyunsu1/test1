@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.mapper.AnimalBoardMapper">
+	<insert id="insertBoard" parameterType="Animal">
+		<selectKey keyProperty="cnum" resultType="_int" order="BEFORE">
+			select com_ani_board_seq.nextval from dual
+		</selectKey>
+		insert into com_ani_board(cnum,nick_fk,cpass,title,content,wdate,cnt,
+		filename,originFilename,filesize,pet,price,myaddr)
+		values(#{cnum},#{nick_fk},#{cpass},#{title},#{content:VARCHAR},SYSDATE,#{cnt},
+		#{filename:VARCHAR},#{originFilename:VARCHAR},#{filesize:NUMERIC},#{pet:VARCHAR},#{price},#{myaddr:VARCHAR})
+	</insert>
+	<select id="getTotalCount" resultType="int" parameterType="Paging">
+		select count(cnum) from com_ani_board
+		<!-- <include refid="findWhere"/> -->
+	</select>
+	<select id="selectBoardAll" resultType="Animal" parameterType="map">
+		select * from
+		(select row_number() over(order by cnum desc) rn,
+		com_ani_board.* from com_ani_board)
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
+	</select>
+	<select id="selectBoardByIdx" resultType="Animal" parameterType="_int">
+		select * from com_ani_board where cnum=#{value}
+	</select>
+	<update id="updateCnt"  parameterType="_int">
+		update com_ani_board set cnt = cnt+1 where cnum=#{value}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		delete com_ani_board  where cnum=#{value}
+	</delete>
+	<update id="updateBoard" parameterType="Animal" >
+		update com_ani_board set nick_fk=#{nick_fk},title=#{title},content=#{content:VARCHAR},
+		cpass=#{cpass},pet=#{pet:VARCHAR},price=#{price}
+		<if test="filename!=null and filename!=''">
+			,filename=#{filename},filesize=#{filesize},originFilename=#{originFilename}
+		</if>
+		<where>
+			cnum=#{cnum}
+		</where>
+	</update>
+</mapper>
