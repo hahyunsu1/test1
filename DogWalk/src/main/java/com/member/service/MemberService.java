@@ -17,6 +17,7 @@ public interface MemberService {
     public MemberVO memberLogin(MemberVO member) throws Exception;
     
     public int updateMember(MemberVO member) throws Exception;
+    public int removeMember(String userid);
     
     MemberVO selectById(String userid);
     

@@ -9,8 +9,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select SCHEDULE_seq.nextval from dual
 		</selectKey>
 		insert into SCHEDULE (sindex,petindex, userid, title, content,is_complete,  start_date, end_date, allDay, daysofweek, adncdnoti, color, groupId) 
-			values(#{sindex},#{petindex}, #{userid}, #{title}, #{content},#{is_complete},  #{start_date} , #{end_date}, 
-			#{allDay}, #{daysofweek}, #{adncdnoti}, #{color}, #{groupId})
+			values(#{sindex},#{petindex}, #{userid}, #{title}, #{content},#{is_complete:VARCHAR},  #{start_date} , #{end_date}, 
+			#{allDay:VARCHAR}, #{daysofweek:VARCHAR}, #{adncdnoti:VARCHAR}, #{color}, #{groupId})
 	</insert>
 
 </mapper>

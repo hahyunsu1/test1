@@ -12,6 +12,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,7 @@ import com.common.CommonUtil;
 import com.family.model.AnimalBoardVO;
 import com.family.model.PagingVO;
 import com.family.service.AnimalBoardService;
+import com.member.model.MemberVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -50,7 +53,8 @@ public class AnimalController {
 	}
 	@PostMapping("/comanimalwrite")
 	public String animalInsert(Model m,@RequestParam("mfilename") MultipartFile mfilename,
-			@ModelAttribute AnimalBoardVO amb,HttpServletRequest req) {
+			@ModelAttribute AnimalBoardVO amb,
+			HttpServletRequest req,HttpSession httpSession) {
 		
 		ServletContext app=req.getServletContext();
 		String upImg=app.getRealPath("/resources/animal_board_images");
@@ -84,8 +88,8 @@ public class AnimalController {
 			amb.setFilesize(fsize);
 		
 		}//if
-		if(amb.getNick_fk()==null||amb.getTitle()==null||amb.getCpass()==null||amb.getPet()==null||
-				amb.getNick_fk().trim().isEmpty()||amb.getTitle().trim().isEmpty()||
+		if(amb.getNick()==null||amb.getTitle()==null||amb.getCpass()==null||amb.getPet()==null||
+				amb.getNick().trim().isEmpty()||amb.getTitle().trim().isEmpty()||
 				amb.getCpass().trim().isEmpty()||amb.getPet().trim().isEmpty()) {
 			return "redirect:write";
 			
@@ -104,16 +108,10 @@ public class AnimalController {
 		str+=(n>0)?"성공":"실패";
 		loc=(n>0)?"animal_boardlist":"javascript:history.back()";
 		log.info(m+"/"+str+"/"+loc);
+		
 		return util.addMsgLoc(m, str, loc);
 	}
-	/*@GetMapping("/animal_boardlist")
-	public String animalBoardListPaging(Model m,@ModelAttribute("page") PagingVO page,
-			HttpServletRequest req,@RequestHeader("user-Agent") String userAgent) {
-		String myctx=req.getContextPath();
-		HttpSession ses=req.getSession();
-		
-		int totalCount
-	}*/
+	
 	 @GetMapping("/animal_boardlist")
 	 public String animalBoardList(Model m,@RequestParam(defaultValue = "1")int cpage) {
 		 if(cpage<=0) {
@@ -146,10 +144,16 @@ public class AnimalController {
 		 return "comanimal/animal_boardlist";
 	 }
 	 @GetMapping("/view/{cnum}")
-	 public String animalBoardView(Model m,@PathVariable("cnum") int cnum) {
+	 public String animalBoardView(Model m,@PathVariable("cnum") int cnum,HttpSession httpSession) {
 		 int n=this.animalBoardService.updateCnt(cnum);
 		 AnimalBoardVO amb=this.animalBoardService.selectBoardByIdx(cnum);
+		 String userid = (String) httpSession.getAttribute("userid");
+		String nick = (String) httpSession.getAttribute("nick");
 		 m.addAttribute("amb",amb);
+		 httpSession.setAttribute("amb", amb);
+		 httpSession.setAttribute("userid", userid);
+		 httpSession.setAttribute("nick", nick);
+		 log.info(amb+"/"+userid+"/"+nick);
 		 return "comanimal/animal_board_view";
 	 }
 	 @PostMapping("/delete")

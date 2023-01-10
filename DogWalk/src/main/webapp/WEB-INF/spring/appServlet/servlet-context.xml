@@ -4,10 +4,12 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:websocket="http://www.springframework.org/schema/websocket"
-	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-3.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -28,7 +30,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.family.web,com.family,com.member,com.message,com.family.board" />
-	<context:component-scan base-package="com.common,com.family.pet"/>
+	<context:component-scan base-package="com.common,com.family.pet,com.mongo.db"/>
 	
 	 <!-- <mvc:resources mapping="/**" location="/static/" /> -->
 	
@@ -41,41 +43,26 @@
 		<beans:constructor-arg value="c:/myjava/Upload"/>
 	</beans:bean>
 	<!-- 웹 소켓핸들러 -->
-        <websocket:handlers>
+				<websocket:handlers >
+					<websocket:mapping path="/chat" handler="chatHandler" />
+					<websocket:handshake-interceptors>
+						<beans:bean class="com.message.interceptor.ChatHandShakeInterceptor" />												
+					</websocket:handshake-interceptors>
+					<websocket:sockjs websocket-enabled="true"/>
+				</websocket:handlers>
+			        <websocket:handlers>
                <websocket:mapping handler="alarmHandler" path="/alarm"/>
                <!-- WebSocket Handshake : 웹소켓 핸들러 클래스(echoHandler)가 호출되기전에 HttpSession에 접속하여  -->
                <!-- '이용자 아이디를 추출하는 기능' 등을 인터셉터가 수행하도록 설정 -->
                <websocket:handshake-interceptors>
                        <beans:bean class="com.message.interceptor.AlarmHandShakeInterceptor"/>
                </websocket:handshake-interceptors>
+               <websocket:sockjs websocket-enabled="true"/>
                <!-- <websocket:sockjs /> -->
         </websocket:handlers>
         <beans:bean id="alarmHandler" class="com.message.websocket.WebSocketAlarmHandler" />
-	
-	<!-- MessageSource  -->
-	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <beans:property name="basenames" value="/WEB-INF/messages/messages"/>
-        <beans:property name="defaultEncoding" value="UTF-8"/>
-    </beans:bean>
-	
-	
-	<!-- String upDir=new String("c:/myjava/Upload"); -->
-	<!-- Interceptor설정============================================================  -->
-<!-- 	<interceptors>
-		<interceptor>
-			<mapping path="/user/**"/>	
-			<mapping path="/admin/**"/>		
-			<beans:bean class="com.common.interceptor.LoginCheckInterceptor"/>
-		</interceptor>
-		<interceptor>									
-			<mapping path="/admin/**"/>
-			<beans:bean class="com.common.interceptor.AdminCheckInterceptor"/>
-		</interceptor>
-	</interceptors> -->
-	
-	
-	<!-- 상품평을 쓰는 리뷰폼 매핑============================================================  -->
-	<!-- <view-controller path="/reviewForm" view-name="review/reviewForm"/> -->
-	
+		<beans:bean id="chatHandler" class="com.message.websocket.WebSocketChatHandler" />
+		
+		
 	
 </beans:beans>

@@ -51,6 +51,13 @@ public class MemberServiceImpl implements MemberService {
     public int updateMember(MemberVO member) throws Exception{
     	return this.membermapper.updateMember(member);
     }
+ 
+    @Override
+	public int removeMember(String userid) {
+		int result = membermapper.removeMember(userid);
+		return result;
+	}
+    
     
     @Override
 	public MemberVO selectById(String userid) {

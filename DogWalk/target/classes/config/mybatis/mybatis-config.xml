@@ -9,6 +9,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.family.model.PagingVO" alias="Paging"/>
 		<typeAlias type="com.member.model.MemberVO" alias="Member"/>
 		<typeAlias type="com.message.model.Message" alias="Message"/>
+		<typeAlias type="com.message.model.ChatRoom" alias="ChatRoom"/>
+		<typeAlias type="com.message.model.ChatMember" alias="ChatMember"/>
 		<typeAlias type="com.family.board.model.BoardVO" alias="Board"/>
 		<typeAlias type="com.family.web.animalCareBoard.model.AnimalCareBoardVO" alias="AnimalCareBoardVO"/>
 		<typeAlias type="com.family.web.secondHandBoard.model.SecondHandBoardVO" alias="SecondHandBoardVO"/>
@@ -30,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/ScheduleMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MrecordMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/PetMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/ChatMapper.xml"/>
 		
 	</mappers>
 </configuration>

@@ -48,14 +48,7 @@ public class MedicalController {
 		HashMap<String, Object> map = medicalService.getMrecordList(cp, ps, userid);		
 		logger.info("병원이용 리스트 조회 완료");
 		
-		// view까지 전달 (forward)
-		/*
-		 * map.put("mrecordList", map.get("mrecordList")); 
-		 * map.put("cpage", map.get("cpage")); 
-		 * map.put("pageSize", map.get("pageSize"));
-		 * map.put("pageCount", map.get("pageCount")); 
-		 * map.put("totalMrecordCount",map.get("totalMrecordCount"));
-		 */
+		
 		
 		model.addAttribute("cpage", map.get("cpage"));
 		model.addAttribute("pageSize", map.get("pageSize"));

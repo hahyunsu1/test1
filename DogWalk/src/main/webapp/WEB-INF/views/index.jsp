@@ -56,6 +56,8 @@
 						<c:if test="${ member != null }">
 					      	<li class="last">
 					        	<a href="${myctx}/member/logout">로그아웃</a>
+					        	/ <a href="${myctx}/member/memberUpdate">마이페이지</a>
+					        	/ <a href="${myctx}/message/msgRePage.bit">나의 메세지함</a>
 					     	 </li>
 					     </c:if>
 							<li class="last"><a href="#"><img src="images/search-icon.png"></a></li>
@@ -68,6 +70,7 @@
                                 <a href="gallery.html">산책</a>
                                 <a href="${myctx}/comanimal/animal_boardlist">돌봄</a>
                                 <a href="${myctx}/management/main.bit">반려동물 등록</a>
+                                <a href="${myctx}/chatList.bit">채팅</a>
 								<a href="${myctx}/second-hand">중고 게시판</a>
 								<a href="${myctx}/animal-care">양육 게시판</a>
 								<a href="${myctx}/board/list">문의 게시판</a>

@@ -36,7 +36,7 @@
 	                    <td>
 	                    ${amb.pet}				
 	                    </td>
-	                    <td>${amb.nick_fk}</td>
+	                    <td>${amb.nick}</td>
 	                    <td width="15%">
 	                    <a href="view/<c:out value="${amb.cnum}"/>" target="_blank">
 	                   		<img src="../resources/animal_board_images/${amb.filename}" 
@@ -49,10 +49,7 @@
 	                    원</b><br>
 	                    
 	                    </td>
-	                    <td>
-	                    <a href="javascript:edit('${amb.cnum}')">수정</a>|
-	                    <a href="#" onclick="remove('${amb.cnum}')">삭제</a>
-	                    </td>
+	                    
 	                 </tr>
                  </c:forEach>
                 </c:if>	

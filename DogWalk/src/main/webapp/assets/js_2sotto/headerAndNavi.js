@@ -30,17 +30,18 @@ $(document).ready(function(){
 // jquery slide toggle
 
 		
-var wsocket;
+	var socket=null;
+	var webSocket=null;
 
 function connect() {
-	wsocket = new WebSocket(
-			"ws://" + location.host + "/bit/alarm");
-	wsocket.onopen = onOpen;
-	wsocket.onmessage = onMessage;
-	//wsocket.onclose = onClose;
+	webSocket=new SockJS("http://localhost:9090/web/message");
+	
+	webSocket.onopen = onOpen;
+	webSocket.onmessage = onMessage;
+	webSocket.onclose = onClose;
 }
 function disconnect() {
-	wsocket.close();
+	webSocket.close();
 }
 
 function onOpen(evt) {
@@ -64,8 +65,8 @@ function onClose(evt) {
 
 function send() {
 	var msg = {"type" : "view"};
-	wsocket.send(JSON.stringify(msg));
-	/* wsocket.send("login"); */
+	webSocket.send(JSON.stringify(msg));
+	/* webSocket.send("login"); */
 }
 
 function appendMessage(msg) {	
@@ -92,7 +93,7 @@ function appendMessage(msg) {
                          '</a>'+
                      '</li>'	)
 		}
-	} else if(msg.type == "user") {
+	} else if(msg.type == "member") {
 		$("#alarmMessage").html(
 				'<li>'+
                      '<a href="msgRePage.bit">'+

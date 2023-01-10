@@ -58,9 +58,7 @@
 
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
-
-
+	
 	<div class="container">
 		<div class="side_overlay">
 
@@ -120,9 +118,12 @@
 										<td colspan="5">
 										<!--<c:if test="${currentPost.user_id == user_id }"> -->
 												<a class="btn btn" href="javascript:history.back();"> 이전 </a>
-												<a class="btn btn-primary" href="edit.bit?qaindex=${qna.qaindex}">
-													수정 </a>
-												
+												<%-- <a class="btn btn-primary" href='popupMessage("${amb.userid}")'>
+													답장 </a> --%>
+												<a onclick='popupMessage("${message.suserid}")'
+													style="cursor:pointer;" class="btn btn-primary">
+														답장
+													</a>
 											 <!-- Modal로 보내기 -->
 											 <a href="#" data-toggle="modal" data-target="#deleteModal" class="btn btn-white">삭제</a>	
 											 <!-- Modal로 보내기 -->
@@ -185,7 +186,25 @@
 	   location.replace("detailDelete.bit?msindex=${message.msindex}");
 	  }
 	<!-- Modal에서 삭제 --> 
-	
+	function popupMessage(ruserid){
+
+		//비로그인으로 접근 시
+		if(${empty sessionScope.member}){
+			swal('회원가입을 하고 ${pet.nick}에게 쪽지를 보내 보세요^^');
+		}else{
+		
+			var popupX = (document.body.offsetWidth / 2) - (580 / 2);
+			//만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+		
+			var popupY= (window.screen.height / 2) - (700 / 2);
+			//만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+		
+			//window.open('${pageContext.request.contextPath}/message/write.bit','_blank',
+			window.open('${pageContext.request.contextPath}/message/popmain.bit?ruserid='+ruserid+'&nick=${amb.nick}','_blank',
+			'width=580, height=700, left='+ popupX + ', top='+ popupY);
+		}
+		
+	}
 </script>
 	
 		<%@ include file="/WEB-INF/include/footer.jsp"%>

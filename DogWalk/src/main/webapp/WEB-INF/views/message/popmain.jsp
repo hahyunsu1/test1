@@ -8,11 +8,17 @@
 <title>쪽지</title>
 
 <%@ include file="/WEB-INF/include/import.jsp"%>
-
-
-</head>
+<!-- socketjs/stomp참조-------------------------------------------------  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!-- -------------------------------------------------------------- -->
 <script type="text/javascript">
 
+
+
+ </script>
+</head>
+<script type="text/javascript">
 
  $(document).ready(function() {
 	connect();
@@ -21,16 +27,19 @@
 		 sendQna(); });
 	 console.log('알유저아이디: '+$('#ruserid').val());
  });
-var wsocket;
+ var socket=null;
+	var webSocket=null;
 
 function connect() {
-	wsocket = new WebSocket("ws://localhost:9090/web/messages");
-	wsocket.onopen = onOpen;
-	wsocket.onmessage = onMessage;
-	wsocket.onclose = onClose;
+	webSocket=new SockJS("http://localhost:9090/web/alarm");
+	
+	webSocket.onopen = onOpen;
+	webSocket.onmessage = onMessage;
+	webSocket.onclose = onClose;
+	//webSocket.send=
 }
 function disconnect() {
-	wsocket.close();
+	webSocket.close();
 }
 
 function onOpen(evt) {
@@ -44,12 +53,13 @@ function onMessage(evt) {
 }
 
 function onClose(evt) {
+	
 }
 
 function send() {
 	
 	
-	wsocket.send("login");
+	webSocket.send("login");
 	
 }
 
@@ -60,9 +70,6 @@ function appendMessage(msg) {
 
 
 function sendQna() {
-	/* let qna_brd_title = $('#qna_brd_title').val();
-	let qna_brd_content = $('#qna_brd_content').val();
-	let user = "새로운 문의가 도착했습니다."; */
 	
 	var text = "새로운 문의가 도착했습니다.";
 	var msg = {"type" : "user",
@@ -71,9 +78,8 @@ function sendQna() {
 				"text" : text
 				};
 	console.log('여기타니니니니니니닝');
-	/* 
-	wsocket.send(qna_brd_title + "," + qna_brd_content + "," + user); */
-	wsocket.send(JSON.stringify(msg));
+	
+	webSocket.send(JSON.stringify(msg));
 	$('#ruserid').val('');
 	$('#content').val('');
 
@@ -86,17 +92,15 @@ function sendQna() {
 	
 }
  </script>
+
+
+ 
  
 <body>
 
 
 	<div class="side_overlay">
 		<div class="container">
-
-
-				
-
-			
 			<div class="card card-nav-tabs">
 				<div class="card">
 					<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
@@ -113,12 +117,12 @@ function sendQna() {
 					<div class="row justify-content-center">
 						<!---------- 쪽지쓰기 ------------------>
 						<div class="tab-pane active show" id="write">
-							 <form action="popmain.bit" method="get">
+							 <form action="popmain.bit" method="post">
 								<div class="form-group bmd-form-group">
 									<label for="bmd-label-static">받는 사람</label> 
 
-									<input type="hidden" name="ruserid" id="ruserid" class="form-control" placeholder="받는사람 닉네임(아이디)">									
-									<input type="text" name="nick" class="form-control" placeholder="받는사람 닉네임(아이디)">
+									<input type="hidden" name="ruserid" id="ruserid" class="form-control" placeholder="받는사람 닉네임(아이디)" value="${param.ruserid }">									
+									<input type="text" name="nick" class="form-control" placeholder="받는사람 닉네임(아이디)" value="${param.ruserid }" readonly>
 
 								</div>
 								
@@ -127,7 +131,7 @@ function sendQna() {
 								<div class="border-top">
 										<div class="card-body" style="text-align: center;">
 											<button type="reset" class="btn btn">취소</button>
-											<button type="submit" id="sendQna" class="btn btn-primary" onclick="btn()"><b>쪽지보내기</b></button>
+											<button type="submit" id="sendQna" class="btn btn-primary" onclick="sendQna()"><b>쪽지보내기</b></button>
 											
 									</div>
 								</div>
@@ -151,37 +155,12 @@ function sendQna() {
 	</div>
 	
 	
-	<!-- Modal -->
-<!--  
-<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <c:forEach var="message" items="${messageList}" >
-      <div class="modal-header"> 
-        <h5 class="modal-title" id="exampleModalLabel">보낸사람: ${message.suserid} </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       내용: ${message.content}
-      </div>
-      <div class="modal-footer">
-  		<button onclick="Delete()" type="button" class="btn btn-primary">삭제하기</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-    	
-      </div>
-      </c:forEach> 
-    </div>
-
-  </div>
-</div>
--->
 <!-- Modal -->
 <script> 
 function btn(){ 
-	alert('쪽지를 보냈습니다.'); 
-	window.close();
+	alert('쪽지를 보냈습니다.');
+	
+	//window.close();
 } 
 </script>
 

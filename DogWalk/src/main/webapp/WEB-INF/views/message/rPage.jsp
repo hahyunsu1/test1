@@ -14,7 +14,7 @@
 
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+	
 
 
 	<div class="side_overlay">
@@ -159,31 +159,7 @@
 	
 	
 	<!-- Modal -->
-<!--  
-<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <c:forEach var="message" items="${messageList}" >
-      <div class="modal-header"> 
-        <h5 class="modal-title" id="exampleModalLabel">보낸사람: ${message.suserid} </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       내용: ${message.content}
-      </div>
-      <div class="modal-footer">
-  		<button onclick="Delete()" type="button" class="btn btn-primary">삭제하기</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-    	
-      </div>
-      </c:forEach> 
-    </div>
 
-  </div>
-</div>
--->
 <!-- Modal -->
 	
 
@@ -193,11 +169,7 @@
 <script>
 <!-- Modal에서 삭제 -->
 
-// 삭제 전 확인 창 띄우기
-//function Delete() {
-//  location.replace("delete.bit?msindex=${message.msindex}");
-  //location.replace("delete.bit"); 
-//  }
+
 
 <!-- Modal에서 삭제 --> 
 
@@ -212,69 +184,6 @@ $(document).ready(function(){
     });
 });	
 	
-	// 상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
-	/*
-	$("#selectBtn").click(function(){ 
-		
-		var rowData = new Array();
-		var tdArr = new Array();
-		var checkbox = $("input[name=user_CheckBox]:checked");
-		
-		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
-
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-			var tr = checkbox.parent().parent().eq(i);
-			var td = tr.children();
-			
-			// 체크된 row의 모든 값을 배열에 담는다.
-			rowData.push(tr.text());
-			
-			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-			var no = td.eq(1).text()+", "
-			//var userid = td.eq(2).text()+", ";
-			//var name = td.eq(3).text()+", ";
-			//var email = td.eq(4).text()+", ";
-			//var email1 = td.eq(5).text()+", ";
-			// 가져온 값을 배열에 담는다.
-			tdArr.push(no);
-			//tdArr.push(userid);
-			//tdArr.push(name);
-			//tdArr.push(email);
-			//tdArr.push(email1);
-			console.log("msindex : " + no);
-			//console.log("userid : " + userid);
-			//console.log("name : " + name);
-			//console.log("email : " + email);
-		});
-		
-		$("#ex3_Result1").html(" * 체크된 Row의 모든 데이터 = "+rowData);	
-		$("#ex3_Result2").html(tdArr);	
-	
-	});
-
-	*/
-  
-
-
-    
-	/*
-    $('#delete').click(function(){
-        if(confirm("삭제하시겠습니까?")){
-            $("input[name=checkRow]:checked").each(function(){
-                var tr_value =$(this).val();
-                var tr=$("tr[data-tr_value='"+tr_value+"']");
-                tr.remove();
-           		
-            });
-        }else{
-            return false;
-        }
-    });
- 	
-});
-*/
 
 $('#delete').click(function(){
 	

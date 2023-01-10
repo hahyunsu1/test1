@@ -13,8 +13,7 @@ import com.message.model.Message;
 public interface MessageMapper {
 	
 		// 쪽지 > 쪽지보내기  
-			@Insert("insert into MESSAGE (msindex,ruserid, suserid, content, sendtime, readstate)"
-					+ " values (message_seq.nextval, #{ruserid}, #{suserid}, #{content}, SYSDATE, 0)" )
+			
 			public int writeMessage(Message message);
 			
 			// 쪽지 > 쪽지 리스트 조회  

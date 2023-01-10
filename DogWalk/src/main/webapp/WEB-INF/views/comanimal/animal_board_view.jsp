@@ -28,7 +28,7 @@
             </tr>
             <tr>
                <td width="20%">글쓴이</td>
-               <td width="30%"><c:out value="${amb.nick_fk}"/></td>
+               <td width="30%"><c:out value="${amb.nick}"/></td>
                <td width="20%">조회수</td>
                <td width="30%"><c:out value="${amb.cnt}"/></td>
             </tr>
@@ -76,23 +76,21 @@
                </td>
             </tr>
             <tr>
-               <td colspan="4" align=center><a href="../write">글쓰기</a>| <a
-                  href="../list">목록</a>| <a href="#" onclick="go(1)">편집</a>| <a
+               <td colspan="4" align=center>
+				<c:if test="${sessionScope.member.userid != amb.userid}">
+				
+				<div class="col-9" style="margin-top:20px;">
+							<span onclick='popupMessage("${amb.userid}")'
+							style="cursor:pointer;">
+								<i class="far fa-envelope"></i>
+								<strong>${amb.nick}에게 쪽지보내기</strong>
+							</span>
+				</div>
+				</c:if>
+               | <a href="../list">목록</a>| <a href="#" onclick="go(1)">편집</a>| <a
                   href="#" onclick="go(2)">삭제</a>|</td>
             </tr>
-       	    <%--  <div class="buy_chat">
-				<form:form id="chatSubmit_form" action="/chatMessage" method="GET" modelAttribute="chatRoom">
-					<a href="javascript:{}" onclick="chatSubmit()">
-						<form:input type="hidden" path="sellerName" value="${nick_fk}"/>
-						<form:input type="hidden" path="cnum" value="${amb.cnum}"/>
-						<form:input type="hidden" path="sellerId" value="${amb.mail_fk}"/>
-						<form:input type="hidden" path="pr_title" value="${amb.title}"/>
-						<button id="btn_chat">
-							채팅으로 거래하기
-						</button>
-					</a>
-				</form:form>
-			</div> --%>
+       	   
          </table>
 	</c:if>
 	<!-- 파일 다운로드를 위한 form------------------------------------------ -->
@@ -149,6 +147,28 @@
 		}
 		$('#divCpass').show(500);
 	}
+	function popupMessage(ruserid){
+
+		//비로그인으로 접근 시
+		if(${empty sessionScope.member}){
+			swal('회원가입을 하고 ${pet.nick}에게 쪽지를 보내 보세요^^');
+		}else{
+		
+			var popupX = (document.body.offsetWidth / 2) - (580 / 2);
+			//만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+		
+			var popupY= (window.screen.height / 2) - (700 / 2);
+			//만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+		
+			//window.open('${pageContext.request.contextPath}/message/write.bit','_blank',
+			window.open('${pageContext.request.contextPath}/message/popmain.bit?ruserid='+ruserid+'&nick=${amb.nick}','_blank',
+			'width=580, height=700, left='+ popupX + ', top='+ popupY);
+		}
+		
+	}
+
+
+	</script>
 </script>
 
 <c:import url="/foot"/>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <c:import url="/animal/top"/>
+   
 <%
    String ctx = request.getContextPath();
 %>
@@ -36,7 +36,8 @@
        <tr>
           <td style="width:20%"><b>글쓴이</b></td>
           <td style="width:80%">
-          <input type="text" name="nick_fk" id="nick_fk" class="form-control">
+          <input type="hidden" name="userid" id="userid" class="form-control" value="${sessionScope.member.userid}" readonly>
+          <input type="text" name="nick" id="nick" class="form-control" value="${sessionScope.member.nick}" readonly>
           </td>
        </tr>       
        <tr>
@@ -73,5 +74,3 @@
 </form>       
 
 </div>
-
-<c:import url="/animal/foot"/>

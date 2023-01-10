@@ -152,6 +152,7 @@ public class MessageController {
 		@RequestMapping(value = "write.bit", method = RequestMethod.POST)
 		public String write(Message message, Principal principal,HttpSession httpSession) {
 			logger.info("값이 들어오니?");
+			
 			//String userid = (String) session.getAttribute("userid");
 			 String userid = (String)httpSession.getAttribute("userid");
 			//String userid =  principal.getName();
@@ -159,6 +160,7 @@ public class MessageController {
 		
 			// 세션 userid post객체에 입력
 			message.setSuserid(userid);
+			
 
 			// 임시 petindex 입력
 			//message.setMsindex(1);
@@ -192,7 +194,7 @@ public class MessageController {
 			//받는 사람 id
 			String ruserid = request.getParameter("ruserid");
 			logger.info("쪽지 수신 아이디: "+ ruserid);
-			
+			System.out.println("ruserid"+ruserid);
 			// view까지 전달 (forward)
 			model.addAttribute("cpage", map.get("cpage"));
 			model.addAttribute("pageSize", map.get("pageSize"));

@@ -3,13 +3,16 @@ package com.family.model;
 import java.sql.Date;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class AnimalBoardVO {
 	
 	private String mode;//쓰기 수정 삭제
 	private int cnum; //글번호
-	private String nick_fk; //작성자 닉네임
+	private String userid;//유저아이디
+	private String nick; //작성자 닉네임
 	private String cpass; //게시글패스워드
 	private String title; //게시글 제목
 	private String content; //게시글 내용

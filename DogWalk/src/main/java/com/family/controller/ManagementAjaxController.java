@@ -106,13 +106,13 @@ public class ManagementAjaxController {
 	// 일정 추가하기
 	@RequestMapping("insertSchedule.bit")
 	public int newSchedule(ScheduleVO schedule) {
-		
+		System.out.println("newSchedule...");
 		int result = 0;
 		
 		try {
 			ScheduleMapper dao = sqlsession.getMapper(ScheduleMapper.class);
 			result = dao.newSchedule(schedule);
-			
+			System.out.println("newSchedule...result: "+result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

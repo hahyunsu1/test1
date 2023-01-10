@@ -25,4 +25,6 @@ int insertBoard(AnimalBoardVO amb);
 	String selectPwd(Integer idx);//수정글 가져오기
 	int deleteBoard(Integer idx);//삭제
 	int updateBoard(AnimalBoardVO amb);//수정
+	
+	AnimalBoardVO selectBoardUser(AnimalBoardVO amb);
 }

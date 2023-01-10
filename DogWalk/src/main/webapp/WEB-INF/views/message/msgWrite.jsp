@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <%@ include file="/WEB-INF/include/import.jsp"%>
-
+<!-- socketjs/stomp참조-------------------------------------------------  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!-- -------------------------------------------------------------- -->
 <script type="text/javascript">
 //받은쪽지 시작
 $(document).ready(function(){
@@ -26,7 +29,7 @@ $(document).ready(function(){
     
      //웹소켓 쪽지 연결 	
      connect();
-	 //console.log(wsocket);
+	 //console.log(webSocket);
 	 $('#sendQna').click(function() { 
 		 
 		 sendQna(); });
@@ -45,28 +48,22 @@ $('#delete').click(function(){
 
 
 //웹소켓 쪽지 알람 보내기
-var wsocket;
-var stomp;
+
+
+
+
+	var socket=null;
+	var webSocket=null;
+
 function connect() {
-//	wsocket = new WebSocket("ws://" + location.host + "/messages");
-//	wsocket = new WebSocket("ws://localhost:9090/web/messages");
-//	wsocket.onopen = onOpen;
-//	wsocket.onclose = onClose;
-
-//  /replyEcho
-
-	wsocket=new SockJS("ws://localhost:9090/web/messages");
+	webSocket=new SockJS("http://localhost:9090/web/message");
 	
-	stomp=Stomp.over(wsocket);
-	alert("stomp=="+stomp)
-	
-	stomp.connect({},function(){
-		alert("Stomp Connection")
-	})
-	
+	webSocket.onopen = onOpen;
+	webSocket.onmessage = onMessage;
+	webSocket.onclose = onClose;
 }
 function disconnect() {
-	wsocket.close();
+	webSocket.close();
 }
 
 function onOpen(evt) {
@@ -85,7 +82,7 @@ function onClose(evt) {
 function send() {
 	
 	
-	wsocket.send("login");
+	webSocket.send("login");
 	
 }
 
@@ -102,15 +99,15 @@ function sendQna() {
 	let user = "새로운 문의가 도착했습니다."; */
 	
 	var text = "새로운 문의가 도착했습니다.";
-	var msg = {"type" : "user",
+	var msg = {"type" : "member",
 				"ruserid" : $('#ruserid').val(),
 				"content" : $('#content').val(),
 				"text" : text
 				};
 	
 	/* 
-	wsocket.send(qna_brd_title + "," + qna_brd_content + "," + user); */
-	wsocket.send(JSON.stringify(msg));
+	webSocket.send(qna_brd_title + "," + qna_brd_content + "," + user); */
+	webSocket.send(JSON.stringify(msg));
 	$('#ruserid').val('');
 	$('#content').val('');
 
@@ -130,7 +127,7 @@ function sendQna() {
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+	
 
 
 	<div class="container">

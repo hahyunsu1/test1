@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey keyProperty="cnum" resultType="_int" order="BEFORE">
 			select com_ani_board_seq.nextval from dual
 		</selectKey>
-		insert into com_ani_board(cnum,nick_fk,cpass,title,content,wdate,cnt,
+		insert into com_ani_board(cnum,userid,nick,cpass,title,content,wdate,cnt,
 		filename,originFilename,filesize,pet,price,myaddr)
-		values(#{cnum},#{nick_fk},#{cpass},#{title},#{content:VARCHAR},SYSDATE,#{cnt},
+		values(#{cnum},#{userid},#{nick},#{cpass},#{title},#{content:VARCHAR},SYSDATE,#{cnt},
 		#{filename:VARCHAR},#{originFilename:VARCHAR},#{filesize:NUMERIC},#{pet:VARCHAR},#{price},#{myaddr:VARCHAR})
 	</insert>
 	<select id="getTotalCount" resultType="int" parameterType="Paging">
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete com_ani_board  where cnum=#{value}
 	</delete>
 	<update id="updateBoard" parameterType="Animal" >
-		update com_ani_board set nick_fk=#{nick_fk},title=#{title},content=#{content:VARCHAR},
+		update com_ani_board set nick=#{nick},title=#{title},content=#{content:VARCHAR},
 		cpass=#{cpass},pet=#{pet:VARCHAR},price=#{price}
 		<if test="filename!=null and filename!=''">
 			,filename=#{filename},filesize=#{filesize},originFilename=#{originFilename}
@@ -43,4 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			cnum=#{cnum}
 		</where>
 	</update>
+	<select id="selectBoardUser" resultType="Animal" parameterType="String">
+		select * from com_ani_board where userid=#{userid}
+	</select>
 </mapper>

@@ -77,10 +77,10 @@ public class ManagementController {
 			HttpSession httpSession) {
 
 		String userid = (String) httpSession.getAttribute("userid");
-//		String userid =  principal.getName();
+	//String userid =  principal.getName();
 		logger.info("반려동물을 등록한 유저 아이디: " + userid);
 
-		// 반려동물 등록한 유저 아이디 저장
+	// 반려동물 등록한 유저 아이디 저장
 		pet.setUserid(userid);
 
 		// 파일 업로드

@@ -5,8 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.session.SqlSession;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
@@ -21,6 +22,7 @@ import com.message.model.Message;
 
 
 //문의 질문, 답변 insert 전부 여기로 바꿈
+
 public class WebSocketAlarmHandler extends TextWebSocketHandler{
 	
 	
@@ -73,6 +75,7 @@ public class WebSocketAlarmHandler extends TextWebSocketHandler{
 		JSONParser parser = new JSONParser();
 		System.out.println(message.getPayload());
 		JSONObject obj = (JSONObject) parser.parse(message.getPayload());
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+obj);
 		String type = (String) obj.get("type");
 		System.out.println("타입이 뭐로와 :"+type);
 		MemberVO user = (MemberVO)session.getAttributes().get("member");
@@ -111,34 +114,16 @@ public class WebSocketAlarmHandler extends TextWebSocketHandler{
 			} 
 		
 	
-			
-//			else if(users.containsKey(userid) && !userid.equals(userid)) {
-//				System.out.println("유저 카운트 : " +count);
-//				count = messageDao.getCountUserNotRead();
-//				System.out.println("유저 카운트 : " +count);
-//				if(count > 0) {
-//					obj.put("text", "새로운 쪽지가 도착했습니다.");
-//				} else {
-//					obj.put("text", "새로운 쪽지가 없습니다.");
-//				}
-//				
-//				obj.put("count", count);
-//				System.out.println("userid가 뭐야?"+ userid);
-//				obj.put("now", "userid");
-//				System.out.println("userid가 뭐야?"+ userid);
-//				System.out.println(obj.toJSONString());
-//				TextMessage msg = new TextMessage(obj.toJSONString());
-//				 users.get(userid).sendMessage(msg);
-//				 log(userid + " / " + message.getPayload()); //받은사람한테 보낼 내용?
-//				 log(userid + " / " + msg.getPayload());
-//				// log(userid + " / " + message.getPayload() + " / " + msg.getPayload());
 //			}
 			
 			
 		} 
 		
 		else if(type.equals("user")) {
+			
+			
 			String ruserid = (String)obj.get("ruserid");
+			//System.out.println("sssssssssssss"+users.get(ruserid));
 			String content = (String)obj.get("content");
 			log(userid + " / " + content);
 			
@@ -152,12 +137,7 @@ public class WebSocketAlarmHandler extends TextWebSocketHandler{
 			System.out.println("여기로 와주세요~~~~");
 			messageMapper.writeMessage(mge);
 			System.out.println("userid가 뭘까??"+ userid);
-			//System.out.println("성공적으로 오나요?"+messageDao.writeMessage(mge));
-			//messageDao.writeMessage(mge);
 			
-			//qnadao.writeQna(qna);
-			//qna.setReplyContent(Integer.parse(qna.getQaindex());
-			//qnadao.editPost(qna);
 			
 			int count = 0;
 			count = messageMapper.getCountNotRead(ruserid);
@@ -165,10 +145,10 @@ public class WebSocketAlarmHandler extends TextWebSocketHandler{
 			obj.put("count", count);
 			System.out.println(obj.toString());
 			TextMessage msg = new TextMessage(obj.toString());
-			users.get(ruserid).sendMessage(msg); // 메시지 전달 핵심 코드
+			users.get(userid).sendMessage(msg); // 메시지 전달 핵심 코드
 			log("userid" + " / " + message.getPayload());
 			log("userid" + " / " + msg.getPayload());
-			//log("userid" + " / " + message.getPayload() + " / " + msg.getPayload());
+			
 		} 
 		
 		
@@ -202,7 +182,7 @@ public class WebSocketAlarmHandler extends TextWebSocketHandler{
 			 System.out.println(to_userid+"너님 누구?여기까지 오니?");
 			  log(to_userid + " / " + message.getPayload() + " / " + msg.getPayload());
 		}
-		
+		System.out.println(type);
 	}
 	
 	//연결에 문제 발생시

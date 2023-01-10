@@ -11,8 +11,14 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<%@ include file="/WEB-INF/include/import.jsp"%>
 
+
+<%@ include file="/WEB-INF/include/import.jsp"%>
+<!-- socketjs/stomp참조-------------------------------------------------  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+<!-- -------------------------------------------------------------- -->
 <style>
 	.fc-toolbar-title, a.fc-col-header-cell-cushion, th {
 		color: black;
@@ -58,8 +64,7 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
-
+	
 
 	<div class="container">
 		<div class="side_overlay">
@@ -99,8 +104,8 @@
 								             <th class="checkbox"  colspan="6" ><input type="checkbox" id="ck_all">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전체선택</th>
 								        </tr>
 								        <tr>
-								   	 		<th class="text-center">체크박스</th>
-											<!-- <th class="text-center">쪽지번호</th> -->
+								   	 		<th class="text-center"></th>
+										   <th class="text-center">쪽지번호</th>
 											<th class="text-center">보낸사람</th>
 											<th class="text-center">내용</th>
 											<th class="text-center">받은 날짜</th>
@@ -112,7 +117,7 @@
 								    <tbody>
 								        
 								       <tr data-tr_value="${message.msindex}"> 
-								          <%--   <td><input type="checkbox" name="msindexes" value="${message.msindex}"></td> --%>
+								          <td><input type="checkbox" name="msindexes" value="${message.msindex}"></td>
 								            <td class="text-center">${message.msindex}</td>
 											<td class="text-center">${message.suserid}</td>
 											  <td class="text-center" style="cursor:pointer" onclick="location.href='msgDetail.bit?msindex=${message.msindex}'">${message.content}</td> 
@@ -226,34 +231,26 @@ $('#delete').click(function(){
 });
 //받은쪽지 끝
 //쪽지 보내기 시작
- $(function() {
 
-		CKEDITOR.replace( 'content' );
-
-		
-	}) 
  $(function() {
-	 console.log(wsocket);
+	 
 	 $('#sendQna').click(function() { 
 		 
 		 sendQna(); });
  })
  
 function sendQna() {
-	/* let qna_brd_title = $('#qna_brd_title').val();
-	let qna_brd_content = $('#qna_brd_content').val();
-	let user = "새로운 문의가 도착했습니다."; */
 	
 	var text = "새로운 문의가 도착했습니다.";
-	var msg = {"type" : "user",
+	var msg = {"type" : "member",
 				"ruserid" : $('#ruserid').val(),
 				"content" : $('#content').val(),
 				"text" : text
 				};
 	console.log('여기타니니니니니니닝');
 	/* 
-	wsocket.send(qna_brd_title + "," + qna_brd_content + "," + user); */
-	wsocket.send(JSON.stringify(msg));
+	stompClient.send(qna_brd_title + "," + qna_brd_content + "," + user); */
+	stompClient.send(JSON.stringify(msg));
 	$('#ruserid').val('');
 	$('#content').val('');
 
@@ -265,14 +262,6 @@ function sendQna() {
 	
 	
 }
-//쪽지보내기 끝
-/**
-* @함수명 : moveTab()
-* @작성일 : 2020. 7. 21.
-* @작성자 : 김건휘, 김보성, 태영돈
-* @설명 : 작업 처리 후 원래 탭 위치로 이동시키는  함수
-* @param void
-**/
 
 //탭 이동 함수
 function moveTab(){

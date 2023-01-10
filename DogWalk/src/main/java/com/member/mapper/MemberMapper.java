@@ -15,15 +15,12 @@ public interface MemberMapper {
 	 
 	 int updateMember(MemberVO member);
 	 
+	 int removeMember(String userid);
+	 
 	 MemberVO selectById(String userid);
 	 
-	 public List<String> getNick(String nick);
+	 public List<String> getNick(String nick);	 
 	 
-	 public int editPwd(String pwd,String userid);
-	 
-	 public int deleteUser(String userid);
-	 
-	 public int editUser(MemberVO user);
 	 
 	 public MemberVO getUser(String userid);
 }

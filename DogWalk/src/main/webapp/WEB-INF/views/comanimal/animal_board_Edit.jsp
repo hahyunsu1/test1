@@ -39,7 +39,7 @@
        <tr>
           <td style="width:20%"><b>글쓴이</b></td>
           <td style="width:80%">
-          <input type="text" name="nick_fk" id="nick_fk" value='<c:out value="${amb.nick_fk}"/>' class="form-control">
+          <input type="text" name="nick" id="nick" value='<c:out value="${amb.nick}"/>' class="form-control">
           </td>
        </tr>       
        <tr>

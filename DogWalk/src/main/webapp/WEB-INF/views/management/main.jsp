@@ -691,18 +691,13 @@ $(function() {
 				data: { userid : '${sessionScope.member.userid}' },
 				dataType: "json",
 				//async: false,
+				cache:false,
 				success: function(response) {
 					var schedule = response.schedule;
+					console.log('일정확인!!'+JSON.stringify(response.schedule));
 					var fixedDate = schedule.map(function(array) {
 						
-						/* console.log(typeof(array.start));
-						console.log(typeof(array.end));
-						console.log(typeof(array.allDay)); */
-
-						/* if (array.allDay == 'true' && !array.start == array.end) {
-							// 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력.....인데 안되네....
-							array.end = moment(array.end).add(1, 'days');
-						} */
+						
 						//db의 allDay 컬럼은 String값으로 true/false를 저장해놓았기 때문에 fullcalendar가 인식하는 boolean 타입으로 수정해줘야 함
 						if(array.allDay == 'true'){array.allDay=true}
 						else{array.allDay=false};
@@ -769,8 +764,8 @@ $(function() {
 			//클릭했을 때 기본으로 표시되는 시간 세팅 끝//
 			
 			//모달에 데이터 쏴주기
-			$('#start').val(start);
-			$('#end').val(end);
+			$('#start').val(start_date);
+			$('#end').val(end_date);
 			//혜정씨가 준 부분 끝
 
 			// 모달 열기
@@ -885,8 +880,8 @@ $(function() {
 					content: contentVal,
 					allDay: isAllDay, 
 					color: colorVal,
-					start: realStartDay,
-					end: realEndDay,
+					start_date: realStartDay,
+					end_date: realEndDay,
 					
 				};
 
@@ -926,36 +921,6 @@ $(function() {
 			 
 			
 		},
-		//popover로 일정 뜨게 하는 함수 작동 안되서 보류
-/* 		eventMouseEnter: function(event){
-			console.log("호버 이벤트: "+event.el);
-			event.el.popover({
-			      title: $('<div />', {
-			        class: 'popoverTitleCalendar',
-			        text: event.event.title
-			      }).css({
-			        'background': event.event.color,
-			      }),
-			      content: $('<div />', {
-			          class: 'popoverInfoCalendar'
-			        }).append('<p><strong>등록자 : </strong> ' + event.event.content + '</p>')
-			        //.append('<p><strong>일정 시간 : </strong> ' + getDisplayEventDate(event) + '</p>')
-			        //.append('<div class="popoverDescCalendar"><strong>일정 설 : </strong> ' + event.event.content + '</div>'),
-			        ,
-			      delay: {
-			        show: "800",
-			        hide: "50"
-			      },
-			      trigger: 'hover',
-			      placement: 'top',
-			      html: true,
-			      container: 'body'
-			    });
-
-			    return true;
-
-			  }, */
-
 		
 		eventClick: function(event, jsEvent, view) { //일정을 클릭하면 수정창이 나와 처리하는 메서드
 			editEvent(event);

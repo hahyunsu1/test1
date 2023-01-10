@@ -219,16 +219,12 @@ public class MemberController {
     }
  
  ///////////////////////////////////////////////////////////////////////////////////
-	/*
-	 * @GetMapping("/")
-	 */
-    @GetMapping(value="/mypage", produces ="application/json")
-	public ModelAndView updateMember(HttpSession session) throws Exception {
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		/* .member. 회원정보 가져와 */
-		/* memberservice. 멤버정보를 가져오는걸*/
-		return new ModelAndView("member/mypage");
-	}
+    @GetMapping(value="/memberUpdate", produces ="application/json") 
+	  public ModelAndView memberUpdate(HttpSession session) throws Exception { 
+	  MemberVO member = (MemberVO)session.getAttribute("member");
+	  return new ModelAndView("member/memberUpdate"); 
+	  
+	  }
     
  // 마이페이지 > 내 반려동물 정보(반려동물 관리의 내 반려동물 정보와 동일한 내용의 페이지)
  	@RequestMapping(value = "myPetsInfo.bit", method = RequestMethod.GET)
@@ -271,5 +267,36 @@ public class MemberController {
  		
  		return "member/petPage";
  	}	
+
+	//회원 정보 수정
+	@RequestMapping("/updateMember")
+	public String updateMember(MemberVO member) {
+		String rawPw = ""; // 인코딩 전 비밀번호
+		String encodePw = ""; // 인코딩 후 비밀번호
+
+		rawPw = member.getPwd(); // 비밀번호 데이터 얻음
+		encodePw = pwEncoder.encode(rawPw); // 비밀번호 인코딩
+		member.setPwd(encodePw); // 인코딩된 비밀번호 member객체에 다시 저장
+		mapper.updateMember(member);
+		return "redirect:/index";
+	}
+	
+	//회원삭제
+	@GetMapping("/remove")
+	// 버튼을 통해 넘어왔기에 무조건 get post는 폼에서 post를 지정해줘야만 가능하다
+	public ModelAndView removeMember(HttpSession session, ModelAndView mv) {
+
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String userid = member.getUserid();
+
+			int result = memberservice.removeMember(userid);
+
+			if (result == 1) {
+				session.invalidate();
+				mv.setViewName("redirect:/index");
+			}
+			
+		return mv;
+	}
 
 }// end---------------------------------------------------------------------------------

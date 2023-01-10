@@ -11,40 +11,33 @@
 <title>쪽지</title>
 
 <%@ include file="/WEB-INF/include/import.jsp"%>
-
+<!-- socketjs/stomp참조-------------------------------------------------  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<!-- -------------------------------------------------------------- -->
 
 </head>
 <script type="text/javascript">
  $(document).ready(function() {
 	connect();
-	 //console.log(wsocket);
+	 //console.log(webSocket);
 	 $('#sendQna').click(function() { 
 		 
 		 sendQna(); });
  })
 
-var wsocket;
-var stomp;
+var socket=null;
+	var webSocket=null;
+
 function connect() {
-//	wsocket = new WebSocket("ws://" + location.host + "/messages");
-//	wsocket = new WebSocket("ws://localhost:9090/web/messages");
-//	wsocket.onopen = onOpen;
-//	wsocket.onclose = onClose;
-
-//  /replyEcho
-
-	wsocket=new SockJS("ws://localhost:9090//web/alarm");
+	webSocket=new SockJS("http://localhost:9090/web/message");
 	
-	stomp=Stomp.over(wsocket);
-	alert("stomp=="+stomp)
-	
-	stomp.connect({},function(){
-		alert("Stomp Connection")
-	})
-	
+	webSocket.onopen = onOpen;
+	webSocket.onmessage = onMessage;
+	webSocket.onclose = onClose;
 }
 function disconnect() {
-	wsocket.close();
+	webSocket.close();
 }
 
 function onOpen(evt) {
@@ -63,7 +56,7 @@ function onClose(evt) {
 function send() {
 	
 	
-	wsocket.send("login");
+	webSocket.send("login");
 	
 }
 
@@ -80,15 +73,15 @@ function sendQna() {
 	let user = "새로운 문의가 도착했습니다."; */
 	
 	var text = "새로운 문의가 도착했습니다.";
-	var msg = {"type" : "user",
+	var msg = {"type" : "member",
 				"ruserid" : $('#ruserid').val(),
 				"content" : $('#content').val(),
 				"text" : text
 				};
 	
 	/* 
-	wsocket.send(qna_brd_title + "," + qna_brd_content + "," + user); */
-	wsocket.send(JSON.stringify(msg));
+	webSocket.send(qna_brd_title + "," + qna_brd_content + "," + user); */
+	webSocket.send(JSON.stringify(msg));
 	$('#ruserid').val('');
 	$('#content').val('');
 
@@ -105,7 +98,7 @@ function sendQna() {
 </script>
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+	
 
 
 	<div class="side_overlay">

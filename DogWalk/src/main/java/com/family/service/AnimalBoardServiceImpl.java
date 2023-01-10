@@ -82,4 +82,10 @@ public class AnimalBoardServiceImpl implements AnimalBoardService {
 		return this.aniMapper.updateBoard(amb);
 	}
 
+	@Override
+	public AnimalBoardVO selectBoardUser(AnimalBoardVO amb) {
+		
+		return this.aniMapper.selectBoardUser(amb);
+	}
+
 }
