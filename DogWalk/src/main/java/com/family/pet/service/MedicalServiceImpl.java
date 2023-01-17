@@ -36,8 +36,7 @@ public class MedicalServiceImpl implements MedicalService {
 	PetMapper PetMapper;
 	
 	@Autowired
-	MrecordDao mrecordDao;
-	
+	MrecordDao mrecordDao;	
 	
 	//병원이용 기록 등록하기
 	public int medicalRegister(Mrecord mrecord) {

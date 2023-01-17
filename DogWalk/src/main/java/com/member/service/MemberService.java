@@ -24,5 +24,6 @@ public interface MemberService {
     //하현수 추가
     public List<PetVO> getPetInfo(String userid);
     
-    public PetVO getPet(int petindex);
+    
+    public MemberVO normalLogin(String userid);
 }

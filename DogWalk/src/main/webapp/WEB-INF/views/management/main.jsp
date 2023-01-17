@@ -7,13 +7,45 @@
 <html>
 <head>
 
-<title>동물관리 홈</title>
+<title>반려견 홈</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <%@ include file="/WEB-INF/include/import.jsp"%>
 
 <style>
+	.main-card {
+		background-color: #ffffff;
+		box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 40px 0px;
+		padding: 30px;
+		border-radius: 6px;
+	}
+	
+	.main-card::-webkit-scrollbar {
+		background-color: #ffffff;
+		border-radius: 6px;
+	}
+	
+	.main-card::-webkit-scrollbar-thumb {
+		background-color: #f0f0f0;
+		border-radius: 10px;
+		background-clip: padding-box;
+		border: 4px solid transparent;
+	}
+	
+	#myPetInfo {
+		margin-bottom: 30px;
+	}
+	
+	.main-card card {
+		float: left;
+	}
+	.follow-img-wrapper {
+		width: 180px;
+		height: 110px;
+		float: left;
+		margin: 0px 10px 11px 10px;
+	}
 	
 	@font-face {
 		font-family: 'netmarbleM';
@@ -278,8 +310,13 @@
                             -->
 					<li class="nav-item"><a class="nav-link active show" href="#myPets" id="myPetsTab"
 						role="tab" data-toggle="tab" aria-selected="false"> <i
-							class="material-icons">pets</i> <!-- <span class="material-icons">home</span>  -->
+							class="material-icons">pets</i> 
 							내 반려동물
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#reCom" id="reComTab"
+						role="tab" data-toggle="tab" aria-selected="false"> <i
+							class="material-icons">recom</i> 
+							동네 반려견 추천
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="#dashboard-1" role="tab" data-toggle="tab" id="scheduleTab"
@@ -301,7 +338,7 @@
 							<div class="row justify-content-center">
 								<c:forEach var="petInfo" items="${petInfoList}">
 									<div class="card col-4" style="width: 20rem; cursor:pointer;" 
-									 onclick="location.href='${pageContext.request.contextPath}/member/petPage.bit?petindex=${petInfo.petindex}'">
+									 onclick="location.href='${pageContext.request.contextPath}/management/petPage.bit?petindex=${petInfo.petindex}'">
 										<img class="card-img-top"
 											src="${pageContext.request.contextPath}/assets/images/${petInfo.petimg}"
 											rel="nofollow" style="height:250px" alt="card image">
@@ -328,6 +365,34 @@
 								</c:forEach>
 							</div>
 						</div>
+						<div class="tab-pane" id="reCom">
+						<div class="main-card"
+							style="height: 350px; width: 100%; display: inline-block;">
+							<h3 class="h3-korean">추천 친구</h3>								
+								<c:choose>
+									<c:when test="${empty petList}">
+										나의 반려견을 등록하시면 반려견 친구를 추천해 드려요.
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="recomPet" items="${recommendPetList}"
+											varStatus="status">											
+											<div class="follow-img-wrapper">
+												<a
+													href="${pageContext.request.contextPath}/management/petPage.bit?petindex=${recomPet.petindex}">
+													<img class="rounded-circle img-fluid img"
+													src="${pageContext.request.contextPath}/assets/images/${recomPet.petimg}"
+													rel="nofollow" alt="${recomPet.petname}"
+													data-toggle="tooltip" data-placement="bottom"
+													data-original-title="${recomPet.recomType == 'dist' ? '근처에 사는 친구예요!' : recomPet.recomType == 'kind' ? '같은 종이에요!' : '나이가 비슷하네요!' }">
+													<br>
+												</a>
+											</div>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>				
+				
 						<div class="tab-pane" id="dashboard-1">
 							<div id="calendar"></div>
 							<!-- 일정 추가 MODAL -->
@@ -564,6 +629,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<!-- side_overlay end -->
 
 		</div>
@@ -684,12 +750,12 @@ $(function() {
 		eventColor: '#E6CDED', //default 컬러 설정
 		displayEventTime: true,
 		slotDuration: '02:00',
-		events: function(info, successCallback, failureCallback) {
-			
+		events: function(info, successCallback, failureCallback) {			
 			$.ajax({
 				url: "getSchedule.bit",
-				data: { userid : '${sessionScope.member.userid}' },
+				data: { userid : "${sessionScope.member.userid}" },
 				dataType: "json",
+				method: "GET",
 				//async: false,
 				cache:false,
 				success: function(response) {
@@ -697,17 +763,20 @@ $(function() {
 					console.log('일정확인!!'+JSON.stringify(response.schedule));
 					var fixedDate = schedule.map(function(array) {
 						
-						
+						console.log('array!!'+JSON.stringify(array));
 						//db의 allDay 컬럼은 String값으로 true/false를 저장해놓았기 때문에 fullcalendar가 인식하는 boolean 타입으로 수정해줘야 함
 						if(array.allDay == 'true'){array.allDay=true}
 						else{array.allDay=false};
 						//daysOfWeek 문자열을 배열형태로 형식에 맞게 저장
 						var daysOfWeek = null;
 						var arr = array.daysofweek;
+						var start = array.start_date;
+						var end = array.end_date;
+						console.log('arr!!'+JSON.stringify(arr));
 						if(arr!=null){
 							daysOfWeek = arr.split(',');
 							array.daysOfWeek = daysOfWeek;
-							array.tmpEnd = array.end;  //이벤트 객체가 end를 못받아서 임시로 만든 커스텀 속성
+							array.tmpEnd = array.end_date;  //이벤트 객체가 end를 못받아서 임시로 만든 커스텀 속성
 							console.log('array.tmpEnd'+array.tmpEnd); 
 							//array.startRecur = array.start;
 							//array.endRecur = array.end;
@@ -719,15 +788,31 @@ $(function() {
 						/* //헷깔리므로 디비에서 넘어온 daysofweek는 삭제
 						delete array.daysofweek; */
 						console.log("array>>> "+JSON.stringify(array));
+						var eventData = {
+								petindex: array.petindex,
+								userid: '${sessionScope.member.userid}',
+								title: array.title,
+								content: array.content,
+								start: start,
+								end: end,
+								allDay: array.allDay, 
+								color: array.color,
+
+							};
+						calendar.addEvent(eventData);
+						//calendar.render()
 						return array;
 					});
 					successCallback(fixedDate);
+					console.log('fixedDate' + JSON.stringify(fixedDate));
+					
 				}
 			}); // /.ajax
-
+		
 		},
-		select: function(start, end, allDay) {
-			
+		select: function(start_date, end_date, allDay) {
+			console.log("start===="+JSON.stringify(start_date));
+			console.log("end===="+end_date);
 			// 모달 안 태그값 초기화
 			$('#createEventModal input, textarea').not('input:checkbox').val(""); //체크박스 값은 초기화하면 안됨 
 			$('#createEventModal input:checkbox').prop("checked", false);
@@ -750,23 +835,23 @@ $(function() {
 			var today = moment();
 			
 			//(클릭한)start 객체 안에 현재 시간 set 해주기 (안하면 00:00)
-			var selectstart = start.start.setHours(today.hours()+1);
-			selectstart = start.start.setMinutes(0);
+			var selectstart = start_date.start.setHours(today.hours()+1);
+			selectstart = start_date.start.setMinutes(0);
 			
 			//end 객체 안에 현재 시간 set 해주기 (안하면 00:00)(start를 통해 정의)
-			var selectend = start.end.setHours(today.hours()+2);
-			selectend = start.end.setMinutes(0);
+			var selectend = start_date.end.setHours(today.hours()+2);
+			selectend = start_date.end.setMinutes(0);
 			selectend = moment(selectend).subtract(1, 'days');
 
 			//포맷 정의
-			start = moment(selectstart).format('YYYY-MM-DD HH:mm');
-			end = moment(selectend).format('YYYY-MM-DD HH:mm');
+			start_date = moment(selectstart).format('YYYY-MM-DD HH:mm');
+			end_date = moment(selectend).format('YYYY-MM-DD HH:mm');
 			//클릭했을 때 기본으로 표시되는 시간 세팅 끝//
 			
 			//모달에 데이터 쏴주기
 			$('#start').val(start_date);
 			$('#end').val(end_date);
-			//혜정씨가 준 부분 끝
+			
 
 			// 모달 열기
 			$('#createEventModal').modal('show');
@@ -802,8 +887,8 @@ $(function() {
 			$('#save-event').unbind();
 			$('#save-event').on('click', function() {
 
-				var start = $('#start').val();
-				var end = $('#end').val();
+				var start_date = $('#start').val();
+				var end_date = $('#end').val();
 				var titleVal = $('#title').val();
 				var contentVal = $('#content').val();
 				var petindexVal = $('#petindex').val();
@@ -828,8 +913,8 @@ $(function() {
 					userid: '${sessionScope.member.userid}',
 					title: titleVal,
 					content: contentVal,
-					start: start,
-					end: end,
+					start: start_date,
+					end: end_date,
 					allDay: isAllDay, 
 					color: colorVal,
 
@@ -860,7 +945,7 @@ $(function() {
 					eventData.end = moment(eventData.start).add(1, 'days').format('YYYY-MM-DD');
 				}
 				
-	
+				
 				// DB에 일정 넣기
 				var realEndDay;
 				var realStartDay;
@@ -872,7 +957,7 @@ $(function() {
 					realStartDay = moment(eventData.start).format('YYYY-MM-DD HH:mm');
 					realEndDay = moment(eventData.end).format('YYYY-MM-DD HH:mm');
 				}
-
+				console.log('=====eventData'+ JSON.stringify(eventData));
 				var DBdata = {
 					petindex: petindexVal,
 					userid: '${sessionScope.member.userid}',
@@ -953,7 +1038,7 @@ $(function() {
 	
 	//일정을 클릭하면 수정창이 나와 처리하는 메서드	
 	var editEvent = function(event, element, view) {
-		
+		console.log(event);
 
 		console.log("======edit 함수 실행==========");
 
@@ -970,21 +1055,18 @@ $(function() {
 		var allDay = event.el.fcSeg.eventRange.def.allDay;
 		console.log("이거? "+allDay);
 
-		var start = event.event.start;
+		var start_date = event.event.start;
 		//주기를 설정하면 end값을 못받아와서 임시로 변경
-		var end = null;
+		var end_date = null;
 		if(event.event.end!=null){ 
-			end = event.event.end;
+			end_date = event.event.end;
 		}else{
-			end = event.event.extendedProps.tmpEnd;
+			end_date = event.event.extendedProps.tmpEnd;
 		}	
-		console.log("end: "+end);
+		console.log("end: "+end_date);
 		var color = event.event.backgroundColor;
 		var userid = event.event.extendedProps.userid;
 		
-		/* //배열로 만들어서 다시 체크박스 설정값 로딩해야 하는데 아직 안
-		var daysOfWeek = event.event.extendedProps.daysofweek; //String타입
-		console.log('daysofweek: '+ daysOfWeek); */
 		
 		
 		
@@ -1006,8 +1088,8 @@ $(function() {
 		// 기존 정보 뿌리기
 		$('#title').val(title);
 		$('#content').val(content); 
-		$('#start').val(moment(start).format('YYYY-MM-DD HH:mm'));
-		$('#end').val(moment(end).format('YYYY-MM-DD HH:mm'));
+		$('#start').val(moment(start_date).format('YYYY-MM-DD HH:mm'));
+		$('#end').val(moment(end_date).format('YYYY-MM-DD HH:mm'));
 		$('#petindex').val(petindex).prop("selected", true);
 		$('#color').val(color).prop("selected", true);
 		
@@ -1024,11 +1106,7 @@ $(function() {
 		// 모달 열기 > 마지막에 열자
 		$('#createEventModal').modal('show');
 
-	/* 	$('#createEventModal').on('hidden.bs.modal', function (e) {
-				
-		
-		}); */
-
+	
  		//하루종일 체크시, 일정 끝 인풋창 숨김 메서드
 		if($("#allDay").is(":checked")){
 	           console.log('하루종일 체크함');
@@ -1045,16 +1123,7 @@ $(function() {
 	        }
 	    }); 
 
-		/*
-		if($('#title').val() == "") {
-			swal('일정명을 입력하세요.');
-			return false;
-		}
-
-		if($('#start').val() > $('#end').val() ) {
-			swal('끝나는 날짜가 시작 날짜보다 앞설 수 없습니다.');
-			return false;
-		}*/
+		
 		$('#updateEvent').unbind();
 		$('#updateEvent').on('click', function() {
 
@@ -1089,8 +1158,8 @@ $(function() {
 						userid: '${sessionScope.member.userid}',
 						petindex: $('#petindex').val(),
 						title: $('#title').val(),
-						start: moment($('#start').val()).format('YYYY-MM-DD HH:mm:ss'),
-						end: moment($('#end').val()).format('YYYY-MM-DD HH:mm:ss'),
+						start_date: moment($('#start').val()).format('YYYY-MM-DD HH:mm:ss'),
+						end_date: moment($('#end').val()).format('YYYY-MM-DD HH:mm:ss'),
 						content: $('#content').val(),
 						allDay: isAllDay, 
 						color: $('#color').val()
@@ -1164,8 +1233,8 @@ $(function() {
 				type: "post",
 				data: {
 					sindex: sindex,
-					start: moment(newStart).format('YYYY-MM-DD HH:mm:ss'),
-					end: moment(newEnd).format('YYYY-MM-DD HH:mm:ss'),
+					start_date: moment(newStart).format('YYYY-MM-DD HH:mm:ss'),
+					end_date: moment(newEnd).format('YYYY-MM-DD HH:mm:ss'),
 				},
 				dataType: "JSON",
 				url: "dndUpdateSchedule.bit",
@@ -1523,6 +1592,8 @@ function moveTab(){
 		
 		}else if(${param.tab eq 'schedule'}){
 			$("#scheduleTab").trigger("click");
+		}else if(${param.tab eq 'reCom'}){
+			$("#reComTab").trigger("click");
 		}
 }
 

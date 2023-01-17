@@ -1,15 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<%@ include file="/WEB-INF/include/import.jsp"%>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js">
 </script>
-
+</head>
+<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <div class="container mt-3" style="height: 600px;overFlow:auto;">
-	<h1 class="text-center">animal_Board  내용 보기</h1>
+	<h1 class="text-center">글  내용 보기</h1>
 	<c:if test="${amb eq null}">
 		<div class="alert alert-danger my-5 text-center">
 			<h4>존재 하지 않는 글입니다.</h4>
@@ -85,6 +92,9 @@
 								<i class="far fa-envelope"></i>
 								<strong>${amb.nick}에게 쪽지보내기</strong>
 							</span>
+				</div>
+				<div class ="btns">
+					<input type="button" id="check1" value="거래">						
 				</div>
 				</c:if>
                | <a href="../list">목록</a>| <a href="#" onclick="go(1)">편집</a>| <a
@@ -166,9 +176,57 @@
 		}
 		
 	}
+	$(document).ready(function(){
+		   
+		  
+		   	  
+			var IMP = window.IMP;			
+			IMP.init('imp27573152');
+			
+			$("#check1").click(function(e){
+				IMP.request_pay({ // param
+		            pg: "kakaopay.TC0ONETIME",
+		            pay_method: "card",
+		            merchant_uid: 'cart_' + new Date().getTime(),
+		            name: '${amb.title}',
+		            amount: '${amb.price}',
+		            buyer_email: '${member.mail}',
+		            buyer_name: '${member.name}',
 
+		        }, function (rsp) { // callback
+
+		            /** 결제 검증 **/
+		            $.ajax({
+		                type: 'POST',
+		                url: '/verifyIamport/'+rsp.imp_uid,
+		                beforeSend: function(xhr){
+		                    xhr.setRequestHeader(header, token);
+		                }
+		            }).done(function(result){
+
+		                // rsp.paid_amount와 result.response.amount(서버 검증) 비교 후 로직 실행
+		                if(rsp.paid_amount === result.response.amount){
+		                    alert("결제가 완료되었습니다.");
+		                    $.ajax({
+		                        type:'POST',
+		                        url:'/lecture/payment',
+		                        beforeSend: function(xhr){
+		                            xhr.setRequestHeader(header, token);
+		                        }
+		                    }).done(function() {
+		                        window.location.reload();
+		                    }).fail(function(error){
+		                            alert(JSON.stringify(error));
+		                    })
+		                } else{
+		                    alert("결제에 실패했습니다."+"에러코드 : "+rsp.error_code+"에러 메시지 : "+rsp.error_message);
+
+		                }
+		            })
+		        });
+				
+			}); //check1 클릭 이벤트
+			
+		}); //doc.ready
 
 	</script>
-</script>
-
-<c:import url="/foot"/>

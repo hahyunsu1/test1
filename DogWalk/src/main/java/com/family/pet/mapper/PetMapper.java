@@ -56,7 +56,13 @@ public interface PetMapper {
 			@Select("select * from PET")
 			public List<PetVO> getPetList(@Param("userid") String userid); 
 
-			// 반려동물 한 마리 정보 가져오기
-			
+			// 반려동물 한 마리 정보 가져오기			
 			public PetVO getPet(int petindex);
+			// 메인> 추천 반려동물 (품종) 3마리 추천
+			
+			public List<PetVO> getSameCategoryPet(String userid, String scategory);
+			// 메인> 추천 반려동물 (비슷한 나이(개월)) 3마리 추천
+			public List<PetVO> getSimilarAgePet(String userid, int age);
+			// 메인> 추천 반려동물 (가까운 거리) 3마리 추천
+			public List<PetVO> getNearPet(String userid);
 }

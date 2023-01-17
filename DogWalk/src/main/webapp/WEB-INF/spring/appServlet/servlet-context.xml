@@ -29,8 +29,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.family.web,com.family,com.member,com.message,com.family.board" />
-	<context:component-scan base-package="com.common,com.family.pet,com.mongo.db"/>
+	<context:component-scan base-package="com.family.web,com.family,com.member,com.message" />
+	<context:component-scan base-package="com.common,com.family.pet,com.mongo.db,com.obj.test,com.family.qna"/>
 	
 	 <!-- <mvc:resources mapping="/**" location="/static/" /> -->
 	
@@ -64,5 +64,39 @@
 		<beans:bean id="chatHandler" class="com.message.websocket.WebSocketChatHandler" />
 		
 		
+		<!-- 하현수 0111  -->
+		<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+		<beans:bean id="naverLoginBO" class="com.member.controller.NaverLoginBO" />
+		
+		
+	
+	    <!-- 하현수 0111 끝 -->
+	    <!-- mongo setting=============  -->
+	
+	<!-- [1] MongoClient빈 등록 -->
+	<mongo:mongo-client id="mongoClient" host="localhost" port="27017"/>
+	<!-- [2] MongoDbFactory빈 등록 -->
+	<mongo:db-factory id="mongoDbFactory" dbname="동물병원현황" mongo-client-ref="mongoClient"/>
+	<!-- [3] Mongodb_class 필드를 저장하지 않기 위한 설정 -->
+	<beans:bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext"/>
+	
+	<beans:bean id="defaultMongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<beans:constructor-arg name="typeKey">
+			<beans:null/>
+		</beans:constructor-arg>
+	</beans:bean>
+	<beans:bean id="mappingMongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<beans:constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		<beans:constructor-arg name="mappingContext" ref="mappingContext"/>
+		<beans:property name="typeMapper" ref="defaultMongoTypeMapper"/>
+	</beans:bean>
+	<!-- [4] MongoTemplate빈 등록 -->
+	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<beans:constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		<beans:constructor-arg name="mongoConverter" ref="mappingMongoConverter"/>
+	</beans:bean>
+	
+	<!-- [5] @Repository가 붙은 클래스에서 발생되는 MongoException을 해석할 PostProcessor정의 -->
+	<beans:bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 	
 </beans:beans>

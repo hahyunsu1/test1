@@ -1,17 +1,27 @@
 package com.member.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.io.*;
 import java.security.*;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import org.json.simple.*;
+import org.json.simple.parser.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -29,6 +39,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.family.pet.model.PetVO;
 import com.family.pet.service.MedicalService;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.member.mapper.MemberMapper;
 import com.member.model.MemberVO;
 import com.member.service.MemberService;
@@ -39,6 +50,9 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping(value = "/member")
 public class MemberController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
 
 	@Autowired
 	private MemberService memberservice;
@@ -52,13 +66,36 @@ public class MemberController {
 	 @Autowired
 	 private MemberService ms;
 	 @Autowired 
-	 private MemberMapper mapper;	
+	 private MemberMapper mapper;
 	 
+	//하현수 0112 시작
+	 @Autowired
+	 private NaverLoginBO naverLoginBO;
+	 private String apiResult = null;
+	 
+	 @Autowired
+		private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+			this.naverLoginBO = naverLoginBO;
+		}
+		
+	// 회원가입 화면 보러가기
+	 @GetMapping("/register")
+	 public String register(Model model, HttpSession session) throws IOException {
+		 String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		 logger.info("네이버:" + naverAuthUrl);	
+		 
+		 model.addAttribute("naver_url", naverAuthUrl);
+		 logger.info("naver_url:" + naverAuthUrl);
+		 return "member/register";
+	 
+	 }
+	 ////하현수 0112 끝
 	// 회원가입 페이지 이동
 	@GetMapping("/join")
 	public void joinForm() {
 
 		log.info("회원가입 페이지 진입");
+		
 
 	}
 
@@ -67,22 +104,29 @@ public class MemberController {
 	public String joinPost(MemberVO member) {
 		String rawPw = "";            // 인코딩 전 비밀번호
 	    String encodePw = "";        // 인코딩 후 비밀번호
-
+	    
+	    if(member.getSnstype()==null) {
 	    rawPw = member.getPwd();            // 비밀번호 데이터 얻음
         encodePw = pwEncoder.encode(rawPw);        // 비밀번호 인코딩
         member.setPwd(encodePw);            // 인코딩된 비밀번호 member객체에 다시 저장
-
+	    }
         /* 회원가입 쿼리 실행 */
         memberservice.MemberJoin(member);
-
+        
 		return "redirect:/index";
 	}
 
 	// 로그인 페이지 이동
 	@GetMapping("/login")
-	public void loginForm() {
+	public String loginForm(Model model, HttpSession session) {
 
 		log.info("로그인 페이지 진입");
+		//네이버
+        String naver_url = naverLoginBO.getAuthorizationUrl(session);
+        model.addAttribute("naver_url", naver_url);
+        logger.info("네이버:" + naver_url);
+        return "member/login";
+		
 
 	}
 
@@ -163,10 +207,11 @@ public class MemberController {
 
 	/* 로그인 */
 	@PostMapping("/login")
-	public String loginPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr,@RequestParam("userid") String userid) throws Exception {
+	public String loginPOST(Model model,HttpServletRequest request, MemberVO member, RedirectAttributes rttr,@RequestParam("userid") String userid) throws Exception {
 		HttpSession session = request.getSession();
         String rawPw = "";
         String encodePw = "";
+      
         // 제출한아이디와 일치하는 아이디있는지 
         MemberVO lvo = memberservice.memberLogin(member);
         MemberVO memberVO= memberservice.selectById(userid);
@@ -193,7 +238,74 @@ public class MemberController {
 
 		
 	}
-	
+	//네이버 로그인 성공시 callback호출 메소드
+		@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
+				HttpServletRequest request)
+				throws IOException, ParseException {
+			logger.info("여기는 callback");
+			OAuth2AccessToken oauthToken;
+			oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		//1. 로그인 사용자 정보를 읽어온다.
+				apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
+				
+		//2. String형식인 apiResult를 json형태로 바꿈
+				JSONParser parser = new JSONParser();
+				Object obj = parser.parse(apiResult);
+				JSONObject jsonObj = (JSONObject) obj;
+		//3. 데이터 파싱
+		//Top레벨 단계 _response 파싱
+				JSONObject response_obj = (JSONObject) jsonObj.get("response");
+				System.out.println("response_obj"+response_obj);
+		//response의 nickname값 파싱
+				String name = (String) response_obj.get("name");
+				String email = (String) response_obj.get("email");
+				logger.info(name);
+				logger.info(email);
+		//4.파싱 닉네임 세션으로 저장
+				session.setAttribute("sessionId", name); // 세션 생성
+				session.setAttribute("userid", email); // 세션 생성
+				model.addAttribute("result", apiResult);
+				logger.info(apiResult);
+				logger.info(email);
+				//5.회원가입한 아이디 여부 판단하여 회원가입으로 보낼지 로그인 시킬지 결정
+				if(ms.normalLogin(email)==null) {
+					logger.info("가입안한 아이디면 여기로");
+					
+					model.addAttribute("sns_id", email);  //회원가입 시 id로 활용
+					model.addAttribute("snstype", "naver"); //snstype 파악을 위해
+					return "member/SNSJoinForm";  //나중에 redirect화 하자
+				}
+				
+				//lo 세션에 들어갈 권한을 설정
+					List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+					list.add(new SimpleGrantedAuthority("ROLE_USER"));
+		
+					SecurityContext sc = SecurityContextHolder.getContext();
+			//아이디, 패스워드, 권한을 설정. 아이디는 Object단위로 넣어도 무방하며
+			//패스워드는 null로 하여도 값이 생성.
+					sc.setAuthentication(new UsernamePasswordAuthenticationToken(email, null, list));
+					session = request.getSession(true);
+		
+			//위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정
+					session.setAttribute(HttpSessionSecurityContextRepository.
+			                       SPRING_SECURITY_CONTEXT_KEY, sc);
+		//스프링 시큐리티 수동 로그인을 위한 작업 끝//
+		
+		//로그인 유저 정보 가져와서 세션객체에 저장  
+		    MemberVO user = ms.normalLogin(email);
+		    logger.info("유저네임: "+user.getUserid());      	   
+		   
+		    session = request.getSession();
+		    session.setAttribute("member", user);
+	    //로그인 유저 정보 가져와서 세션객체에 저장 끝//		
+			
+		return "login/naverSuccess";
+
+		}
+				
+		
+		
 	 /* 메인페이지 로그아웃 */
 	@GetMapping("/logout")
     public String logoutMainGET(HttpServletRequest request) throws Exception{
@@ -249,24 +361,7 @@ public class MemberController {
  		return "member/myPetsInfo";
  	}
  	
- 	// 반려동물의 마이페이지 view
- 	@RequestMapping(value = "petPage.bit", method = RequestMethod.GET)
- 	public String petPage(String cp, String ps, HttpServletRequest request, Model model) {
- 		String userid = null;
- 		//request객체로 세션 접근해서 userid 빼기
- 		MemberVO user = (MemberVO)request.getSession().getAttribute("member");
- 		if(user !=null) {
- 			userid = user.getUserid();
- 		}
- 		String petindex = request.getParameter("petindex");
- 		
- 		//반려동물 정보 가져오기
- 		PetVO pet = ms.getPet(Integer.parseInt(petindex));		
- 		model.addAttribute("pet",pet);
- 		
- 		
- 		return "member/petPage";
- 	}	
+ 	
 
 	//회원 정보 수정
 	@RequestMapping("/updateMember")

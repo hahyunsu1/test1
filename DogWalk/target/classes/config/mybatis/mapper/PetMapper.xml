@@ -21,5 +21,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				    left outer join MAINCATEGORY m on p.MCATEGORY = m.MCATEGORY 
 				    where petindex = #{petindex}
 	</select>
-
+	<select id="getSameCategoryPet" resultType="Pet" >
+		<![CDATA[
+		select * from (select * from PET where scategory = #{param2} and userid not in (#{param1})
+		 order by DBMS_RANDOM.RANDOM) 		 
+		 where rownum <=5
+		 ]]>
+	</select>
+	
+	<select id="getSimilarAgePet" resultType="Pet">
+		<![CDATA[
+		select * from (select * from PET where (age between #{param2}-12 and #{param2}+12) 
+		and userid not in (#{param1})order by DBMS_RANDOM.RANDOM)  where rownum <=5
+		]]>
+	</select>
+	
+	<select id="getNearPet" resultType="Pet">
+		<![CDATA[
+		select * from (select * from PET where userid not in (#{param1,jdbcType=VARCHAR})order by DBMS_RANDOM.RANDOM)
+		]]>
+	</select>
+	
 </mapper>

@@ -65,7 +65,7 @@ function send() {
 
 function appendMessage(msg) {
 	console.log(msg);
-	alert("msg : " + msg);
+	//alert("msg : " + msg);
 }
 
 

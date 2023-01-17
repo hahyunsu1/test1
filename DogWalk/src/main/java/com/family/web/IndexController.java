@@ -10,9 +10,13 @@ public class IndexController {
 	public void index() {
 		//"/WEB-INF/views/index.jsp
 	}
+	@RequestMapping("/Top")
+	public void Top() {
+		//"/WEB-INF/views/index.jsp
+	}
 	
-	@RequestMapping("/weather")
-	public void weather() {
+	@RequestMapping("/foot")
+	public void foot() {
 		//"/WEB-INF/views/index.jsp
 	}
 }

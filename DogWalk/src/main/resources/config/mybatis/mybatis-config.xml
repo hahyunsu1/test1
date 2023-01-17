@@ -10,15 +10,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.member.model.MemberVO" alias="Member"/>
 		<typeAlias type="com.message.model.Message" alias="Message"/>
 		<typeAlias type="com.message.model.ChatRoom" alias="ChatRoom"/>
-		<typeAlias type="com.message.model.ChatMember" alias="ChatMember"/>
-		<typeAlias type="com.family.board.model.BoardVO" alias="Board"/>
-		<typeAlias type="com.family.web.animalCareBoard.model.AnimalCareBoardVO" alias="AnimalCareBoardVO"/>
-		<typeAlias type="com.family.web.secondHandBoard.model.SecondHandBoardVO" alias="SecondHandBoardVO"/>
+		<typeAlias type="com.message.model.ChatMember" alias="ChatMember"/>		
 		<typeAlias type="com.family.pet.model.PetVO" alias="Pet"/>
 		<typeAlias type="com.family.pet.model.ScheduleVO" alias="Schedule"/>
 		<typeAlias type="com.family.pet.model.Mrecord" alias="Mrecord"/>
-		
-		
+	<!-- 하현수 추가 -->	
+		<typeAlias type="com.family.qna.model.QnaVO" alias="Qna"/>
+		<typeAlias type="com.family.qna.model.QnaCommentVO" alias="QnaCm"/>
+		<typeAlias type="com.family.qna.model.QnaReplyVO" alias="QnaRe"/>
+		<typeAlias type="com.family.pet.model.PetLikeVO" alias="PetLike"/>
 		 
 	</typeAliases>
 	<!-- mapper 정의 -->
@@ -26,13 +26,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/AnimalMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MemberMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MessageMapper.xml"/>
-		<mapper resource="config/mybatis/mapper/boardMapper.xml"/>
-		<mapper resource="config/mybatis/mapper/AnimalCareBoardMapper.xml"/>
-		<mapper resource="config/mybatis/mapper/SecondHandBoardMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ScheduleMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MrecordMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/PetMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ChatMapper.xml"/>
-		
+	<!--하현수 추가  -->
+		<mapper resource="config/mybatis/mapper/QnaMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/QnaCommentMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/PetLikeMapper.xml"/>
 	</mappers>
 </configuration>

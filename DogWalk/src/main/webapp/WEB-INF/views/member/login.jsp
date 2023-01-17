@@ -40,8 +40,14 @@
            			 
 					<div class="login_button_wrap">
 						<input type="button" class="login_button" value="로그인">
-					</div>
+					</div>					
 				</div>
+				<div id="signUpList-wrapper">
+							<ul id="signUpList">
+								<a href="${naver_url}"><li style="border: 1px solid #19ce60"><span class="span">네이버 아이디로 로그인</span></li></a>
+							</ul>
+						<br>
+					</div>
 			</form>
 
 		</div>

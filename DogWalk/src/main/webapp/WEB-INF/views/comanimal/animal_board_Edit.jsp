@@ -1,14 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-    <c:import url="/animal/top"/>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<%@ include file="/WEB-INF/include/import.jsp"%>
+</head>  
 <%
    String ctx = request.getContextPath();
 %>
 
 
-<title>돌봄서비스 글수정</title>
+<title>돌봄매칭 글수정</title>
 <p>
       <a href="<%=ctx%>/comanimal/comanimalwrite">글쓰기</a>| <a
          href="<%=ctx%>/comanimal/animal_boardlist">글목록</a>
@@ -34,14 +39,10 @@
           <td style="width:20%"><b>돌봄비 입력</b></td>
           <td style="width:80%">
           <input type="text" name="price" id="price" value='<c:out value="${amb.price}"/>' class="form-control">
+           <input type="hidden" name="nick" id="nick" value='<c:out value="${amb.nick}"/>' class="form-control">
           </td>
        </tr>
-       <tr>
-          <td style="width:20%"><b>글쓴이</b></td>
-          <td style="width:80%">
-          <input type="text" name="nick" id="nick" value='<c:out value="${amb.nick}"/>' class="form-control">
-          </td>
-       </tr>       
+          
        <tr>
           <td style="width:20%"><b>글내용</b></td>
           <td style="width:80%">
@@ -84,6 +85,4 @@
 
 </form>       
 
-</div>
 
-<c:import url="/animal/foot"/>

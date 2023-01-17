@@ -56,7 +56,7 @@ $('#delete').click(function(){
 	var webSocket=null;
 
 function connect() {
-	webSocket=new SockJS("http://localhost:9090/web/message");
+	webSocket=new SockJS("http://localhost:9090/web/alarm");
 	
 	webSocket.onopen = onOpen;
 	webSocket.onmessage = onMessage;
@@ -88,7 +88,7 @@ function send() {
 
 function appendMessage(msg) {
 	console.log(msg);
-	alert("msg : " + msg);
+	//alert("msg : " + msg);
 }
  
 

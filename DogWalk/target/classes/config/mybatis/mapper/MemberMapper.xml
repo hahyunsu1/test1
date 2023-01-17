@@ -9,9 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select members_seq.nextval from dual
 		</selectKey>
 		insert into members(idx,rrn2,name,userid,pwd,hp1,hp2,hp3,post,addr1,addr2,indate,
-		status,nick,rrn1,mail)
+		status,nick,rrn1,mail,snstype)
 		values(#{idx},#{rrn2},#{name},#{userid},#{pwd},#{hp1},#{hp2},#{hp3},#{post:VARCHAR},
-		#{addr1:VARCHAR},#{addr2:VARCHAR},SYSDATE,#{status},#{nick},#{rrn1},#{mail:VARCHAR})
+		#{addr1:VARCHAR},#{addr2:VARCHAR},SYSDATE,#{status},#{nick},#{rrn1},#{mail:VARCHAR},#{snstype})
 	</insert>
 	
 	<select id="idCheck" resultType="int">
@@ -44,6 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	<delete id="removeMember" parameterType="String">
     	delete from members where userid=#{userid}
 	</delete>
-  
+  	
+  	<!-- 하현수 0112-->
+  	<select id="getUser" resultType="Member">
+  		select * from MEMBERS where userid = #{userid}
+  	</select>
   	
 </mapper>

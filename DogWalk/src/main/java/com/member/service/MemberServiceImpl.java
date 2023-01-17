@@ -66,18 +66,19 @@ public class MemberServiceImpl implements MemberService {
 	}
     
     //하현수 추가
-    
+    @Override
     public List<PetVO> getPetInfo(String userid) {
 		petMapper = sqlsession.getMapper(PetMapper.class);
 		return petMapper.getPetInfo(userid);
 	}
 	
-	//반려동물 한 마리 정보 가져오기(petindex 매개변수)
-	public PetVO getPet(int petindex) {
-
-		petMapper = sqlsession.getMapper(PetMapper.class);
-		return petMapper.getPet(petindex);
+	
+    @Override
+	public MemberVO normalLogin(String userid) {
 		
+		membermapper = sqlsession.getMapper(MemberMapper.class);
+
+		return membermapper.getUser(userid);
 	}
 
 

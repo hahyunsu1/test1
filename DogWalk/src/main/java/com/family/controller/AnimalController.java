@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.common.CommonUtil;
+import com.family.file.service.ObjectStorageService;
 import com.family.model.AnimalBoardVO;
 import com.family.model.PagingVO;
 import com.family.service.AnimalBoardService;
@@ -43,6 +45,8 @@ public class AnimalController {
 	@Resource(name="animalBoardServiceImpl")
 	private AnimalBoardService animalBoardService;
 	
+	@Autowired
+	private ObjectStorageService os;
 	@Inject
 	private CommonUtil util;
 	
@@ -83,10 +87,11 @@ public class AnimalController {
 			}catch(Exception e) {
 				log.error("글쓰기 error"+e);
 			}
+			
 			amb.setFilename(filename);
 			amb.setOriginFilename(originFname);
 			amb.setFilesize(fsize);
-		
+			
 		}//if
 		if(amb.getNick()==null||amb.getTitle()==null||amb.getCpass()==null||amb.getPet()==null||
 				amb.getNick().trim().isEmpty()||amb.getTitle().trim().isEmpty()||

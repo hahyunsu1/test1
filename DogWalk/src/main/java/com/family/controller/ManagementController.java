@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -14,9 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.mvc.support.*;
 
+import com.family.model.AnimalBoardVO;
+import com.family.pet.mapper.ScheduleMapper;
+import com.family.pet.model.PetLikeVO;
 import com.family.pet.model.PetVO;
+import com.family.pet.model.ScheduleVO;
 import com.family.pet.service.MedicalService;
 import com.family.pet.service.PetService;
+import com.family.service.AnimalBoardService;
+import com.member.model.MemberVO;
+import com.member.service.MemberService;
 
 
 @Controller
@@ -28,16 +36,23 @@ public class ManagementController {
 	@Autowired
 	private PetService petService;
 	
+	private SqlSession sqlsession;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@Autowired private MedicalService medicalService;
 	 
-
+	@Autowired
+	private AnimalBoardService amb;
 	// 반려동물 관리 홈 보여주기
 	@RequestMapping(value = "main.bit", method = RequestMethod.GET)
 	public String mainView(String cp, String ps, Principal principal, Model model, HttpSession httpSession) {
+		
+		
 
-//		String userid =  principal.getName();
 		String userid = (String) httpSession.getAttribute("userid");
+		MemberVO user = (MemberVO)httpSession.getAttribute(userid);
 		logger.info("로그인 유저 아이디: " + userid);
 		List<PetVO> pet = petService.getPetInfo(userid);
 
@@ -49,8 +64,11 @@ public class ManagementController {
 			logger.info("반려동물 정보 가져오기 실패");
 			return "redirect:/main.bit";
 		}
-
-		
+		List<PetVO> petList = petService.getPetPicture(userid);
+		//System.out.println("petList===="+petList);
+		List<PetLikeVO> list = petService.getPetLike(userid);
+		List<PetVO> recommendPetList = petService.getRecommendPetList(petList, user);
+		//System.out.println("recommendPetList===="+recommendPetList);
 		  HashMap<String, Object> map = medicalService.getMrecordList(cp, ps, userid);
 		  logger.info("병원이용 리스트 조회 완료");
 		  
@@ -59,8 +77,9 @@ public class ManagementController {
 		  map.get("pageSize")); model.addAttribute("postList", map.get("postList"));
 		  model.addAttribute("pageCount", map.get("pageCount"));
 		  model.addAttribute("totalPostCount", map.get("totalPostCount"));
-		 
-
+		  model.addAttribute("petLikeList", list);
+		  model.addAttribute("petList", petList); 
+		  model.addAttribute("recommendPetList", recommendPetList);
 		return "management/main";
 	}
 
@@ -235,5 +254,75 @@ public class ManagementController {
 
 		return "redirect:/management/main.bit?tab=myPets";
 	}
+	@RequestMapping("getMyPetSchedule.bit")
+	public List<ScheduleVO> getMyPetSchedule(String userid, String petname) {
+		
+		List<ScheduleVO> list = null;
+		try {
+			ScheduleMapper scheduleMapper = sqlsession.getMapper(ScheduleMapper.class);
+			list = scheduleMapper.getMyPetSchedule(userid, petname);
+			
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	// 반려동물의 마이페이지 view
+		@RequestMapping(value = "petPage.bit", method = RequestMethod.GET)
+		public String petPage(String cp, String ps, HttpServletRequest request, Model model) {
+			String userid = null;
+			//request객체로 세션 접근해서 userid 빼기
+			MemberVO user = (MemberVO)request.getSession().getAttribute("member");
+			if(user !=null) {
+				userid = user.getUserid();
+			}
+			String petindex = request.getParameter("petindex");
+			
+			//반려동물 정보 가져오기
+			PetVO pet = petService.getPet(Integer.parseInt(petindex));		
+			System.out.println("페의정보"+pet);
+			//포스트와 관련된 pet정보를 추출하기 위한 작업//
+			List<PetVO> pArr = new ArrayList<PetVO>();
+			Set<String> pindexSet = new HashSet(); //petindex 중복 제거를 위한 임시 Set
+
+			
+			for(String pindex: pindexSet) {
+				pArr.add(petService.editPetInfo(Integer.parseInt(pindex))); 
+			}
+			PetLikeVO petLike = null;
+			//유저가 팔로우한 반려동물인지 확인
+			if(user !=null) {
+				petLike = petService.isFollowPet(petindex, userid);		 
+			}
+			model.addAttribute("petInfoList2",pet);			
+			model.addAttribute("pArr", pArr);
+			model.addAttribute("petLike", petLike);
+			
+			return "management/petPage";
+		}
+		
+		// 반려동물 팔로우(petlike) 처리
+		@ResponseBody
+		@PostMapping(value = "followPet.bit",produces="application/json" )
+		public int followPet(PetLikeVO petLike, HttpSession httpSession) {
+			
+			petLike.setUserid((String)httpSession.getAttribute("userid"));
+			System.out.println("petLike2"+petLike);
+			return petService.followPet(petLike);
+		}
+		
+		// 반려동물 언팔로우(petlike) 처리
+		@ResponseBody
+		@PostMapping(value = "unFollowPet.bit", produces="application/json")
+		public int unFollowPet(PetLikeVO petLike, HttpSession httpSession) {
+			
+			petLike.setUserid((String)httpSession.getAttribute("userid"));		
+			System.out.println("petLike3"+petLike);
+			return petService.unFollowPet(petLike);
+		}
 
 }

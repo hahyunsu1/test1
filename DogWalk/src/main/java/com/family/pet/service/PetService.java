@@ -2,6 +2,7 @@ package com.family.pet.service;
 
 import java.util.List;
 
+import com.family.pet.model.PetLikeVO;
 import com.family.pet.model.PetVO;
 import com.family.pet.model.ScheduleVO;
 import com.member.model.MemberVO;
@@ -28,4 +29,11 @@ public interface PetService {
 	
 	// 일정 모두 불러오기
 	public List<ScheduleVO> getSchedule(String userid);
+	public List<PetVO> getRecommendPetList(List<PetVO> petList, MemberVO user);
+	public List<PetVO> getPetPicture(String userid);
+	public PetVO getPet(int petindex);
+	public PetLikeVO isFollowPet(String petindex, String userid);
+	public int followPet(PetLikeVO petLike);
+	public int unFollowPet(PetLikeVO petLike);
+	public List<PetLikeVO> getPetLike(String userid);
 }

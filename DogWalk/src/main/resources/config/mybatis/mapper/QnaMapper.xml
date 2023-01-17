@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.qna.mapper.QnaMapper">
+	<!-- Qna > Qna보내기 --> 
+	<insert id="writeQna" parameterType="Qna">
+	<selectKey keyProperty="qaindex" resultType="_int" order="BEFORE">
+			select QNA_seq.nextval from dual
+		</selectKey>
+	insert into QNA (qaindex,userid, title, qatime, count, scstate, content, replyContent, filename, awstate)
+			values (#{qaindex}, #{userid}, #{title:VARCHAR}, sysdate, 0, 0, #{content:VARCHAR}, #{replyContent:VARCHAR}, 0, 0)	
+	</insert>
+	<!--  Qna > 내 Qna 개수 조회 -->
+	<select id="getQnaCount" resultType="int">
+		select count(*) from QNA where USERID=#{userid}
+	</select>
+	<!-- Qna > 내 글 상세 조회 -->
+	<select id="getPost" resultType="Qna">
+		select * from QNA where qaindex = #{qaindex}
+	</select>
+	<!-- Qna > 글 수정   -->
+	<update id="editPost" parameterType="Qna">
+	 update QNA set title=#{title}, content=#{content} where qaindex=#{qaindex}
+	</update>
+	<!--Qna > 글답글 수정  -->
+	<update id="editReplyPost" parameterType="Qna">
+	 update QNA set title=#{title}, replyContent=#{replyContent}, awstate='답변완료' where qaindex=#{qaindex}
+	</update>
+	<!-- Qna > 글 삭제 -->
+	<delete id="deletePost" parameterType="int">
+		delete from QNA where qaindex=#{qaindex}
+	</delete>
+	
+	<!-- Qna> 글 조회수 증가 -->
+	<update id="updateQnaCount" parameterType="_int">
+		update QNA set count= count+1 where qaindex=#{qaindex}
+	</update>
+	<!-- 어드민 > Qna 리스트 조회  ajax -->
+	<select id="getAdminQnaList" resultType="Qna">
+		select * from QNA
+	</select>
+	<!-- 메시지 리스트 조회 -->
+	<select id="getQnaList" resultType="Qna">
+		
+		SELECT * FROM (SELECT ROWNUM, Q.* FROM QNA Q) S WHERE ROWNUM 
+		BETWEEN ${param1}*${param2}-(${param2}-1) AND ${param1}*${param2}
+	</select>
+	
+	<!-- 메시지 리스트 조회 -->
+	<select id="getQnaSendList" resultType="Qna">
+		
+		SELECT * FROM (SELECT ROWNUM, P.* FROM QNA P WHERE USERID = #{param3}) S WHERE ROWNUM 
+		BETWEEN ${param1}*${param2}-(${param2}-1) AND ${param1}*${param2}
+	</select>
+	
+	<!-- 사용자가 어드민한테 문의했으나 아직 읽지 않은 모든 글 카운트 -->
+	<select id="getCountAdminNotRead" resultType="int">
+    	select count(*) from QNA where awstate = '1'
+	</select>
+	
+	<!-- 어드민이 알림을 읽으면 개수 줄어들게 하기 위해 업데이트  -->
+	<update id="updateAdminRead">
+		update QNA set awstate = '2' where awstate = '1' and qaindex = #{qaindex}
+	</update>
+	
+
+	<!-- 사용자 입장에서 답변이 왔지만 읽지 않은 문의글 개수 카운트 -->
+	 <select id="getCountUserNotRead" resultType="int">
+		select count(*) from QNA where awstate = '3' and userid = #{userid}
+	</select>
+	
+</mapper>

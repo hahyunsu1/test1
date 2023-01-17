@@ -4,7 +4,7 @@
 <html>
 <head>
 
-	<title>반려동물 등록하기</title>
+	<title>반려견 등록하기</title>
 	
 	<%@ include file="/WEB-INF/include/import.jsp"%>
 	

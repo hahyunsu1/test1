@@ -12,6 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -121,7 +123,7 @@ public class ManagementAjaxController {
 	}
 	
 	// 전체 일정 불러오기
-	@RequestMapping("getSchedule.bit")
+	@GetMapping(value="getSchedule.bit",produces="application/json;  charset=UTF-8")
 	public Map<String, Object> getSchedule(String userid) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -135,7 +137,8 @@ public class ManagementAjaxController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("schedule================"+schedule);
+		System.out.println("userid"+userid);
 		return map;
 	}
 	

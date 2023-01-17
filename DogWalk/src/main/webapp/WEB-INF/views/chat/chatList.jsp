@@ -8,7 +8,7 @@
 <title>채팅 리스트</title>
 
 <%@ include file="/WEB-INF/include/import.jsp"%>
-	
+
 	<style>
 		a:visited {
 			color: #000000;
@@ -118,6 +118,8 @@
 	</style>
 
 </head>
+<%@ include file="/WEB-INF/views/Top.jsp"%>	
+
 <body>
 	<div style="margin: 20px;">
 	<!-- <div class="container"> -->
@@ -199,7 +201,7 @@
 			</div>
 
 	</div>
-	
+<%@ include file="/WEB-INF/views/foot.jsp"%>		
 <!-- 기본 폼 완성 -->
 <input type="hidden" id="userid" value="${session.member.userid}">
 <input type="hidden" id="nick" value="${session.member.nick}">	
