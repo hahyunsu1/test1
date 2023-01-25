@@ -66,7 +66,7 @@ private ChatService chatservice;
 	
 	//채팅방 비밀번호 불러오기
 	@ResponseBody
-	@RequestMapping("/getRoomPwd")
+	@RequestMapping(value="/getRoomPwd", produces="application/json")
 	public int getRoomPwd(int room_number) throws ClassNotFoundException, SQLException {
 		return chatservice.getRoomPwd(room_number);
 	}

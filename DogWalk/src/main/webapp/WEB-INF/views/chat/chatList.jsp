@@ -175,7 +175,7 @@
 											</button>
 										</div>
 									<div class="modal-body p-4">
-										<label for='secret-input'>비밀번호</label><input class='form-control' id='pwdChk' name='pwdChk' placeholder='네 자리의 숫자를 입력하세요' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
+										<label for='secret-input'>비밀번호</label><input class='form-control' type='number' id='pwdChk' name='pwdChk' placeholder='네 자리의 숫자를 입력하세요' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
 										<div class="modal-footer">
 												<button type="button" class="btn btn">취소</button>
 												<button type="button" onclick="pwdcheck();" class="btn btn-primary" >입장하기</button>
@@ -213,14 +213,14 @@
 		
 		
 		//비밀방 체크했을시 비밀번호 폼 생성
-		$('#room_secret').change(function() {
+		$('#room_secret').on('click',function() {
 			console.log($('input:checkbox[id="room_secret"]').val());
 
 			a = "";
-			if ($('#room_secret').is(':checked')) {
+			if ($('#room_secret').is(':checked') == true) {
 				a += "<label for='secret-input'>비밀번호</label><input class='form-control' type='number' id='room_pwd' name='room_pwd' placeholder='네 자리의 숫자를 입력하세요' onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>"
 				$('.secret-input-box').html(a);
-			} else {
+			} else if($('#room_secret').is(':checked') == false){
 				$('.secret-input-box').html(a);
 					}
 
@@ -337,6 +337,7 @@
 				type:'POST',
 				url: 'getRoomPwd',
 				data:{'room_number' : roomnum},
+				dataType: "json",
 				success:function(data){
 					if(data == $('#pwdChk').val()) {
 						swal("성공", "비밀번호가 맞았습니다.", "success");

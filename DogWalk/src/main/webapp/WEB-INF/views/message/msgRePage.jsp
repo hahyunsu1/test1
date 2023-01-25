@@ -236,7 +236,7 @@ $('#delete').click(function(){
  $(function() {
 	 
 	 $('#sendQna').click(function() { 
-		 
+		 alert("AAAAAA");
 		 sendQna(); });
  })
  

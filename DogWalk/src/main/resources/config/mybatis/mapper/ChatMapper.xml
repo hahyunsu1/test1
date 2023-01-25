@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 채팅방 리스트 가져오기 -->
     <select id="getChatList" resultType="ChatRoom">
-	   	select c.room_number, c.room_title, c.user_email, c.room_secret, c.room_pwd, c.room_count,  u.nick,  
+	   	select c.room_number, c.room_title, c.user_email, c.room_secret, c.room_pwd, c.room_count,c.user_nickname,  u.nick,  
 	   	(SELECT COUNT(user_email) FROM CHATMEMBER WHERE room_number = c.room_number) AS current_count 
 	   	from CHATROOM c 
 	   	JOIN MEMBERS u 

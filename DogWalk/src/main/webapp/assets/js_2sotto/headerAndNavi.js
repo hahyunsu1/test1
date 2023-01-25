@@ -1,5 +1,4 @@
 $(document).ready(function(){
-		
 	$('.toggle-btn').on('click', function(){
 	    $('#wrapSideMenu').addClass('side_show');
 		$('#wrapSideMenu').fadeIn();
@@ -21,6 +20,7 @@ $(document).ready(function(){
 
 	console.log('userid== '+$('#userid').val());
 	//알람 테스트 
+	
 	if($('#userid').val() != null) {
 		connect();	
 	}
