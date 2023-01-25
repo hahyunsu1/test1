@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -10,14 +9,16 @@
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=v16lw67don&submodules=geocoder"></script>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<%@ include file="/WEB-INF/include/import.jsp"%>
 </head>
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <body>
+<div class="container">
 <div class="search">
 	<input id="address" type="text" placeholder="검색할 주소">
 	<input id="submit" type="button" value="주소검색">
 </div>
-<div id="map" style="width:1000px;height:500px;"></div>
+<div id="map" style="width:100%;height:75vh; margin: 0 auto; float : left"></div>
 <div>
 	<table>
 		<thead>
@@ -25,14 +26,16 @@
 				<th>병원이름</th>
 				<th>주소</th>
 				<th>연락처</th>
-				<th>위도</th>
-				<th>경도</th>	
+				<!-- <th>위도</th>
+				<th>경도</th>	 -->
 			</tr>	
 		</thead>
 		<tbody id="mapList"></tbody>
 	</table>
 </div>
+</div>
 </body>
+<%@ include file="/WEB-INF/include/footer.jsp"%>
 <script>
 //지도를 그려주는 함수 실행
 selectMapList();
@@ -61,7 +64,7 @@ const showAddrList=function(res){
 		//console.log(obj)
 		let addr=obj.refine_LOTNO_ADDR;
 		  // 지역을 담는 배열 ( 병원명 /위도경도 )
-		areaArr.push({location : obj.bizplc_NM , lat : obj.refine_WGS84_LAT , lng : obj.refine_WGS84_LOGT})
+		areaArr.push({location : obj.bizplc_NM , lat : obj.refine_WGS84_LAT , lng : obj.refine_WGS84_LOGT,tel : obj.locplc_FACLT_TELNO_DTLS,laddr : obj.refine_LOTNO_ADDR, raddr : obj.refine_ROADNM_ADDR })
 		//searchAddressToCoordinate(addr);
 		
 		insertAddress(obj.bizplc_NM, obj.refine_LOTNO_ADDR,obj.locplc_FACLT_TELNO_DTLS, obj.refine_WGS84_LAT,obj.refine_WGS84_LOGT);
@@ -118,7 +121,7 @@ function initMap(areaArr) {
 	    
 	    /* 정보창 */
 		 var infoWindow = new naver.maps.InfoWindow({
-		     content: '<div style="width:200px;text-align:center;padding:10px;"><b>' + areaArr[i].location + '</b><br> - 동물병원 - </div>'
+		     content: '<div style="width:200px;text-align:center;padding:10px;"><b>' + areaArr[i].location + '</b><br> - 동물병원 - <br>'+areaArr[i].tel+'<br>'+areaArr[i].raddr+'<br>'+areaArr[i].laddr+'</div>'
 		 }); // 클릭했을 때 띄워줄 정보 HTML 작성
 	    
 		 markers.push(marker); // 생성한 마커를 배열에 담는다.
@@ -173,8 +176,8 @@ function insertAddress(name,address, tel, latitude, longitude) {
 	mapList += "	<td>" + name + "</td>"
 	mapList += "	<td>" + address + "</td>"
 	mapList += "	<td>" + tel + "</td>"
-	mapList += "	<td>" + latitude + "</td>"
-	mapList += "	<td>" + longitude + "</td>"
+	/* mapList += "	<td>" + latitude + "</td>"
+	mapList += "	<td>" + longitude + "</td>" */
 	mapList += "</tr>"
 
 	$('#mapList').append(mapList);

@@ -12,7 +12,7 @@
     
 </head>
 <body>
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 	<div class="side_overlay">
 		<div class="container">
 

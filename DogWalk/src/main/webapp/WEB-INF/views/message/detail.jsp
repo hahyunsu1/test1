@@ -16,7 +16,7 @@
 <body>
 
 
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 	<div class="side_overlay">
 
 		<div class="container">
@@ -122,17 +122,7 @@
 <script>
 
 
-	// 삭제 전 확인 창 띄우기 confirm
-	/*
-	$('#delete').click(function(){
-		let con = confirm("정말로 삭제 하시겠습니까?");
-		if(con){
-			return location.href='delete.bit?qaindex=${qna.qaindex}';
-		}else{
-			return false;
-		}
-	});
-	*/
+	
 	<!-- Modal에서 삭제 -->
 	// 삭제 전 확인 창 띄우기
 	function Delete() {

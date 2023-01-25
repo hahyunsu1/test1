@@ -16,11 +16,14 @@ public class MemberVO {
 	private String post;
 	private String addr1,addr2;
 	private java.sql.Date indate;
-	private int status; //회원상태(0:일반회원, 1:비회원, -1:비매너회원, -2:정지회원 99:운영진)
+	private int status; //회원상태(0:일반회원, 1:정지회원, 2:추방회원, 3:탈퇴회원 99:운영진)
 	private String nick;
 	private String mail;
 	private String rrn1,rrn2;
+	private String naverLogin;
 	private String snstype;
+	private int board_cnt;
+
 	
 	public String getAllHp() {
 		return hp1+"-"+hp2+"-"+hp3;
@@ -33,6 +36,7 @@ public class MemberVO {
 	public String getAllRrn() {
 		return rrn1+"-"+rrn2;
 	}
+
 	
 }
 

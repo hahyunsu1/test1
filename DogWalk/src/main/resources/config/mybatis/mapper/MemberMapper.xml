@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into members(idx,rrn2,name,userid,pwd,hp1,hp2,hp3,post,addr1,addr2,indate,
 		status,nick,rrn1,mail,snstype)
 		values(#{idx},#{rrn2},#{name},#{userid},#{pwd},#{hp1},#{hp2},#{hp3},#{post:VARCHAR},
-		#{addr1:VARCHAR},#{addr2:VARCHAR},SYSDATE,#{status},#{nick},#{rrn1},#{mail:VARCHAR},#{snstype})
+		#{addr1:VARCHAR},#{addr2:VARCHAR},SYSDATE,#{status},#{nick},#{rrn1},#{mail:VARCHAR},#{snstype:VARCHAR})
 	</insert>
 	
 	<select id="idCheck" resultType="int">
@@ -50,4 +50,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   		select * from MEMBERS where userid = #{userid}
   	</select>
   	
+  	<!--어드민용 메인 -->
+	<select id="adminUserList" resultType="Member">
+		SELECT * FROM(SELECT * FROM members order by idx desc )  
+      <![CDATA[
+      where ROWNUM <=5 
+      ]]>
+	</select>
+
+	<select id="adminUserList2" resultType="Member">
+		select m.*,
+		(select count(*) from com_ani_board where userid = m.userid) as board_cnt
+		from members m
+		order by m.idx desc
+
+	</select>
+
+	<!-- 회원 드롭 -->
+	<update id="dropUser">
+		UPDATE members
+		SET status = 2
+		WHERE userid = #{userid}
+	</update>
+  	
+	<select id="findLike" resultType="int">
+		select count(*) from user_like where user_no = #{user_no}
+	</select>
 </mapper>

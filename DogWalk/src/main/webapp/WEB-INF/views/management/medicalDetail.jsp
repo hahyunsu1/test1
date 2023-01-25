@@ -10,7 +10,7 @@
 <head>
 
 <title>슬기로운 반려생활</title>
-
+ 
 <%@ include file="/WEB-INF/include/import.jsp"%>
 	<style>
 		@font-face {
@@ -49,10 +49,10 @@
 	
 
 </head>
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+	
 
 
 	

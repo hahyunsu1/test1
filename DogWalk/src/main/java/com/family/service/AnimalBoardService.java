@@ -1,5 +1,6 @@
 package com.family.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,5 +27,17 @@ public interface AnimalBoardService {
 	int deleteBoard(Integer idx);//삭제
 	int updateBoard(AnimalBoardVO amb);//수정
 	AnimalBoardVO selectBoardUser(AnimalBoardVO amb);
+
+	Object getAdminList();
+
+	Object getAllboard();
+
+	List<AnimalBoardVO> getUserBoardList(String userid);
+
+	Object getAllTotal();
+
+	List<HashMap<String, Object>> admin_findDate(String date1, String date2);
+
+	
 	
 }

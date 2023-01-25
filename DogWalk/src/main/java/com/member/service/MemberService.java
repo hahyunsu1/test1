@@ -26,4 +26,14 @@ public interface MemberService {
     
     
     public MemberVO normalLogin(String userid);
+
+	Object adminUserList();
+
+	List<MemberVO> adminUserList2();
+
+	void successId(String userid);
+
+	void failed(String id);
+
+	void dropUser(String userid);
 }

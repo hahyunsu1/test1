@@ -23,6 +23,7 @@ public class OCRService {
 		String secretKey = "SFJJZUZYd25YRHFHTmhwR1hzVWxhbFloYmtHQVRDZ1c=";
 		String imageFile = filePathName; // 사용자가 직접 파일을 업로드 하게 함. 
 		String result = "";
+		
 
 		try {
 			URL url = new URL(apiURL);
@@ -73,6 +74,7 @@ public class OCRService {
 			
 			// jsonToString() 메소드 호출하고 결과 받아옴
 			result = jsonToString(response.toString());
+			
 			System.out.println("result==="+result); // 뭔가가 있는 줄 알았어요
 			
 		} catch (Exception e) {
@@ -138,8 +140,10 @@ public class OCRService {
 			if(fieldArray != null) {
 				for(int i=0; i<fieldArray.length(); i++) {
 					tempObj = (JSONObject) fieldArray.get(i);
+					//resultText +="["+tempObj+"] \r\n";
 					resultText += (String) tempObj.get("inferText") + " ";
 				}
+				
 			}
 		} else {
 			System.out.println("없음");

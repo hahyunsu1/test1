@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:import url="/top"/>
+<%@ include file="/WEB-INF/include/import.jsp"%>
 <style>
 	.txt0{
 		color:gray;
@@ -15,7 +14,8 @@
 		color:tomato;
 	}
 </style>
-<div class="container mt-3" style="height:600px; overflow:auto;">
+<%@ include file="/WEB-INF/include/header.jsp"%>
+<div class="container mt-3"">
 	<h1 class="text-center">Users [Admin Page]</h1>
 	<div>
 	<%-- ${userArr} --%>
@@ -49,6 +49,7 @@
 	<form name="frm" id="frm" method="post" action>
 		<input type="hidden" name="idx" id="idx">
 	</form>
+	<%@ include file="/WEB-INF/include/footer.jsp"%>
 <script>
 	function userDel(vidx){
 		$('#idx').val(vidx);

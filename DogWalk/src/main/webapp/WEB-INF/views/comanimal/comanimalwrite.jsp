@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <%@ include file="/WEB-INF/include/import.jsp"%>
+
 <style>
-div#content {
+div#content2 {
     width: 300px;
     height: 200px;
     border: 1px solid #dcdcdc;
@@ -17,41 +18,44 @@ div#content {
 }
 </style>
 </head>
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <title>돌봄매칭 글쓰기</title>
 
 <form name="bf" id="bf" role="form" action="comanimalwrite" method="POST" enctype="multipart/form-data">
    <input type="hidden" name="mode" value="write">
-   <!-- 원본글쓰기mode는 write, 답변글쓰기 mode는 rewrite로 감  -->       
-    <table class="table">
-       <tr>
-          <td style="width:20%"><b>제목</b></td>
-          <td style="width:50%">
+   <!-- 원본글쓰기mode는 write, 답변글쓰기 mode는 rewrite로 감  -->  
+   <div class="container" style="text-align:center">     
+    <table class="table" >
+       <tr colspan="3">
+          <td style="width:20%"colspan="1"><b>제목</b></td>
+          <td style="width:50%"colspan="2">
           <input type="text" name="title" id="title" class="form-control">             
           <input type="hidden" name="userid" id="userid" class="form-control" value="${sessionScope.member.userid}" readonly>
           <input type="hidden" name="nick" id="nick" class="form-control" value="${sessionScope.member.nick}" readonly>
           </td>
        </tr>
-        <tr>
-          <td style="width:20%"><b>반려동물 종입력</b></td>
-          <td style="width:50%">
+        <tr colspan="3">
+          <td style="width:20%" colspan="1"><b>반려동물 종입력</b></td>
+          <td style="width:50%" colspan="2">
           <input type="text" name="pet" id="pet" class="form-control">
           </td>
        </tr>
-       <tr>
-          <td style="width:20%"><b>돌봄비 입력</b></td>
-          <td style="width:50%">
+       <tr colspan="3">
+          <td style="width:20%" colspan="1"><b>돌봄비 입력</b></td>
+          <td style="width:50%" colspan="2">
           <input type="text" name="price" id="price" class="form-control">
           </td>
        </tr>
            
-       <tr>
-          <td style="width:20%"><b>글내용</b></td>
-          <td style="width:50%">
-          <div contenteditable="true" name="content" id="content" class="form-control">
-          
-          </div>
+       <tr colspan="3">
+          <td style="width:20%" colspan="1"><b>글내용</b></td>
+          <td style="width:50%" colspan="2"> 
+          <textarea name="content" id="content" rows="10" cols="50"
+                  class="form-control" style="float:left;  width:49%;"></textarea>             
+                <img id="img" name="petimg" src="../assets/images/pet_profile.jpg" alt="" width="200px"
+										height="200px" style="border-radius: 10px; float:left;margin: 2px" />
           </td>
+          
        </tr>
        <tr>
           <td style="width:20%"><b>비밀번호</b></td>
@@ -67,10 +71,7 @@ div#content {
          <input type="file" name="mfilename" onchange="readURL(this);"
             id="filename" class="form-control">                
             </td>
-            <td>
-            <img id="img" name="petimg" src="../assets/images/pet_profile.jpg" alt="" width="150px"
-										height="150px" style="border-radius: 10px;" />
-            </td>
+            
       </tr>
       <tr>
          <td colspan="2">
@@ -81,10 +82,12 @@ div#content {
    
       </table>
    
-
+	</div>
 </form>
+<%@ include file="/WEB-INF/include/footer.jsp"%>
 <script>
-$('#content').each(function(){
+
+$('#content2').each(function(){
     this.contentEditable = true;
 });
 

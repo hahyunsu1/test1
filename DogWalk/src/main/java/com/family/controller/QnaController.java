@@ -36,7 +36,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 	public String mainView(String cp, String ps, HttpSession httpSession, Model model) {
 		
 		String userid = (String) httpSession.getAttribute("userid");
-		logger.info("로그인 유저 아이디: " + userid);
+		//logger.info("로그인 유저 아이디: " + userid);
 		
 		HashMap<String, Object> map = qnas.mainView(cp, ps, userid);
 		
@@ -56,7 +56,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 	public String detail(int qaindex, Model model) {
 
 		QnaVO qna = qnas.getPost(qaindex);
-		logger.info("내 Qna 글 조회 완료");
+		//logger.info("내 Qna 글 조회 완료");
 		
 		int result = 0;
 		
@@ -66,7 +66,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 		}
 		
 		if (result == 1) {
-			logger.info(qaindex+"번 블로그 글 조회수 업데이트 성공");
+			//logger.info(qaindex+"번 블로그 글 조회수 업데이트 성공");
 		}
 		
 		
@@ -80,7 +80,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 		public String update(int qaindex, Model model) {
 			
 			QnaVO qna = qnas.getPost(qaindex);
-			logger.info("내 QNA 글 조회 완료");
+			//logger.info("내 QNA 글 조회 완료");
 			model.addAttribute("qna", qna);
 			
 			return "qna/edit";	
@@ -91,7 +91,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 		public String replyUpdate(int qaindex, Model model) {
 			
 			QnaVO qna = qnas.getPost(qaindex);
-			logger.info("답글 작성 뷰 완료");
+			//logger.info("답글 작성 뷰 완료");
 			model.addAttribute("qna", qna);
 			
 			return "qna/reply";	
@@ -106,15 +106,15 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 			String url = "";
 				
 			int result = qnas.editPost(qna);
-			System.out.println(result);
+			//System.out.println(result);
 			if(result==1) {
 				
-				logger.info("Qna 글 수정 완료");
+				//logger.info("Qna 글 수정 완료");
 				msg = "Qna 글 수정 완료";
 		        url = "main";	
 			}else { 
 				
-				logger.info("Qna 글 수정 실패");
+				//logger.info("Qna 글 수정 실패");
 				msg = "Qna 글 수정 실패";
 		        url = "javascript:history.back();";
 			}
@@ -139,13 +139,13 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 		
 			if(result==1) {
 				
-				logger.info("관리자 답글 작성 완료");
+				//logger.info("관리자 답글 작성 완료");
 				msg = "관리자 답글 작성 완료";
 		        url = "main";
 				
 			}else { 
 				
-				logger.info("관리자 답글 작성 실패");
+				//logger.info("관리자 답글 작성 실패");
 				msg = "관리자 답글 작성 실패";
 		        url = "javascript:history.back();";
 
@@ -164,11 +164,11 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 		
 			if(result==1) {
 				
-				logger.info("Qna 글 삭제 완료");
+				//logger.info("Qna 글 삭제 완료");
 				return "redirect:/qna/main";
 			}else { 
 				
-				logger.info("Qna 글 삭제 실패");
+				//logger.info("Qna 글 삭제 실패");
 				return "javascript:history.back()";
 			}			
 			
@@ -188,7 +188,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 
 				String userid = (String) httpSession.getAttribute("userid");
 				
-				logger.info("로그인 유저 아이디: " + userid);
+				//logger.info("로그인 유저 아이디: " + userid);
 			
 				// 세션 userid post객체에 입력
 				qna.setUserid(userid);
@@ -197,13 +197,13 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 				int result = qnas.writeQna(qna);
 				if (result == 1) {
 					
-					logger.info("Qna 글작성  성공");
+					//logger.info("Qna 글작성  성공");
 
 					return "redirect:/qna/main";
 					
 				} else { // 회원가입 실패시 어찌할지 로직구현해야 함
 
-					logger.info("Qna 글작성 실패");
+					//logger.info("Qna 글작성 실패");
 
 					return "redirect:/qna/main";
 				}
@@ -226,9 +226,9 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 			int result = qnas.writeCommnet(qnaComment);
 			
 			if(result==1) {
-				logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 입력 처리 완료");
+				//logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 입력 처리 완료");
 			}else {
-				logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 입력 처리 실패");
+				//logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 입력 처리 실패");
 			}
 			
 			return result;
@@ -248,9 +248,9 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 			int result = qnas.editComment(qnaComment);
 			
 			if(result==1) {
-				logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 수정 처리 완료");
+				//logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 수정 처리 완료");
 			}else {
-				logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 수정 처리 실패");
+				//logger.info("Qna"+qnaComment.getQaindex()+"번글 댓글 수정 처리 실패");
 			}
 			
 			return result;
@@ -262,13 +262,13 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 		public List<QnaCommentVO> getCommentList(HttpServletRequest request, Model model) throws IOException {
 			
 			int qaindex = Integer.parseInt(request.getParameter("qaindex"));
-			//System.out.println("qaindex===="+qaindex);
+			////System.out.println("qaindex===="+qaindex);
 			List<QnaCommentVO> commentList = qnas.getCommentList(qaindex);
-			//System.out.println("commentList===="+commentList);
+			////System.out.println("commentList===="+commentList);
 			if(commentList!=null) {
-				logger.info("Qna"+qaindex+"번글 댓글내역 조회 완료");
+				//logger.info("Qna"+qaindex+"번글 댓글내역 조회 완료");
 			}else {
-				logger.info("Qna"+qaindex+"번글 댓글입력 조회 실패");
+				//logger.info("Qna"+qaindex+"번글 댓글입력 조회 실패");
 			}
 			
 			return commentList;
@@ -283,12 +283,12 @@ private static final Logger logger = LoggerFactory.getLogger(QnaController.class
 			int qaindex = comment.getQaindex();
 			if(result==1) {
 
-				logger.info("QNA 댓글 삭제 완료");
+				//logger.info("QNA 댓글 삭제 완료");
 				return "redirect:/qna/detail?qaindex="+qaindex+"";
 				
 			}else { 
 
-				logger.info("QNA 댓글 삭제 실패");
+				//logger.info("QNA 댓글 삭제 실패");
 		        return "javascript:history.back()";
 			}
 

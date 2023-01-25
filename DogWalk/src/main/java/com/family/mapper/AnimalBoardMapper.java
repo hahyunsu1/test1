@@ -1,5 +1,6 @@
 package com.family.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +28,14 @@ int insertBoard(AnimalBoardVO amb);
 	int updateBoard(AnimalBoardVO amb);//수정
 	
 	AnimalBoardVO selectBoardUser(AnimalBoardVO amb);
+
+	List<AnimalBoardVO> getAdminList();
+
+	List<AnimalBoardVO> getUserBoardList(String userid);
+
+	List<AnimalBoardVO> getAllboard();
+
+	List<Integer> getAllTotal();
+
+	List<HashMap<String, Object>> admin_findDate(String date1, String date2);
 }

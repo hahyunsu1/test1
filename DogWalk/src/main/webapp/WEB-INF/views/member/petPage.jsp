@@ -67,6 +67,7 @@
 </style>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css_2sotto/blog_main.css">
 </head>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <body>
 
 	

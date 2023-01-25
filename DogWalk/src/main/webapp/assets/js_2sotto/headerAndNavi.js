@@ -19,7 +19,7 @@ $(document).ready(function(){
 	//스피너	
 	$("#page-loading").fadeOut(500);
 
-	
+	console.log('userid== '+$('#userid').val());
 	//알람 테스트 
 	if($('#userid').val() != null) {
 		connect();	
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	var webSocket=null;
 
 function connect() {
-	webSocket=new SockJS("http://localhost:9090/web/message");
+	webSocket=new SockJS("http://localhost:9090/web/alarm");
 	
 	webSocket.onopen = onOpen;
 	webSocket.onmessage = onMessage;

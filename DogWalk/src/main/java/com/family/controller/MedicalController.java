@@ -42,11 +42,11 @@ public class MedicalController {
 		
 		String userid = (String) httpSession.getAttribute("userid");
 //		String userid =  principal.getName();
-		logger.info("로그인 유저 아이디: "+userid);
+		//logger.info("로그인 유저 아이디: "+userid);
 		
 		
 		HashMap<String, Object> map = medicalService.getMrecordList(cp, ps, userid);		
-		logger.info("병원이용 리스트 조회 완료");
+		//logger.info("병원이용 리스트 조회 완료");
 		
 		
 		
@@ -55,7 +55,7 @@ public class MedicalController {
 		model.addAttribute("mrecordList", map.get("mrecordList"));
 		model.addAttribute("pageCount", map.get("pageCount"));
 		model.addAttribute("totalMrecordCount", map.get("totalMrecordCount"));
-		logger.info("병원이용 정보 뷰로 쐈당");
+		//logger.info("병원이용 정보 뷰로 쐈당");
 
 		return "management/main";
 		
@@ -68,14 +68,14 @@ public class MedicalController {
 		
 //		String userid =  principal.getName();
 		String userid = (String) httpSession.getAttribute("userid");
-		logger.info("로그인 유저 아이디: "+userid);
+		//logger.info("로그인 유저 아이디: "+userid);
 		
 		HashMap<String, Object> map = medicalService.getPetname(userid);		
-		logger.info("petname 가져오기 완료");	
+		//logger.info("petname 가져오기 완료");	
 		
 		model.addAttribute("petNameList", map.get("petNameList"));
 		model.addAttribute("totalMrecordCount", map.get("totalMrecordCount"));
-		logger.info("petname이랑 userid 뷰로 쐈당");
+		//logger.info("petname이랑 userid 뷰로 쐈당");
 		return "management/medicalRegister";
 	}
 	
@@ -87,27 +87,27 @@ public class MedicalController {
 		
 		String userid = (String) httpSession.getAttribute("userid");
 //		String userid =  principal.getName();
-		logger.info("반려동물을 등록한 유저 아이디: " + userid);
+		//logger.info("반려동물을 등록한 유저 아이디: " + userid);
 		
 		// 반려동물 등록한 유저 아이디 저장
 		mrecord.setUserid(userid);
 		MemberVO member = (MemberVO)httpSession.getAttribute("member");	
 		int result = medicalService.medicalRegister(mrecord);
-		logger.info("프론트에서 값 받아오기 성공");
+		//logger.info("프론트에서 값 받아오기 성공");
 		
 		
 		if(result == 1) {
 			
-			logger.info("병원 기록 등록 성공");
+			//logger.info("병원 기록 등록 성공");
 
 			return "redirect:/management/main.bit?tab=mrecord";
 	        
 		} else { 
 			
 			redirectAttributes.addFlashAttribute("failedRegisterPet", "failed");
-			logger.info("병원 기록 등록 실패");
+			//logger.info("병원 기록 등록 실패");
 			
-			return "javascript:history.back();";
+			return "management/main";
 
 		}
 		
@@ -122,12 +122,12 @@ public class MedicalController {
 			
 			String userid = (String) httpSession.getAttribute("userid");
 			HashMap<String, Object> map = medicalService.getPetname(userid);		
-			logger.info("petname 가져오기 완료");
+			//logger.info("petname 가져오기 완료");
 			
 			
 			model.addAttribute("mrecord", mrecord);
 			model.addAttribute("petNameList", map.get("petNameList"));
-			System.out.println("mrecord: "+ mrecord);
+			//System.out.println("mrecord: "+ mrecord);
 			return "management/medicalDetail";	
 		}
 		
@@ -137,13 +137,13 @@ public class MedicalController {
 		public String editMrecord(String mindex, Principal principal, Model model,HttpSession httpSession) {
 			
 			Mrecord mrecord = medicalService.getMrecordDetail(mindex);			
-			logger.info("병원이용기륵 조회 완료");
+			//logger.info("병원이용기륵 조회 완료");
 			
 			//petname 가져오기... 쉬불..
 //			String userid =  principal.getName();
 			String userid = (String) httpSession.getAttribute("userid");
 			HashMap<String, Object> map = medicalService.getPetname(userid);		
-			logger.info("petname 가져오기 완료");
+			//logger.info("petname 가져오기 완료");
 			
 			model.addAttribute("mrecord", mrecord);
 			model.addAttribute("petNameList", map.get("petNameList"));
@@ -162,16 +162,16 @@ public class MedicalController {
 		
 			if(result==1) {
 				
-				logger.info("병원이용기륵 수정 완료");
+				//logger.info("병원이용기륵 수정 완료");
 //				msg = "병원이용기륵 수정 완료";
 //		        url = "getMrecordDetail.bit?mindex="+mrecord.getMindex();
 		        return "redirect:/management/main.bit?mindex="+mrecord.getMindex();
 				
 			}else { 
 				
-				logger.info("병원이용기륵 수정 실패");
+				//logger.info("병원이용기륵 수정 실패");
 				
-		        return "javascript:history.back();";
+		        return "management/main";
 
 			}
 			
@@ -189,15 +189,15 @@ public class MedicalController {
 		
 			if(result==1) {
 				
-				logger.info("병원방문 글 삭제 완료");
+				//logger.info("병원방문 글 삭제 완료");
 //				
 				return "redirect:/management/main.bit";
 				
 			}else { 
 				
-				logger.info("병원방문 글 삭제 실패");
+				//logger.info("병원방문 글 삭제 실패");
 //				
-		        return "javascript:history.back()";
+		        return "management/main";
 			}
 		}
 }

@@ -34,7 +34,7 @@ public class MessageController {
 		//String userid = (String) session.getAttribute("userid");
 		String userid = (String)httpSession.getAttribute("userid");
 		//String userid =  principal.getName();
-		logger.info("로그인 유저 아이디: " + userid);
+		//logger.info("로그인 유저 아이디: " + userid);
 		
 		HashMap<String, Object> map = ms.rPageView(cp, ps, userid);
 		
@@ -56,7 +56,7 @@ public class MessageController {
 		//String userid = (String) session.getAttribute("userid");
 		String userid = (String)httpSession.getAttribute("userid");
 		//String userid =  principal.getName();
-		logger.info("로그인 유저 아이디: " + userid);
+		//logger.info("로그인 유저 아이디: " + userid);
 		
 		HashMap<String, Object> map = ms.sPageView(cp, ps, userid);
 		
@@ -84,11 +84,11 @@ public class MessageController {
 	
 	@RequestMapping(value = "msgWrite.bit", method = RequestMethod.POST)
 	public String msgWrite(Message message, Principal principal,HttpSession httpSession) {
-		logger.info("값이 들어오니?");
+		//logger.info("값이 들어오니?");
 		//String userid = (String) session.getAttribute("userid");
 		String userid = (String)httpSession.getAttribute("userid");
 		//String userid =  principal.getName();
-		logger.info("로그인 유저 아이디: " + userid);
+		//logger.info("로그인 유저 아이디: " + userid);
 	
 		// 세션 userid post객체에 입력
 		message.setSuserid(userid);
@@ -99,13 +99,13 @@ public class MessageController {
 		int result = ms.writeMessage(message);
 		if (result == 1) {
 			
-			logger.info("쪽지 보내기 성공");
+			//logger.info("쪽지 보내기 성공");
 
 			return "redirect:/message/msgRePage.bit";
 			
 		} else { 
 
-			logger.info("쪽지 보내기 실패");
+			//logger.info("쪽지 보내기 실패");
 
 			return "redirect:/message/msgRePage.bit";
 		}
@@ -123,7 +123,7 @@ public class MessageController {
 		//String userid = (String) session.getAttribute("userid");
 		 String userid = (String)httpSession.getAttribute("userid");
 		//String userid =  principal.getName();
-		logger.info("로그인 유저 아이디: " + userid);
+		//logger.info("로그인 유저 아이디: " + userid);
 		
 		HashMap<String, Object> map = ms.rPageView(cp, ps, userid);
 		
@@ -151,12 +151,12 @@ public class MessageController {
 		// 쪽지>쪽지 페이지 view
 		@RequestMapping(value = "write.bit", method = RequestMethod.POST)
 		public String write(Message message, Principal principal,HttpSession httpSession) {
-			logger.info("값이 들어오니?");
+			//logger.info("값이 들어오니?");
 			
 			//String userid = (String) session.getAttribute("userid");
 			 String userid = (String)httpSession.getAttribute("userid");
 			//String userid =  principal.getName();
-			logger.info("로그인 유저 아이디: " + userid);
+			//logger.info("로그인 유저 아이디: " + userid);
 		
 			// 세션 userid post객체에 입력
 			message.setSuserid(userid);
@@ -168,13 +168,13 @@ public class MessageController {
 			int result = ms.writeMessage(message);
 			if (result == 1) {
 				
-				logger.info("쪽지 보내기 성공");
+				//logger.info("쪽지 보내기 성공");
 
 				return "redirect:/message/msgRePage.bit";
 				
 			} else { // 회원가입 실패시 어찌할지 로직구현해야 함
 
-				logger.info("쪽지 보내기 실패");
+				//logger.info("쪽지 보내기 실패");
 
 				return "redirect:/message/msgRePage.bit";
 			}
@@ -188,13 +188,13 @@ public class MessageController {
 								HttpServletRequest request, Model model,HttpSession httpSession) {
 			String userid = (String)httpSession.getAttribute("userid");
 			//String userid =  principal.getName();
-			logger.info("로그인 유저 아이디: " + userid);
+			//logger.info("로그인 유저 아이디: " + userid);
 			HashMap<String, Object> map = ms.rPageView(cp, ps, userid);
 			
 			//받는 사람 id
 			String ruserid = request.getParameter("ruserid");
-			logger.info("쪽지 수신 아이디: "+ ruserid);
-			System.out.println("ruserid"+ruserid);
+			//logger.info("쪽지 수신 아이디: "+ ruserid);
+			//System.out.println("ruserid"+ruserid);
 			// view까지 전달 (forward)
 			model.addAttribute("cpage", map.get("cpage"));
 			model.addAttribute("pageSize", map.get("pageSize"));
@@ -210,11 +210,11 @@ public class MessageController {
 		// a에게 쪽지보내기 페이지 view
 		@RequestMapping(value = "popmain.bit", method = RequestMethod.POST)
 		public String popmain(Message message, Principal principal,HttpSession httpSession) {
-			logger.info("message==="+message);
+			//logger.info("message==="+message);
 			//String userid = (String) session.getAttribute("userid");
 			String userid = (String)httpSession.getAttribute("userid");
 			//String userid =  principal.getName();
-			logger.info("로그인 유저 아이디: " + userid);
+			//logger.info("로그인 유저 아이디: " + userid);
 		
 			// 세션 userid post객체에 입력
 			message.setSuserid(userid);
@@ -225,13 +225,13 @@ public class MessageController {
 			int result = ms.writeMessage(message);
 			if (result == 1) {
 				
-				logger.info("쪽지 보내기 성공");
+				//logger.info("쪽지 보내기 성공");
 
 				return "redirect:/message/popmain.bit";
 				
 			} else { // 회원가입 실패시 어찌할지 로직구현해야 함
 
-				logger.info("쪽지 보내기 실패");
+				//logger.info("쪽지 보내기 실패");
 
 				return "redirect:/message/popmain.bit";
 			}
@@ -245,7 +245,7 @@ public class MessageController {
 			//String userid = (String) session.getAttribute("userid");
 			//String userid =  principal.getName();
 			String userid = (String)httpSession.getAttribute("userid");
-			logger.info("로그인 유저 아이디: " + userid);
+			//logger.info("로그인 유저 아이디: " + userid);
 			
 			HashMap<String, Object> map = ms.sPageView(cp, ps, userid);
 			
@@ -266,7 +266,7 @@ public class MessageController {
 			//String ruserid = principal.getName(); //현재 로그인 유저의 아이디
 			String ruserid = (String)httpSession.getAttribute("userid");
 			Message message = ms.getMessage(msindex, ruserid);
-			logger.info("내 Message  조회 완료");
+			//logger.info("내 Message  조회 완료");
 			model.addAttribute("message", message);
 			
 			return "message/msgDetail";
@@ -275,11 +275,11 @@ public class MessageController {
 		// message > 글 삭제 처리
 		@RequestMapping(value = "delete.bit", method = {RequestMethod.GET, RequestMethod.POST})
 		public String delete(Message message, HttpServletRequest request, Model model) {
-			logger.info("여기까지 들어오는건가??");				
+			//logger.info("여기까지 들어오는건가??");				
 			//String msg = null;
 			//String url = null;
 			String[] msindexArr =request.getParameterValues("msindexes");	
-			System.out.println("arr"+ msindexArr.toString());
+			//System.out.println("arr"+ msindexArr.toString());
 			
 			int result =1;
 			
@@ -291,13 +291,13 @@ public class MessageController {
 			
 			if(result != 0) { // 만일 result중 하나라도 실패가 있으면 0이 됨
 				
-				logger.info("message 글 삭제 완료");
+				//logger.info("message 글 삭제 완료");
 				//msg = "Qna 글 삭제 완료";
 		        //url = "main.bit";
 				return "redirect:/message/msgRePage.bit";
 			}else { 
 				
-				logger.info("message 글 삭제 실패");
+				//logger.info("message 글 삭제 실패");
 				//msg = "Qna 글 삭제 실패";
 		        //url = "javascript:history.back();";
 				return "javascript:history.back()";
@@ -314,11 +314,11 @@ public class MessageController {
 		// message > 글 삭제 처리
 				@RequestMapping(value = "detailDelete.bit", method = {RequestMethod.GET, RequestMethod.POST})
 				public String detailDelete(Message message, HttpServletRequest request, Model model) {
-					logger.info("여기까지 들어오는건가??");				
+					//logger.info("여기까지 들어오는건가??");				
 					//String msg = null;
 					//String url = null;
 					String[] msindexArr =request.getParameterValues("msindex");	
-					System.out.println("arr"+ msindexArr.toString());
+					//System.out.println("arr"+ msindexArr.toString());
 					
 					int result =1;
 					
@@ -330,13 +330,13 @@ public class MessageController {
 					
 					if(result != 0) { // 만일 result중 하나라도 실패가 있으면 0이 됨
 						
-						logger.info("message 글 삭제 완료");
+						//logger.info("message 글 삭제 완료");
 						//msg = "Qna 글 삭제 완료";
 				        //url = "main.bit";
 						return "redirect:/message/msgRePage.bit";
 					}else { 
 						
-						logger.info("message 글 삭제 실패");
+						//logger.info("message 글 삭제 실패");
 						//msg = "Qna 글 삭제 실패";
 				        //url = "javascript:history.back();";
 						return "javascript:history.back()";
@@ -360,7 +360,7 @@ public class MessageController {
 				//String userid = (String) session.getAttribute("userid");
 				String userid = (String)httpSession.getAttribute("userid");
 				//String userid =  principal.getName();
-				logger.info("로그인 유저 아이디: " + userid);
+				//logger.info("로그인 유저 아이디: " + userid);
 				
 				HashMap<String, Object> map = ms.rPageView(cp, ps, userid);
 				
@@ -378,11 +378,11 @@ public class MessageController {
 			// 팝업창에서 메시지 삭제  > 글 삭제 처리
 			@RequestMapping(value = "popDelete.bit", method = {RequestMethod.GET, RequestMethod.POST})
 			public String popDelete(Message message, HttpServletRequest request, Model model) {
-				logger.info("여기까지 들어오는건가??");				
+				//logger.info("여기까지 들어오는건가??");				
 				//String msg = null;
 				//String url = null;
 				String[] msindexArr =request.getParameterValues("msindexes");	
-				System.out.println("arr"+ msindexArr.toString());
+				//System.out.println("arr"+ msindexArr.toString());
 				
 				int result =1;
 				
@@ -394,13 +394,13 @@ public class MessageController {
 				
 				if(result != 0) { // 만일 result중 하나라도 실패가 있으면 0이 됨
 					
-					logger.info("message 글 삭제 완료");
+					//logger.info("message 글 삭제 완료");
 					//msg = "Qna 글 삭제 완료";
 			        //url = "main.bit"; 
 					return "redirect:/message/popRePage.bit";
 				}else { 
 					
-					logger.info("message 글 삭제 실패");
+					//logger.info("message 글 삭제 실패");
 					//msg = "Qna 글 삭제 실패";
 			        //url = "javascript:history.back();";
 					return "javascript:history.back()";

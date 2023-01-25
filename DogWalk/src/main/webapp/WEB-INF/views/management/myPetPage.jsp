@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+	<%@ include file="/WEB-INF/include/header.jsp"%>
 	<div class="side_overlay">
 		<div class="container">
 			<button class="btn btn-primary btn-round" onclick="location.href='register.bit'">반려동물 등록</button>
@@ -158,4 +158,5 @@
 		</div>
 	</div>
 </body>
+<%@ include file="/WEB-INF/include/footer.jsp"%>
 </html>

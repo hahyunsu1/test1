@@ -17,7 +17,7 @@ public interface PetMapper {
 			public int newPet(PetVO pet);
 
 			// 반려동물 정보 가져오기
-			//@Select("select * from pet where userid = #{userid}")
+			
 			@Select("select p.*, s.SCANAME as scaname, m.MCANAME as mcaname " 
 					+ "from PET p "
 					+ "left outer join SUBCATEGORY s on p.SCATEGORY = s.SCATEGORY "

@@ -26,7 +26,7 @@
 	 
 </head>
 <body>
-    
+ <%@ include file="/WEB-INF/include/header.jsp"%>   
 	
 	<div class="container">
 		<div class="side_overlay">

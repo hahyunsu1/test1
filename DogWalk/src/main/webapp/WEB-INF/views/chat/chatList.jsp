@@ -118,7 +118,7 @@
 	</style>
 
 </head>
-<%@ include file="/WEB-INF/views/Top.jsp"%>	
+
 
 <body>
 	<div style="margin: 20px;">
@@ -201,7 +201,6 @@
 			</div>
 
 	</div>
-<%@ include file="/WEB-INF/views/foot.jsp"%>		
 <!-- 기본 폼 완성 -->
 <input type="hidden" id="userid" value="${session.member.userid}">
 <input type="hidden" id="nick" value="${session.member.nick}">	

@@ -77,7 +77,7 @@ function sendQna() {
 				"content" : $('#content').val(),
 				"text" : text
 				};
-	console.log('여기타니니니니니니닝');
+	//console.log('여기타니니니니니니닝');
 	
 	webSocket.send(JSON.stringify(msg));
 	$('#ruserid').val('');

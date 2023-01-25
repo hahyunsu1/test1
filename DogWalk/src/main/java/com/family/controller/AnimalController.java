@@ -118,34 +118,26 @@ public class AnimalController {
 	}
 	
 	 @GetMapping("/animal_boardlist")
-	 public String animalBoardList(Model m,@RequestParam(defaultValue = "1")int cpage) {
-		 if(cpage<=0) {
-			 cpage=1;
-		 }
+	 public String animalBoardList(Model m, @ModelAttribute("page") PagingVO page,
+			 HttpServletRequest req,@RequestHeader("user-Agent") String userAgent) {
+		 String myctx=req.getContextPath();//컨텍스트명"/multiweb"
+			
+		 HttpSession ses=req.getSession();
+		 int totalCount=this.animalBoardService.getTotalCount(page);
+		 page.setTotalCount(totalCount);
 		 
-		 int totalCount=this.animalBoardService.getTotalCount(null);
+		 page.setPagingBlock(5);
 		 
-		 int pageSize=5;
-		 int pageCount=(totalCount-1)/pageSize+1;
+		 page.init(ses);
+		 List<AnimalBoardVO> ambArr=this.animalBoardService.selectBoardAllPaging(page);
 		 
-		 if(cpage>pageCount) {
-			 cpage=pageCount;
-		 }
-		 int start=(cpage-1)*pageSize;
-		 int end=start+(pageSize+1);
-		 
-		 Map<String,Integer> map=new HashMap<>();
-		 map.put("start", Integer.valueOf(start));
-		 map.put("end", Integer.valueOf(end));
-		 
-		 List<AnimalBoardVO> ambArr=this.animalBoardService.selectBoardAll(map);
+		 String loc="comanimal/animal_boardlist";
+		 String pageNavi=page.getPageNavi(myctx, loc, userAgent);
 		
-		 m.addAttribute("ambArr",ambArr); 
-		 m.addAttribute("totalCount",totalCount);
-		 m.addAttribute("pageCount",pageCount);
-		 m.addAttribute("cpage",cpage);
-		 log.info(ambArr);
-		 log.info("/"+m);
+		 m.addAttribute("pageNavi",pageNavi);
+		 m.addAttribute("paging",page);
+		 m.addAttribute("ambArr",ambArr);
+		 
 		 return "comanimal/animal_boardlist";
 	 }
 	 @GetMapping("/view/{cnum}")
@@ -166,7 +158,7 @@ public class AnimalController {
 				HttpServletRequest req,
 				@RequestParam(defaultValue = "0") int cnum,
 				@RequestParam(defaultValue = "") String cpass) {
-			//log.info("num==="+num+"/ passwd==="+passwd);
+			
 			if(cnum==0||cpass.isEmpty()) {
 				return "redirect:animal_boardlist";
 			}

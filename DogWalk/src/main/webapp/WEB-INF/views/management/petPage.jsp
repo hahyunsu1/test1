@@ -65,8 +65,9 @@
 </style>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css_2sotto/blog_main.css">
 </head>
-<body>
 
+<body>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 	
 	
 	 
@@ -103,6 +104,11 @@
 				<div class="col-3 text-center" style="margin-top:20px;">
 							<button class="btn btn-primary" id="unFollowBtn"> 언팔로우 </button>
 							<button class="btn btn-primary" id="followBtn">	팔로우 </button>
+				</div>
+				<div class="col-3 text-center" style="margin-top:20px;">
+							<button class="btn btn-primary"> ♡ </button>
+							<button class="btn btn-primary"> ♥ </button>
+
 				</div>
 				<div class="col-9" style="margin-top:20px;">
 							<span onclick='popupMessage("${petInfo.userid }")'

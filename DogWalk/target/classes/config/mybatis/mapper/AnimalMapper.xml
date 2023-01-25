@@ -12,14 +12,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{cnum},#{userid},#{nick},#{cpass},#{title},#{content:VARCHAR},SYSDATE,#{cnt},
 		#{filename:VARCHAR},#{originFilename:VARCHAR},#{filesize:NUMERIC},#{pet:VARCHAR},#{price},#{myaddr:VARCHAR})
 	</insert>
+	<sql id="findWhere">
+		<if test="findType!=null and findKeyword!=''">
+			<where>
+				<if test="findType==1"><!-- 글제목 -->
+					title like '%'||#{findKeyword}||'%'
+				</if>
+				<if test="findType==2"><!-- 작성자 -->
+					userid like '%'||#{findKeyword}||'%'
+				</if>
+				<if test="findType==3"><!-- 글내용 -->
+					price like '%'||#{findKeyword}||'%'
+				</if>
+			</where>
+		</if>
+	</sql>
 	<select id="getTotalCount" resultType="int" parameterType="Paging">
 		select count(cnum) from com_ani_board
-		<!-- <include refid="findWhere"/> -->
+		<include refid="findWhere"/>
 	</select>
 	<select id="selectBoardAll" resultType="Animal" parameterType="map">
 		select * from
 		(select row_number() over(order by cnum desc) rn,
 		com_ani_board.* from com_ani_board)
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
+	</select>
+	<select id="selectBoardAllPaging" resultType="Animal" parameterType="Paging">		
+		select * from
+		(select row_number() over(order by cnum desc) rn,
+		com_ani_board.* from com_ani_board <include refid="findWhere"/>)
+		
 		<![CDATA[
 		where rn > #{start} and rn < #{end}
 		]]>
@@ -46,4 +70,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBoardUser" resultType="Animal" parameterType="String">
 		select * from com_ani_board where userid=#{userid}
 	</select>
+	
+	<!-- 0114 조은경=========================== -->
+	 <!-- 어드민용 -->
+   <select id="getAdminList" resultType="Animal">
+     SELECT* FROM(SELECT* FROM com_ani_board order by cnum desc ) tbl
+      <![CDATA[
+      where ROWNUM <=5
+      ]]>
+      
+   </select>
+   
+   <!-- 어드민용 유저 게시글 보기 -->
+   
+      <select id="getUserBoardList" resultType="Animal">
+         select * from com_ani_board where userid=#{userid}
+      </select>
+      
+   <!-- 어드민 전체 게시판 -->
+   
+   <select id="getAllboard"  resultType="Animal" >
+      select * from com_ani_board
+   </select>
 </mapper>

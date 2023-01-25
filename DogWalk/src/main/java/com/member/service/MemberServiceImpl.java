@@ -81,5 +81,32 @@ public class MemberServiceImpl implements MemberService {
 		return membermapper.getUser(userid);
 	}
 
+    @Override
+	public List<MemberVO> adminUserList() {
+		return membermapper.adminUserList();
+}
+	@Override
+	public List<MemberVO> adminUserList2() {
+		return membermapper.adminUserList2();
+	}
+	
+	@Override
+	public void successId(String id) {
+		membermapper.successId(id);
+	}
+
+	@Override
+	public void failed(String id) {
+		membermapper.failed(id);
+	}
+	@Override
+	public void dropUser(String id) {
+		membermapper.dropUser(id);
+		
+	}
+
+	
+
+
 
 }

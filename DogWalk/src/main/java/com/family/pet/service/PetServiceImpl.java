@@ -146,10 +146,10 @@ public class PetServiceImpl implements PetService {
 				for(PetVO recomPet: tmpList1) {
 					recomPet.setRelatedPet(pet.getPetindex()); //어떤 반려동물과 관련되어 있는지 추가
 					recomPet.setRecomType("kind");
-					System.out.println("추천 동물 친구: "+ recomPet);
+					//System.out.println("추천 동물 친구: "+ recomPet);
 					//list.add(recomPet);
 					map.put(recomPet.getPetindex(), recomPet);
-					System.out.println("추천 리스트" + map);
+					//System.out.println("추천 리스트" + map);
 				}
 		
 				// 비슷한 나이대의 동물 친구
@@ -157,10 +157,10 @@ public class PetServiceImpl implements PetService {
 				for(PetVO recomPet: tmpList2) {
 					recomPet.setRelatedPet(pet.getPetindex()); //어떤 반려동물과 관련되어 있는지 추가
 					recomPet.setRecomType("age");
-					System.out.println("추천 동물 친구: "+ recomPet);
+					//System.out.println("추천 동물 친구: "+ recomPet);
 					//list.add(recomPet);
 					map.put(recomPet.getPetindex(), recomPet);
-					System.out.println("추천 리스트" + map);
+					//System.out.println("추천 리스트" + map);
 				}
 				// 가까운 거리에 사는 동물 친구
 				// 유저의 위치 정보
@@ -168,28 +168,28 @@ public class PetServiceImpl implements PetService {
 				for(PetVO recomPet: tmpList3) {
 					recomPet.setRelatedPet(pet.getPetindex()); //어떤 반려동물과 관련되어 있는지 추가
 					recomPet.setRecomType("dist");
-					System.out.println("추천 동물 친구: "+ recomPet);
+					//System.out.println("추천 동물 친구: "+ recomPet);
 					//list.add(recomPet);
 					map.put(recomPet.getPetindex(), recomPet);
-					System.out.println("추천 리스트" + map);
+					//System.out.println("추천 리스트" + map);
 				}
 			}
 			
 			System.out.println("섞기 전: "+ map);
 			// 배열을 랜덤하게 섞어주는 작업
 			for (PetVO petVO : map.values()) {
-				System.out.println("$$$$$$$$$$$$$"+petVO);
+				//System.out.println("$$$$$$$$$$$$$"+petVO);
 				list.add(petVO);
 			}
 			Collections.shuffle(list);
-			System.out.println("섞은 후: "+ list);
+			//System.out.println("섞은 후: "+ list);
 			
 			
 			// 배열 중 6개만 뽑기  //6개가 안되면 에러 발생 >> 리스트가  null이면 패스			
 			if(list.size()>6) {
 				list = list.subList(0, 6);
 			}
-			System.out.println("추천리스트 최종: "+ list);
+			//System.out.println("추천리스트 최종: "+ list);
 			
 			
 			return list;

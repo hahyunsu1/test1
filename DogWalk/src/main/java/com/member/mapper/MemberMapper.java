@@ -25,6 +25,16 @@ public interface MemberMapper {
 	 public MemberVO getUser(String userid);
 	 //하현수 0112추가
 	 public MemberVO normalLogin(String userid);
+
+	List<MemberVO> adminUserList();
+
+	List<MemberVO> adminUserList2();
+
+	void successId(String id);
+
+	void failed(String id);
+
+	void dropUser(String id);
 	 
 	 
 }

@@ -12,8 +12,7 @@ import com.family.pet.model.SubCategory;
 
 public interface SubCategoryDao {
 
-	//하나로 합치려면.. 동적 쿼리?
-	//추후 리팩토링
+	
 	
 	@Select("select * from SUBCATEGORY where mcategory = '1' order by scaname asc")
 	public List<SubCategory> getSubCategory_dog();

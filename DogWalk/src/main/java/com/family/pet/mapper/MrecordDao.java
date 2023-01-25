@@ -18,15 +18,7 @@ public interface MrecordDao {
 					+ "values (MRECORD_seq.nextval,#{userid}, #{petindex}, #{hname}, #{vdate}, #{vreason})")
 			public int medicalRegister(Mrecord mrecord);
 
-			// 병원이용기록 리스트로  가져오기
-			/*
-			 * @Select("SET @ROWNUM:= 0;" +
-			 * "SELECT * FROM (SELECT @ROWNUM := @ROWNUM +1 ROWNUM, M.*, p.petname FROM" +
-			 * "MRECORD M join PET P ON M.USERID = P.USERID, (SELECT @ROWNUM:=0) r where m.userid=#{param3}) S WHERE ROWNUM"
-			 * +
-			 * "BETWEEN ${param1}${param2}-(${param2}-1) AND ${param1}${param2}")//1*5-(5-1)
-			 * AND 1*5
-			 */	
+			
 			
 			//전체 병원기록 리스트 가져오기
 			public List<Mrecord> getMrecordList(int cpage, int pageSize, String userid);

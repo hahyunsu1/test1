@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -12,11 +11,10 @@
 </script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<style type="text/css">
-	@import url("../css/member/join.css");
-</style>
 
-<div class="container" style="height: 750px; overflow: auto;">
+<%@ include file="/WEB-INF/include/import.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
+<div class="container">
 	<h1 class="text-center mt-1">Signup</h1>
 	<form name="mf" id="join_form" method="post">
 
@@ -115,7 +113,7 @@
 	</form>
 
 </div>
-
+<%@ include file="/WEB-INF/include/footer.jsp"%>
 <script>
 	var code = ""; //이메일전송 인증번호 저장위한 코드
 

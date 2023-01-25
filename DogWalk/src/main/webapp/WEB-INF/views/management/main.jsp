@@ -290,7 +290,9 @@
 
 
 </head>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <body>
+
 	<div class="container">
 		<div class="side_overlay">
 			<div class="row">
@@ -298,6 +300,8 @@
 				<div class="col-3	" style="margin: 0 auto;">
 					<button class="btn btn-outline-primary btn-sm" onclick="location.href='register.bit'"
 						style="display: inline-block;">반려동물 등록</button><br>
+					<button class="btn btn-outline-primary btn-sm" onclick="location.href='register2.bit'"
+						style="display: inline-block;">반려동물 등록증으로 등록하기</button><br>
 					<a href="#" data-toggle="modal" data-target="#mapModal"
 						type="button" class="btn btn-outline-primary btn-sm">동물병원 보기</a>
 				</div>
@@ -679,7 +683,7 @@
 
 	
 </body>
-
+<%@ include file="/WEB-INF/include/footer.jsp"%>
 <!-- fullcalendar -->
 <link href='https://unpkg.com/fullcalendar@5.1.0/main.min.css' rel='stylesheet' />
 <script src='https://unpkg.com/fullcalendar@5.1.0/main.min.js'></script>

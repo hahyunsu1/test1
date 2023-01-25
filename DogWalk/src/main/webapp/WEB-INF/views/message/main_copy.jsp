@@ -147,50 +147,10 @@
 		</div>
 		<!-- container end -->
 	</div>
-	
-	
-	<!-- Modal -->
-	<!--  
-<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <c:forEach var="message" items="${messageList}" >
-      <div class="modal-header"> 
-        <h5 class="modal-title" id="exampleModalLabel">보낸사람: ${message.suserid} </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       내용: ${message.content}
-      </div>
-      <div class="modal-footer">
-  		<button onclick="Delete()" type="button" class="btn btn-primary">삭제하기</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-    	
-      </div>
-      </c:forEach> 
-    </div>
-
-  </div>
-</div>
--->
-<!-- Modal -->
-	
-
 	<!-- side_overlay end -->
 	<%@ include file="/WEB-INF/include/footer.jsp"%>
 
 <script>
-<!-- Modal에서 삭제 -->
-<!--
-// 삭제 전 확인 창 띄우기
-function Delete() {
-  location.replace("delete.bit?msindex=${message.msindex}"); 
-  //location.replace("delete.bit"); 
-  }
--->
-<!-- Modal에서 삭제 --> 
 
 
 

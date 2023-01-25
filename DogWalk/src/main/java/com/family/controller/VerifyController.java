@@ -34,7 +34,7 @@ public class VerifyController {
     /** 프론트에서 받은 PG사 결괏값을 통해 아임포트 토큰 발행 **/
     @PostMapping("/{imp_uid}")
     public IamportResponse<Payment> paymentByImpUid(@PathVariable String imp_uid) throws IamportResponseException, IOException{
-        log.info("paymentByImpUid 진입");
+      //  log.info("paymentByImpUid 진입");
         return iamportClient.paymentByImpUid(imp_uid);
     }
 

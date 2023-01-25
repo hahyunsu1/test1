@@ -12,8 +12,9 @@
    String ctx = request.getContextPath();
 %>
 
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <title>돌봄매칭 글수정</title>
+<div class="container" style="text-align:center">
 <p>
       <a href="<%=ctx%>/comanimal/comanimalwrite">글쓰기</a>| <a
          href="<%=ctx%>/comanimal/animal_boardlist">글목록</a>
@@ -84,5 +85,5 @@
    
 
 </form>       
-
-
+</div>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

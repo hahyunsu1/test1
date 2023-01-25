@@ -30,7 +30,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 	public String mainView(String cp, String ps, HttpSession httpSession, Model model) {
 		
 		String userid = (String) httpSession.getAttribute("userid");
-		logger.info("로그인 유저 아이디: " + userid);
+		//logger.info("로그인 유저 아이디: " + userid);
 		
 		HashMap<String, Object> map = qnas.mainView(cp, ps, userid);
 		
@@ -50,7 +50,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 	public String detail(int qaindex, Model model) {
 
 		QnaVO qna = qnas.getPost(qaindex);
-		logger.info("내 Qna 글 조회 완료");
+		//logger.info("내 Qna 글 조회 완료");
 		model.addAttribute("qna", qna);
 		
 		return "qna/detail";
@@ -61,7 +61,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 		public String update(int qaindex, Model model) {
 			
 			QnaVO qna = qnas.getPost(qaindex);
-			logger.info("내 QNA 글 조회 완료");
+			//logger.info("내 QNA 글 조회 완료");
 			model.addAttribute("qna", qna);
 			
 			return "qna/edit";	
@@ -78,13 +78,13 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 		
 			if(result==1) {
 				
-				logger.info("Qna 글 수정 완료");
+				//logger.info("Qna 글 수정 완료");
 				msg = "Qna 글 수정 완료";
 		        url = "/main";
 				
 			}else { 
 				
-				logger.info("Qna 글 수정 실패");
+				//logger.info("Qna 글 수정 실패");
 				msg = "Qna 글 수정 실패";
 		        url = "javascript:history.back();";
 
@@ -102,7 +102,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 		public String replyUpdate(int qaindex, Model model) {
 					
 			QnaVO qna = qnas.getPost(qaindex);
-			logger.info("내 QNA 글 조회 완료");
+			//logger.info("내 QNA 글 조회 완료");
 			model.addAttribute("qna", qna);
 					
 			return "qna/reply";	
@@ -119,12 +119,12 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 				
 			if(result==1) {
 						
-				logger.info("Qna 글 답글 완료");
+				//logger.info("Qna 글 답글 완료");
 			
 				return "redirect:/qna/main";
 			}else { 
 						
-				logger.info("Qna 글 답글 실패");
+				//logger.info("Qna 글 답글 실패");
 			
 				return "redirect:/qna/main";
 			}
@@ -141,12 +141,12 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 		
 			if(result==1) {
 				
-				logger.info("Qna 글 삭제 완료");
+				//logger.info("Qna 글 삭제 완료");
 				
 				return "redirect:/qna/main";
 			}else { 
 				
-				logger.info("Qna 글 삭제 실패");
+				//logger.info("Qna 글 삭제 실패");
 				
 				return "javascript:history.back()";
 			}
@@ -167,7 +167,7 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 			public String write(QnaVO qna,HttpSession httpSession) {
 
 				String userid = (String) httpSession.getAttribute("userid");
-				logger.info("로그인 유저 아이디: " + userid);
+				//logger.info("로그인 유저 아이디: " + userid);
 			
 				// 세션 userid post객체에 입력
 				qna.setUserid(userid);
@@ -176,13 +176,13 @@ private static final Logger logger = LoggerFactory.getLogger(QnaReplyController.
 				int result = qnas.writeQna(qna);
 				if (result == 1) {
 					
-					logger.info("Qna 글작성  성공");
+					//logger.info("Qna 글작성  성공");
 
 					return "redirect:/qna/main";
 					
 				} else { // 회원가입 실패시 어찌할지 로직구현해야 함
 
-					logger.info("Qna 글작성 실패");
+					//logger.info("Qna 글작성 실패");
 
 					return "redirect:/qna/main";
 				}

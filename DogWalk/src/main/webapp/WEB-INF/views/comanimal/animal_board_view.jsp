@@ -13,10 +13,21 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js">
 </script>
+<style>
+div#content {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #dcdcdc;
+    overflow-y: auto;
+}
+</style>
 </head>
 <script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-<div class="container mt-3" style="height: 600px;overFlow:auto;">
-	<h1 class="text-center">글  내용 보기</h1>
+
+<div class="container" style="text-align:center">
+<%@ include file="/WEB-INF/include/header.jsp"%>
+	<div class="row">
+        <div class="col-md-12">
 	<c:if test="${amb eq null}">
 		<div class="alert alert-danger my-5 text-center">
 			<h4>존재 하지 않는 글입니다.</h4>
@@ -49,7 +60,17 @@
             <tr height="60">
                <td width="20%">글내용</td>
                <td colspan="3" align="left">
-               ${amb.content}
+               <textarea name="content" id="content" rows="10" cols="50"
+                  class="form-control" style="float:left;  width:49%;">${amb.content}</textarea>  
+               
+          		<c:if test="${amb.filename eq null}">
+                <img id="img" name="petimg" src="../assets/images/pet_profile.jpg" alt="" width="200px"
+										height="200px" style="border-radius: 10px; float:left;margin: 2px" />
+				</c:if>
+				<c:if test="${amb.filename ne null}">
+                <img id="img" name="petimg"  src="${pageContext.request.contextPath}/resources/animal_board_images/${amb.filename}" alt="" width="200px"
+										height="200px" style="border-radius: 10px; float:left;margin: 2px" />
+				</c:if>
                </td>
             </tr>
             <tr height="60">
@@ -69,13 +90,12 @@
                <td colspan="3">&nbsp; 
                      <!--  첨부파일이 있다면 -->
                      <c:if test="${amb.filename ne null}">
-                     <%-- <a href="${pageContext.request.contextPath}/resources/spring_board_images/${board.filename}" download> --%> 
+                    
                      <a href='#' onclick="down()">
                      ${amb.originFilename}
                      </a> [ <c:out value="${amb.filesize}"/> bytes]  
             		 </c:if>
-            		<c:set var="fname" value="${fn:toLowerCase(amb.filename)}"/>
-            		<!-- 파일명의 확장자를 검사하기 위해 모두 소문자로 바꾼다 -->
+            		<c:set var="fname" value="${fn:toLowerCase(amb.filename)}"/>            		
             		<c:if test="${fn:endsWith(fname,'.jpg') or fn:endsWith(fname,'.png') or fn:endsWith(fname,'.gif') }">
                         <img width="80px" class="img img-thumbnail"
                            src="${pageContext.request.contextPath}/resources/animal_board_images/${amb.filename}">
@@ -94,10 +114,10 @@
 							</span>
 				</div>
 				<div class ="btns">
-					<input type="button" id="check1" value="거래">						
+					<input type="button" id="check1" value="사례비">						
 				</div>
 				</c:if>
-               | <a href="../list">목록</a>| <a href="#" onclick="go(1)">편집</a>| <a
+               | <a href="../animal_boardlist">목록</a>| <a href="#" onclick="go(1)">편집</a>| <a
                   href="#" onclick="go(2)">삭제</a>|</td>
             </tr>
        	   
@@ -131,6 +151,8 @@
 		<input type="hidden" name="title" value="<c:out value="${amb.title}"/>">
 	</form>
 	<!-- ------------------------------------------------------------------- -->
+	</div>
+      </div>
 </div>
 
 <script>
@@ -176,6 +198,10 @@
 		}
 		
 	}
+	$('#content').each(function(){
+	    this.contentEditable = false;
+	});
+
 	$(document).ready(function(){
 		   
 		  
@@ -230,3 +256,4 @@
 		}); //doc.ready
 
 	</script>
+<%@ include file="/WEB-INF/include/footer.jsp"%>

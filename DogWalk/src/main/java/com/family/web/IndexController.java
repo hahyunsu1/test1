@@ -10,8 +10,8 @@ public class IndexController {
 	public void index() {
 		//"/WEB-INF/views/index.jsp
 	}
-	@RequestMapping("/Top")
-	public void Top() {
+	@RequestMapping("/top")
+	public void top() {
 		//"/WEB-INF/views/index.jsp
 	}
 	

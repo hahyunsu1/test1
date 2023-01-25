@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>홈_슬기로운 반려생활</title>
+<title></title>
 
      <%@ include file="/WEB-INF/include/import.jsp"%>
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css_2sotto/blog_main.css">
@@ -14,7 +14,7 @@
 
 </head>
 <body>
-   
+ <%@ include file="/WEB-INF/include/header.jsp"%>  
 	<div class="container">
 		<div class="side_overlay">
 			<div class="row">

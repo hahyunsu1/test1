@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 
 <!DOCTYPE html>
@@ -13,7 +12,7 @@
 </head>
 <body>
   
-    <%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+    <%@ include file="/WEB-INF/include/header.jsp"%>
 	
 	<div class="side_overlay">
 		<div class="container">

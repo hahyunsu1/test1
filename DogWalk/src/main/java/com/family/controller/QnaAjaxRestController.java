@@ -50,8 +50,8 @@ public class QnaAjaxRestController {
 		int cpage = Integer.parseInt(cp);
 		int pageCount = 0;
 
-		logger.info("pageSize" + pageSize);
-		logger.info("cpage" + cpage);
+		//logger.info("pageSize" + pageSize);
+		//logger.info("cpage" + cpage);
 
 		
 		List<QnaVO> qnalist = null;
@@ -61,7 +61,7 @@ public class QnaAjaxRestController {
 		// request.setAttribute("emplist", emplist);
 
 		int totalQnaCount = dao.getQnaCount();
-		logger.info("totalQnaCount" + totalQnaCount);
+		//logger.info("totalQnaCount" + totalQnaCount);
 		if (totalQnaCount % pageSize == 0) {
 			pageCount = totalQnaCount / pageSize;
 

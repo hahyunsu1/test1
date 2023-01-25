@@ -97,7 +97,7 @@ function sendQna() {
 
 </script>
 <body>
-
+<%@ include file="/WEB-INF/include/header.jsp"%>
 	
 
 

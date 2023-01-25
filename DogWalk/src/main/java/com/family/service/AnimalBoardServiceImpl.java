@@ -1,5 +1,6 @@
 package com.family.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class AnimalBoardServiceImpl implements AnimalBoardService {
 	@Override
 	public List<AnimalBoardVO> selectBoardAllPaging(PagingVO pageing) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.aniMapper.selectBoardAllPaging(pageing);
 	}
 
 	@Override
@@ -86,6 +87,29 @@ public class AnimalBoardServiceImpl implements AnimalBoardService {
 	public AnimalBoardVO selectBoardUser(AnimalBoardVO amb) {
 		
 		return this.aniMapper.selectBoardUser(amb);
+	}
+
+	@Override
+	public List<AnimalBoardVO> getAdminList() {
+		return aniMapper.getAdminList();
+	}
+	
+	@Override
+	public List<AnimalBoardVO> getUserBoardList(String userid) {
+		return aniMapper.getUserBoardList(userid);
+	}
+	@Override
+	public List<AnimalBoardVO> getAllboard() {
+		return aniMapper.getAllboard();
+	}
+	@Override
+	public List<Integer> getAllTotal() {
+		return aniMapper.getAllTotal();
+	}
+	@Override
+	public List<HashMap<String, Object>> admin_findDate(String date1, String date2) {
+
+		return aniMapper.admin_findDate(date1, date2); 
 	}
 
 }

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 
 <!DOCTYPE html>
@@ -14,7 +13,7 @@
 <body>
 
 
-	<%@ include file="/WEB-INF/include/headerAndNavi.jsp"%>
+	<%@ include file="/WEB-INF/include/header.jsp"%>
 
 
 

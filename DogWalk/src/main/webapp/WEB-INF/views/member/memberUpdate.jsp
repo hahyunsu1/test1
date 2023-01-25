@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -11,13 +10,14 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
 	
 </script>
+<%@ include file="/WEB-INF/include/import.jsp"%>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<style type="text/css">
-@import url("../css/member/join.css");
-</style>
+
 </head>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 <body>
+<div class="container">
 	<c:if test="${member!=null}">
 		<form action="updateMember" method="post">
 			<table class="table">
@@ -106,7 +106,7 @@
 			</table>
 			<div class="d-grid gap-2">
 				<button class="btn btn-primary btn-lg" id="update_button" type="submit">수정하기</button>
-				<button type="button" onclick="removeMember();"> 탈퇴하기 </button>
+				<button type="button" class="btn btn-danger btn-lg" onclick="removeMember();"> 탈퇴하기 </button>
 			</div>
 		</form>
 	</c:if>
@@ -124,6 +124,7 @@
 				onclick="location.href='/web/member/login'">로그인 하기</button>
 		</div>
 	</c:if>
+	</div>
 </body>
 <script>
 function removeMember() {
@@ -254,7 +255,7 @@ $("#userid").on("propertychange change keyup paste input", function() {
 		}
 	});
 });//$()---------------------------------------------
-
+<%@ include file="/WEB-INF/include/footer.jsp"%>
 //닉네임 중복검사
 $('#nick').on("propertychange change keyup paste input", function(){
 

@@ -58,7 +58,7 @@ public class ManagementAjaxController {
 			
 			MainCategoryDao dao = sqlsession.getMapper(MainCategoryDao.class);
 			list = dao.getMainCategory();
-			logger.info("대분류코드 가져오기 완료");
+			//logger.info("대분류코드 가져오기 완료");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -77,7 +77,7 @@ public class ManagementAjaxController {
 			
 			SubCategoryDao dao = sqlsession.getMapper(SubCategoryDao.class);
 			list = dao.getSubCategory_dog();
-			logger.info("소분류 코드(개) 가져오기 완료");
+			//logger.info("소분류 코드(개) 가져오기 완료");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -96,7 +96,7 @@ public class ManagementAjaxController {
 			
 			SubCategoryDao dao = sqlsession.getMapper(SubCategoryDao.class);
 			list = dao.getSubCategory_cat();
-			logger.info("소분류 코드(고양이) 가져오기 완료");
+			//logger.info("소분류 코드(고양이) 가져오기 완료");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -108,7 +108,7 @@ public class ManagementAjaxController {
 	// 일정 추가하기
 	@RequestMapping("insertSchedule.bit")
 	public int newSchedule(ScheduleVO schedule) {
-		System.out.println("newSchedule...");
+		//System.out.println("newSchedule...");
 		int result = 0;
 		
 		try {
@@ -146,7 +146,7 @@ public class ManagementAjaxController {
 	@RequestMapping("updateSchedule.bit")
 	public int updateSchedule(ScheduleVO schedule) {
 		
-		System.out.println("올데이: "+ schedule.getAllDay());
+		//System.out.println("올데이: "+ schedule.getAllDay());
 		
 		int result = 0;
 		try {
@@ -164,7 +164,7 @@ public class ManagementAjaxController {
 	@RequestMapping("dndUpdateSchedule.bit")
 	public int dndUpdateSchedule(ScheduleVO schedule) {
 		
-		System.out.println("올데이: "+ schedule.getAllDay());
+		//System.out.println("올데이: "+ schedule.getAllDay());
 		
 		int result = 0;
 		try {

@@ -10,7 +10,7 @@
 <html>
 <head>
 
-<title>홈_슬기로운 반려생활</title>
+<title></title>
 
   	<%@ include file="/WEB-INF/include/import.jsp"%>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css_2sotto/blog_main.css">
@@ -126,6 +126,7 @@
 	
 	</style>
 </head>
+<%@ include file="/WEB-INF/include/header.jsp"%>
 	<div class="container">
 		<div class="side_overlay">
 			<div class="main-card">
@@ -143,13 +144,19 @@
 				<h1>${qna.title}</h1>	
 				<li class="nav-item dropdown" style="float: right;">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class="fas fa-ellipsis-v"></i></span></a>
-					<c:if test="${sessionScope.member.userid eq qna.userid}">
+						<c:if test="${(sessionScope.member.status eq 99) or (sessionScope.member.userid eq qna.userid)}">
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			            	<a class="dropdown-item" href="edit?qaindex=${qna.qaindex}">수정</a>
-			            	<a class="dropdown-item" href="reply?qaindex=${qna.qaindex}">관리자 답글</a>
+						
+						<c:if test="${sessionScope.member.status eq 99}">
+							<a class="dropdown-item" href="reply?qaindex=${qna.qaindex}">관리자 답글</a>
+			            </c:if>	
+			            <c:if test="${sessionScope.member.userid eq qna.userid}">
+			            	<a class="dropdown-item" href="edit?qaindex=${qna.qaindex}">수정</a>			            	
 			            	<a class="dropdown-item" href="javascript:;" id="delete">삭제</a>
+			            </c:if> 
+			            
 					  	</div>
-					</c:if> 
+					</c:if>
 				</li>
 				
 				<div class="heart-comment-time-area">					
